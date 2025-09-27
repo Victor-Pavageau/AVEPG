@@ -1,8 +1,10 @@
-export type Path =
-  | '/'
-  | '/page1'
-  | '/page2'
-  | '/page3'
-  | '/page4'
-  | '/page5'
-  | '*';
+export type Path = '/' | '/about' | '/events' | '/photos' | '/contact' | '*';
+
+export const PathsLabels: Record<Path, string> = {
+  '/': 'Home',
+  '/about': 'About',
+  '/events': 'Events',
+  '/photos': 'Photos',
+  '/contact': 'Contact',
+  '*': 'Not Found',
+};

@@ -1,8 +1,18 @@
 import { JSX } from 'react';
+import { Footer, Navbar } from './components';
+import './main.css';
 import RoutingSystem from './routing';
 
 function App(): JSX.Element {
-  return <RoutingSystem />;
+  return (
+    <div className='min-h-screen flex flex-col'>
+      <Navbar />
+      <main className='flex-1 pt-20 px-32'>
+        <RoutingSystem />
+      </main>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

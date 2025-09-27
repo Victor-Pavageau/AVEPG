@@ -8,6 +8,7 @@
         "ignoreAtRules": ["tailwind"]
       }
     ],
+    "import-notation": "string",
     "order/properties-order": [
       [
         "position",
