@@ -7,7 +7,7 @@ function App(): JSX.Element {
   return (
     <div className='min-h-screen flex flex-col'>
       <Navbar />
-      <main className='flex-1 pt-20 px-32'>
+      <main className='flex-1 pt-20'>
         <RoutingSystem />
       </main>
       <Footer />

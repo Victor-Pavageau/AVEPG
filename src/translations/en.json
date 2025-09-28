@@ -1,6 +1,31 @@
 {
   "home": {
-    "title": "Welcome to AVEPG"
+    "title": "AVEPG - Association of Vintage Vehicles of the Pays de Gex",
+    "welcome": {
+      "title": "Welcome to AVEPG",
+      "intro": "Welcome to the AVEPG website - Association of Vintage Vehicles of the Pays de Gex. Founded in 1991, AVEPG brings together enthusiasts and owners of vintage vehicles, with the mission to preserve, promote and share our region's automotive heritage.",
+      "description": "The association organizes monthly friendly rides, fostering exchanges and discovery, and hosts the annual Gex Retromobiles show, an unmissable event for all vintage vehicle enthusiasts.",
+      "callToAction": "Join us to experience and share together the passion for vintage automobiles!"
+    },
+    "navigation": {
+      "title": "Explore our website",
+      "about": {
+        "title": "About",
+        "description": "Presentation of the association, its history, board members, and our partners"
+      },
+      "events": {
+        "title": "Events",
+        "description": "Calendar and events organized by the association, news and information about the Gex Rétromobiles show"
+      },
+      "photos": {
+        "title": "Photos",
+        "description": "The association's photo gallery featuring our best moments"
+      },
+      "contact": {
+        "title": "Contact",
+        "description": "A form to contact the association and get more information"
+      }
+    }
   },
   "about": {},
   "events": {},
