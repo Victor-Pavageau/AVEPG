@@ -1,8 +1,8 @@
 import { JSX } from 'react';
+import { useLocation } from 'react-router-dom';
 import { goTo } from '../services';
 import { Path, PathsLabels } from '../types';
 import LanguageSelector from './LanguageSelector';
-import { useLocation } from 'react-router-dom';
 
 type Props = {
   isMobile: boolean;
@@ -26,11 +26,13 @@ export function NavigationLinks(props: Props): JSX.Element {
               isMobile
                 ? `block px-3 py-2 rounded-md text-base transition-colors ${
                     location.pathname === path
-                      ? 'text-gray-900 font-bold bg-gray-100'
+                      ? 'text-[#0164B5] font-extrabold bg-gray-100'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium'
                   }`
-                : `text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm transition-colors ${
-                    location.pathname === path ? 'font-bold' : 'font-medium'
+                : `px-3 py-2 rounded-md text-sm transition-colors ${
+                    location.pathname === path
+                      ? 'font-extrabold text-[#0164B5]'
+                      : 'font-medium text-gray-600 hover:text-gray-900'
                   }`
             }
             onClick={onLinkClick}

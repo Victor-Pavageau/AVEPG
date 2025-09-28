@@ -1,6 +1,31 @@
 {
   "home": {
-    "title": "Bienvenue à l'AVEPG"
+    "title": "AVEPG - Association des Véhicules d'Epoque du Pays de Gex",
+    "welcome": {
+      "title": "Bienvenue sur le site de l'AVEPG",
+      "intro": "Bienvenue sur le site de l'AVEPG - Association Véhicule d'Époque du Pays de Gex. Fondée en 1991, l'AVEPG rassemble les passionnés et propriétaires de véhicules anciens, avec pour mission de préserver, valoriser et partager le patrimoine automobile de notre région.",
+      "description": "L'association propose chaque mois des balades conviviales, favorisant les échanges et la découverte, et organise le salon annuel Gex Rétromobiles, un rendez-vous incontournable pour tous les amateurs de véhicules historiques.",
+      "callToAction": "Rejoignez-nous pour vivre et transmettre ensemble la passion de l'automobile d'époque !"
+    },
+    "navigation": {
+      "title": "Découvrez notre site",
+      "about": {
+        "title": "À propos",
+        "description": "Présentation de l'association, son histoire, les membres du bureau et nos partenaires"
+      },
+      "events": {
+        "title": "Événements",
+        "description": "Calendrier et événements organisés par l'association, actualités et informations sur le salon Gex Rétromobiles"
+      },
+      "photos": {
+        "title": "Photos",
+        "description": "La galerie photos de l'association avec nos plus beaux moments"
+      },
+      "contact": {
+        "title": "Contact",
+        "description": "Un formulaire pour contacter l'association et obtenir plus d'informations"
+      }
+    }
   },
   "about": {},
   "events": {},
