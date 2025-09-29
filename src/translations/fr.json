@@ -27,7 +27,61 @@
       }
     }
   },
-  "about": {},
+  "about": {
+    "title": "À propos de l'AVEPG",
+    "presentation": {
+      "title": "Présentation de l'association et ses buts",
+      "founded": "Fondée le 29/5/1991, l'AVEPG regroupe des passionnés de véhicules de collection, toutes marques et toutes époques confondues. Affiliée à la FFVE (Fédération Française de Véhicules d'Époque), l'association a pour vocation de réunir les propriétaires et amateurs de véhicules anciens afin de préserver, transmettre et partager la passion automobile dans le Pays de Gex.",
+      "members": "Aujourd'hui, l'AVEPG compte environ 50 membres, tous animés par la même passion et le désir de faire vivre le patrimoine roulant. Les membres aiment se retrouver régulièrement pour parcourir ensemble des centaines de kilomètres lors de sorties amicales, d'expositions et d'événements locaux.",
+      "valuesTitle": "L'association s'appuie sur des valeurs essentielles :",
+      "values": [
+        "Passion pour l'automobile ancienne et son histoire",
+        "Transmission du savoir et du patrimoine aux générations futures",
+        "Convivialité et plaisir de partager des moments uniques",
+        "Entraide et solidarité entre membres",
+        "Ouverture à tous les amateurs, quel que soit leur véhicule"
+      ],
+      "spirit": "Chaque rencontre est placée sous le signe de la convivialité et de l'entraide, permettant à chacun de partager ses connaissances, ses expériences et de tisser des liens d'amitié autour d'une passion commune."
+    },
+    "leadership": {
+      "title": "Membres de la direction et informations officielles",
+      "contact": {
+        "title": "Coordonnées",
+        "address": "Adresse postale :",
+        "phone": "Téléphone : xxxx",
+        "email": "mail :",
+        "affiliation": "Association affiliée à la FFVE - N° 123"
+      },
+      "bureau": {
+        "title": "Composition du Bureau",
+        "president": "Président : Henry-claude Ruh",
+        "vicePresident": "Vice-président : Gerald Chenu",
+        "treasurer": "Trésorier : Romain de Bretteville",
+        "secretary": "Secrétaire : Regis Chritin"
+      }
+    },
+    "partners": {
+      "title": "Nos Partenaires",
+      "description": "L'AVEPG collabore étroitement avec des organismes et institutions qui partagent notre passion pour le patrimoine automobile et soutiennent nos activités.",
+      "visitWebsite": "Visiter le site",
+      "list": [
+        {
+          "name": "FFVE",
+          "fullName": "Fédération Française des Véhicules d'Epoque",
+          "description": "Notre fédération nationale qui regroupe les associations de véhicules anciens et défend nos intérêts auprès des pouvoirs publics.",
+          "website": "https://www.ffve.org/",
+          "logo": "/assets/pictures/partners/logo_ffve.png"
+        },
+        {
+          "name": "Ville de Gex",
+          "fullName": "Ville de Gex",
+          "description": "Notre partenaire institutionnel local qui nous soutient dans l'organisation de nos événements et manifestations.",
+          "website": "https://www.gex.fr/",
+          "logo": "/assets/pictures/partners/logo_city_gex.png"
+        }
+      ]
+    }
+  },
   "events": {},
   "photos": {},
   "contact": {},

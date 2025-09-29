@@ -1,10 +1,10 @@
 import { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
-import { GiOpenBook } from 'react-icons/gi';
+import { FaInfoCircle } from 'react-icons/fa';
 import { ImCamera } from 'react-icons/im';
 import { IoIosMail } from 'react-icons/io';
 import { IoCalendar } from 'react-icons/io5';
-import { goTo } from '../services';
+import { Card, NavigationCard } from '../components';
 
 export function HomePage(): JSX.Element {
   const { t } = useTranslation();
@@ -29,7 +29,7 @@ export function HomePage(): JSX.Element {
           <h2 className='text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center'>
             {t('home.welcome.title')}
           </h2>
-          <div className='bg-gray-50 rounded-lg p-6 md:p-8 shadow-sm border-l-4 border-[#0164B5]'>
+          <Card variant='bordered' className='md:p-8'>
             <p className='text-base md:text-lg leading-relaxed mb-4'>
               {t('home.welcome.intro')}
             </p>
@@ -39,7 +39,7 @@ export function HomePage(): JSX.Element {
             <p className='text-base md:text-lg leading-relaxed'>
               {t('home.welcome.callToAction')}
             </p>
-          </div>
+          </Card>
         </div>
 
         <div className='text-gray-800'>
@@ -47,81 +47,41 @@ export function HomePage(): JSX.Element {
             {t('home.navigation.title')}
           </h3>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <a
-              className='bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200'
-              href={goTo('/about')}
-            >
-              <div className='flex items-start'>
-                <div className='bg-blue-100 rounded-full p-2 mr-4 flex-shrink-0'>
-                  <GiOpenBook className='text-blue-600' size={25} />
-                </div>
-                <div>
-                  <h4 className='font-semibold text-lg text-gray-900 mb-2'>
-                    {t('home.navigation.about.title')}
-                  </h4>
-                  <p className='text-gray-600 text-sm md:text-base'>
-                    {t('home.navigation.about.description')}
-                  </p>
-                </div>
-              </div>
-            </a>
+            <NavigationCard
+              path='/about'
+              icon={<FaInfoCircle size={25} />}
+              iconBgColor='bg-blue-100'
+              iconColor='text-blue-600'
+              title={t('home.navigation.about.title')}
+              description={t('home.navigation.about.description')}
+            />
 
-            <a
-              className='bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200'
-              href={goTo('/events')}
-            >
-              <div className='flex items-start'>
-                <div className='bg-green-100 rounded-full p-2 mr-4 flex-shrink-0'>
-                  <IoCalendar className='text-green-600' size={25} />
-                </div>
-                <div>
-                  <h4 className='font-semibold text-lg text-gray-900 mb-2'>
-                    {t('home.navigation.events.title')}
-                  </h4>
-                  <p className='text-gray-600 text-sm md:text-base'>
-                    {t('home.navigation.events.description')}
-                  </p>
-                </div>
-              </div>
-            </a>
+            <NavigationCard
+              path='/events'
+              icon={<IoCalendar size={25} />}
+              iconBgColor='bg-green-100'
+              iconColor='text-green-600'
+              title={t('home.navigation.events.title')}
+              description={t('home.navigation.events.description')}
+            />
 
-            <a
-              className='bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200'
-              href={goTo('/photos')}
-            >
-              <div className='flex items-start'>
-                <div className='bg-purple-100 rounded-full p-2 mr-4 flex-shrink-0'>
-                  <ImCamera className='text-purple-600' size={25} />
-                </div>
-                <div>
-                  <h4 className='font-semibold text-lg text-gray-900 mb-2'>
-                    {t('home.navigation.photos.title')}
-                  </h4>
-                  <p className='text-gray-600 text-sm md:text-base'>
-                    {t('home.navigation.photos.description')}
-                  </p>
-                </div>
-              </div>
-            </a>
+            <NavigationCard
+              path='/photos'
+              icon={<ImCamera size={25} />}
+              iconBgColor='bg-purple-100'
+              iconColor='text-purple-600'
+              title={t('home.navigation.photos.title')}
+              description={t('home.navigation.photos.description')}
+            />
 
-            <a
-              className='bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200'
-              href={goTo('/contact')}
-            >
-              <div className='flex items-start'>
-                <div className='bg-orange-100 rounded-full p-2 mr-4 flex-shrink-0'>
-                  <IoIosMail className='text-orange-600' size={25} />
-                </div>
-                <div>
-                  <h4 className='font-semibold text-lg text-gray-900 mb-2'>
-                    {t('home.navigation.contact.title')}
-                  </h4>
-                  <p className='text-gray-600 text-sm md:text-base'>
-                    {t('home.navigation.contact.description')}
-                  </p>
-                </div>
-              </div>
-            </a>
+            <NavigationCard
+              path='/contact'
+              icon={<IoIosMail size={25} />}
+              iconBgColor='bg-orange-100'
+              iconColor='text-orange-600'
+              title={t('home.navigation.contact.title')}
+              description={t('home.navigation.contact.description')}
+            />
           </div>
         </div>
       </div>
