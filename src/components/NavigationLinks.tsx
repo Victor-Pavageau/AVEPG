@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { goTo } from '../services';
 import { Path, PathsLabels } from '../types';
-import LanguageSelector from './LanguageSelector';
+import { LanguageSelector } from './LanguageSelector';
 
 interface Props {
   isMobile: boolean;
@@ -48,5 +48,3 @@ export function NavigationLinks(props: Props): JSX.Element {
     </>
   );
 }
-
-export default NavigationLinks;

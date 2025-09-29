@@ -1,9 +1,9 @@
 import { JSX, useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { goTo } from '../services';
-import NavigationLinks from './NavigationLinks';
+import { NavigationLinks } from './NavigationLinks';
 
-function Navbar(): JSX.Element {
+export function Navbar(): JSX.Element {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -49,5 +49,3 @@ function Navbar(): JSX.Element {
     </nav>
   );
 }
-
-export default Navbar;

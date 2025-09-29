@@ -24,5 +24,3 @@ export function SectionHeader({
     </div>
   );
 }
-
-export default SectionHeader;
