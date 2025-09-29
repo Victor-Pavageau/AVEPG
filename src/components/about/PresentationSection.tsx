@@ -39,7 +39,7 @@ export function PresentationSection(): JSX.Element {
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
         <div className='lg:order-2 lg:col-span-2'>
-          <Card className='md:p-8 h-full'>
+          <Card variant='default' className='md:p-8 h-full'>
             <h3 className='text-xl font-semibold text-gray-900 mb-4'>
               {t('about.presentation.valuesTitle')}
             </h3>

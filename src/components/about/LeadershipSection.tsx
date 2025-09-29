@@ -36,7 +36,7 @@ export function LeadershipSection(): JSX.Element {
           </div>
         </Card>
 
-        <Card>
+        <Card variant='default'>
           <h3 className='text-xl font-semibold text-gray-900 mb-4'>
             {t('about.leadership.bureau.title')}
           </h3>

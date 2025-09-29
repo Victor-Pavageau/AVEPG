@@ -16,7 +16,7 @@ export function PartnersSection(): JSX.Element {
       />
 
       <div className='mb-6'>
-        <Card className='md:p-8'>
+        <Card variant='default' className='md:p-8'>
           <p className='text-base md:text-lg leading-relaxed text-gray-700 mb-8 text-center'>
             {t('about.partners.description')}
           </p>
