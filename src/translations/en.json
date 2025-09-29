@@ -86,5 +86,13 @@
   "photos": {},
   "contact": {},
   "notFound": {},
-  "shared": {}
+  "shared": {
+    "navbar": {
+      "/": "Home",
+      "/about": "About",
+      "/events": "Events",
+      "/photos": "Photos",
+      "/contact": "Contact"
+    }
+  }
 }

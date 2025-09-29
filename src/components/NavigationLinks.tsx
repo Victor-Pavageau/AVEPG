@@ -1,18 +1,20 @@
 import { JSX } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { goTo } from '../services';
 import { Path, PathsLabels } from '../types';
 import LanguageSelector from './LanguageSelector';
 
-type Props = {
+interface Props {
   isMobile: boolean;
   onLinkClick?: () => void;
-};
+}
 
 export function NavigationLinks(props: Props): JSX.Element {
   const { isMobile, onLinkClick } = props;
 
   const location = useLocation();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -37,7 +39,7 @@ export function NavigationLinks(props: Props): JSX.Element {
             }
             onClick={onLinkClick}
           >
-            {PathsLabels[path]}
+            {t(`shared.navbar.${path}`)}
           </a>
         ))}
       <div className={isMobile ? 'px-3 py-2' : ''}>
