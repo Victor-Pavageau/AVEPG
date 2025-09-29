@@ -3,7 +3,7 @@ import { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AVAILABLE_LANGUAGES, Languages } from '../i18n';
 
-function LanguageSelector(): JSX.Element {
+export function LanguageSelector(): JSX.Element {
   const { i18n } = useTranslation();
 
   const changeLanguage = (value: string) => {
@@ -35,5 +35,3 @@ function LanguageSelector(): JSX.Element {
     />
   );
 }
-
-export default LanguageSelector;

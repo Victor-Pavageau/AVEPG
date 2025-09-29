@@ -41,5 +41,3 @@ export function NavigationCard({
     </a>
   );
 }
-
-export default NavigationCard;
