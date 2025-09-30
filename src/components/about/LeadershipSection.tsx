@@ -16,7 +16,7 @@ export function LeadershipSection(): JSX.Element {
       />
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6'>
-        <Card variant='bordered' borderColor='green-500'>
+        <Card bordered className='border-green-500'>
           <h3 className='text-xl font-semibold text-gray-900 mb-4'>
             {t('about.leadership.contact.title')}
           </h3>
@@ -36,7 +36,7 @@ export function LeadershipSection(): JSX.Element {
           </div>
         </Card>
 
-        <Card variant='default'>
+        <Card>
           <h3 className='text-xl font-semibold text-gray-900 mb-4'>
             {t('about.leadership.bureau.title')}
           </h3>

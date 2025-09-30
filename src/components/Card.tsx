@@ -3,28 +3,22 @@ import { JSX, ReactNode } from 'react';
 interface Props {
   children: ReactNode;
   className?: string;
-  variant: 'default' | 'highlighted' | 'bordered';
-  borderColor?: string;
+  bordered?: boolean;
 }
 
 export function Card({
   children,
   className = '',
-  variant,
-  borderColor,
+  bordered = false,
 }: Props): JSX.Element {
   const baseClasses = 'rounded-lg p-6 shadow-sm';
 
-  const variantClasses = {
-    default: 'bg-white border border-gray-200',
-    highlighted: 'bg-gray-50',
-    bordered: borderColor
-      ? `bg-gray-50 border-l-4 border-${borderColor}`
-      : 'bg-gray-50 border-l-4 border-[#0164B5]',
-  };
+  const cardClasses = bordered
+    ? 'bg-gray-50 border-l-4'
+    : 'bg-white border border-gray-200';
 
   return (
-    <div className={`${baseClasses} ${variantClasses[variant]} ${className}`}>
+    <div className={`${baseClasses} ${cardClasses} ${className}`}>
       {children}
     </div>
   );

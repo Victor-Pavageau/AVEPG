@@ -22,10 +22,7 @@ export function NavigationCard({
 }: Props): JSX.Element {
   return (
     <a href={goTo(path)} className='block'>
-      <Card
-        variant='default'
-        className='hover:shadow-md transition-shadow duration-200 cursor-pointer'
-      >
+      <Card className='hover:shadow-md transition-shadow duration-200 cursor-pointer'>
         <div className='flex items-start'>
           <div className={`${iconBgColor} rounded-full p-2 mr-4 flex-shrink-0`}>
             <div className={iconColor}>{icon}</div>

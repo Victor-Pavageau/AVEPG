@@ -16,7 +16,7 @@ export function PartnersSection(): JSX.Element {
       />
 
       <div className='mb-6'>
-        <Card variant='default' className='md:p-8'>
+        <Card className='md:p-8'>
           <p className='text-base md:text-lg leading-relaxed text-gray-700 mb-8 text-center'>
             {t('about.partners.description')}
           </p>
@@ -33,9 +33,8 @@ export function PartnersSection(): JSX.Element {
             ).map((partner, index) => (
               <Card
                 key={index}
-                variant='bordered'
-                borderColor='purple-500'
-                className='p-6 hover:shadow-lg transition-shadow duration-300'
+                bordered
+                className='p-6 hover:shadow-lg transition-shadow duration-300 border-purple-500'
               >
                 <div className='flex flex-col items-center text-center h-full'>
                   <div className='w-32 h-32 mb-4 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden'>
