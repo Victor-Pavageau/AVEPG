@@ -93,6 +93,10 @@
       "/events": "Événements",
       "/photos": "Photos",
       "/contact": "Contact"
+    },
+    "footer": {
+      "copyright": "© {{year}} AVEPG. Tous droits réservés.",
+      "photoRights": "Les photos de ce site ne sont pas libres de droits"
     }
   }
 }
