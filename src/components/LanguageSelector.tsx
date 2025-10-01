@@ -13,8 +13,7 @@ export function LanguageSelector(): JSX.Element {
   }
 
   const defaultValue: Languages =
-    AVAILABLE_LANGUAGES.find((l: Languages) => l.value === i18n.language) ??
-    AVAILABLE_LANGUAGES[0];
+    AVAILABLE_LANGUAGES.find((l: Languages) => l.value === i18n.language) ?? AVAILABLE_LANGUAGES[0];
 
   return (
     <Select

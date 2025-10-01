@@ -5,10 +5,8 @@ import { goTo } from '../services';
 import { NavigationLinks } from './NavigationLinks';
 
 export function Navbar(): JSX.Element {
-  const [isMobileMenuOpen, setIsMobileMenuOpen]: [
-    boolean,
-    (value: boolean) => void,
-  ] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen]: [boolean, (value: boolean) => void] =
+    useState(false);
 
   return (
     <nav className='fixed top-0 left-0 right-0 z-50 shadow-md bg-white border-b border-gray-200 select-none'>

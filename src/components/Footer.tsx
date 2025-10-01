@@ -11,9 +11,7 @@ export function Footer(): JSX.Element {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6'>
         <div className='text-center'>
           <div className='mb-4'>
-            <p className='text-gray-400 text-xs'>
-              {t('shared.footer.photoRights')}
-            </p>
+            <p className='text-gray-400 text-xs'>{t('shared.footer.photoRights')}</p>
           </div>
 
           <div className='border-t border-gray-700 pt-4 space-y-2'>

@@ -31,45 +31,37 @@ export function PartnersSection(): JSX.Element {
           </p>
 
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-            {(
-              t('about.partners.list', { returnObjects: true }) as Partner[]
-            ).map((partner: Partner, index: number) => (
-              <Card
-                key={index}
-                bordered
-                className='p-6 hover:shadow-lg transition-shadow duration-300 border-purple-500'
-              >
-                <div className='flex flex-col items-center text-center h-full'>
-                  <div className='w-32 h-32 mb-4 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden'>
-                    <img
-                      src={partner.logo}
-                      alt={`Logo ${partner.name}`}
-                      className='max-w-full max-h-full object-contain'
-                    />
+            {(t('about.partners.list', { returnObjects: true }) as Partner[]).map(
+              (partner: Partner, index: number) => (
+                <Card
+                  key={index}
+                  bordered
+                  className='p-6 hover:shadow-lg transition-shadow duration-300 border-purple-500'>
+                  <div className='flex flex-col items-center text-center h-full'>
+                    <div className='w-32 h-32 mb-4 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden'>
+                      <img
+                        src={partner.logo}
+                        alt={`Logo ${partner.name}`}
+                        className='max-w-full max-h-full object-contain'
+                      />
+                    </div>
+
+                    <h3 className='text-xl font-bold text-gray-900 mb-2'>{partner.fullName}</h3>
+
+                    <p className='text-base text-gray-700 mb-4 flex-grow'>{partner.description}</p>
+
+                    <a
+                      href={partner.website}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='inline-flex items-center px-4 py-2 bg-[#0164B5] text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 font-medium'>
+                      <span className='mr-2'>{t('about.partners.visitWebsite')}</span>
+                      <FaExternalLinkAlt size={14} />
+                    </a>
                   </div>
-
-                  <h3 className='text-xl font-bold text-gray-900 mb-2'>
-                    {partner.fullName}
-                  </h3>
-
-                  <p className='text-base text-gray-700 mb-4 flex-grow'>
-                    {partner.description}
-                  </p>
-
-                  <a
-                    href={partner.website}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='inline-flex items-center px-4 py-2 bg-[#0164B5] text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 font-medium'
-                  >
-                    <span className='mr-2'>
-                      {t('about.partners.visitWebsite')}
-                    </span>
-                    <FaExternalLinkAlt size={14} />
-                  </a>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              ),
+            )}
           </div>
         </Card>
       </div>

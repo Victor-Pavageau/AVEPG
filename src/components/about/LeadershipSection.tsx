@@ -17,20 +17,16 @@ export function LeadershipSection(): JSX.Element {
       />
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6'>
-        <Card bordered className='border-green-500'>
+        <Card
+          bordered
+          className='border-green-500'>
           <h3 className='text-xl font-semibold text-gray-900 mb-4'>
             {t('about.leadership.contact.title')}
           </h3>
           <div className='space-y-2 text-base md:text-lg'>
-            <p className='text-gray-700'>
-              {t('about.leadership.contact.address')}
-            </p>
-            <p className='text-gray-700'>
-              {t('about.leadership.contact.phone')}
-            </p>
-            <p className='text-gray-700'>
-              {t('about.leadership.contact.email')}
-            </p>
+            <p className='text-gray-700'>{t('about.leadership.contact.address')}</p>
+            <p className='text-gray-700'>{t('about.leadership.contact.phone')}</p>
+            <p className='text-gray-700'>{t('about.leadership.contact.email')}</p>
             <p className='text-gray-700 font-semibold mt-4'>
               {t('about.leadership.contact.affiliation')}
             </p>
@@ -42,18 +38,12 @@ export function LeadershipSection(): JSX.Element {
             {t('about.leadership.bureau.title')}
           </h3>
           <div className='space-y-3 text-base md:text-lg'>
-            <p className='text-gray-700 font-medium'>
-              {t('about.leadership.bureau.president')}
-            </p>
+            <p className='text-gray-700 font-medium'>{t('about.leadership.bureau.president')}</p>
             <p className='text-gray-700 font-medium'>
               {t('about.leadership.bureau.vicePresident')}
             </p>
-            <p className='text-gray-700 font-medium'>
-              {t('about.leadership.bureau.treasurer')}
-            </p>
-            <p className='text-gray-700 font-medium'>
-              {t('about.leadership.bureau.secretary')}
-            </p>
+            <p className='text-gray-700 font-medium'>{t('about.leadership.bureau.treasurer')}</p>
+            <p className='text-gray-700 font-medium'>{t('about.leadership.bureau.secretary')}</p>
           </div>
         </Card>
       </div>

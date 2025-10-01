@@ -40,8 +40,7 @@ export function NavigationLinks(props: Props): JSX.Element {
                       : 'font-medium text-gray-600 hover:text-gray-900'
                   }`
             }
-            onClick={onLinkClick}
-          >
+            onClick={onLinkClick}>
             {t(`shared.navbar.${path}`)}
           </a>
         ))}
