@@ -1,8 +1,10 @@
-import { JSX } from 'react';
+import type { JSX } from 'react';
+import type { Location } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { goTo } from '../services';
-import { Path, PathsLabels } from '../types';
+import type { Path } from '../types';
+import { PathsLabels } from '../types';
 import { LanguageSelector } from './LanguageSelector';
 
 interface Props {
@@ -11,16 +13,16 @@ interface Props {
 }
 
 export function NavigationLinks(props: Props): JSX.Element {
-  const { isMobile, onLinkClick } = props;
+  const { isMobile, onLinkClick }: Props = props;
 
-  const location = useLocation();
+  const location: Location = useLocation();
   const { t } = useTranslation();
 
   return (
     <>
       {(Object.keys(PathsLabels) as Path[])
-        .filter((path) => path !== '*') // Exclude the Not Found path
-        .map((path) => (
+        .filter((path: Path) => path !== '*') // Exclude the Not Found path
+        .map((path: Path) => (
           <a
             key={path}
             href={goTo(path)}

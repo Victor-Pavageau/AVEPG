@@ -1,14 +1,16 @@
 import { Select } from 'antd';
-import { JSX } from 'react';
+import type { i18n } from 'i18next';
+import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AVAILABLE_LANGUAGES, Languages } from '../i18n';
+import type { Languages } from '../i18n';
+import { AVAILABLE_LANGUAGES } from '../i18n';
 
 export function LanguageSelector(): JSX.Element {
-  const { i18n } = useTranslation();
+  const { i18n }: { i18n: i18n } = useTranslation();
 
-  const changeLanguage = (value: string) => {
+  function changeLanguage(value: string): void {
     i18n.changeLanguage(value);
-  };
+  }
 
   const defaultValue: Languages =
     AVAILABLE_LANGUAGES.find((l: Languages) => l.value === i18n.language) ??
@@ -24,8 +26,8 @@ export function LanguageSelector(): JSX.Element {
           <div className='flex items-center gap-3 w-28'>
             <img
               className='h-4'
-              src={`https://flagcdn.com/${l.country_code.toLowerCase()}.svg`}
-              alt={l.country_name}
+              src={`https://flagcdn.com/${l.countryCode.toLowerCase()}.svg`}
+              alt={l.countryName}
             />
             {l.label}
           </div>
