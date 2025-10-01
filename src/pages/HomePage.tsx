@@ -30,13 +30,13 @@ export function HomePage(): JSX.Element {
           <h2 className='text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center'>
             {t('home.welcome.title')}
           </h2>
-          <Card bordered className='md:p-8 border-[#0164B5]'>
+          <Card
+            bordered
+            className='md:p-8 border-[#0164B5]'>
             <p className='text-base md:text-lg leading-relaxed mb-4'>
               {t('home.welcome.description')}
             </p>
-            <p className='text-base md:text-lg leading-relaxed'>
-              {t('home.welcome.callToAction')}
-            </p>
+            <p className='text-base md:text-lg leading-relaxed'>{t('home.welcome.callToAction')}</p>
           </Card>
         </div>
 

@@ -6,8 +6,4 @@ export { NavigationCard } from './NavigationCard';
 export { NavigationLinks } from './NavigationLinks';
 export { SectionHeader } from './SectionHeader';
 
-export {
-  LeadershipSection,
-  PartnersSection,
-  PresentationSection,
-} from './about';
+export { LeadershipSection, PartnersSection, PresentationSection } from './about';

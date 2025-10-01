@@ -1,11 +1,7 @@
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  LeadershipSection,
-  PartnersSection,
-  PresentationSection,
-} from '../components';
+import { LeadershipSection, PartnersSection, PresentationSection } from '../components';
 
 export function AboutPage(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();

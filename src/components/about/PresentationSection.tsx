@@ -18,7 +18,9 @@ export function PresentationSection(): JSX.Element {
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6'>
         <div className='lg:col-span-2'>
-          <Card bordered className='md:p-8 h-full border-[#0164B5]'>
+          <Card
+            bordered
+            className='md:p-8 h-full border-[#0164B5]'>
             <p className='text-base md:text-lg leading-relaxed mb-4'>
               {t('about.presentation.founded')}
             </p>
@@ -52,8 +54,7 @@ export function PresentationSection(): JSX.Element {
               ).map((value: string, index: number) => (
                 <li
                   key={index}
-                  className='text-base md:text-lg leading-relaxed pl-2'
-                >
+                  className='text-base md:text-lg leading-relaxed pl-2'>
                   {value}
                 </li>
               ))}
