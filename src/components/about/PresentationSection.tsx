@@ -1,10 +1,11 @@
-import { JSX } from 'react';
+import type { TFunction } from 'i18next';
+import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaInfoCircle } from 'react-icons/fa';
 import { Card, SectionHeader } from '../index';
 
 export function PresentationSection(): JSX.Element {
-  const { t } = useTranslation();
+  const { t }: { t: TFunction } = useTranslation();
 
   return (
     <div className='mb-12'>
@@ -48,7 +49,7 @@ export function PresentationSection(): JSX.Element {
                 t('about.presentation.values', {
                   returnObjects: true,
                 }) as string[]
-              ).map((value, index) => (
+              ).map((value: string, index: number) => (
                 <li
                   key={index}
                   className='text-base md:text-lg leading-relaxed pl-2'

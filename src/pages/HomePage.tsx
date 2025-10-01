@@ -1,4 +1,5 @@
-import { JSX } from 'react';
+import type { TFunction } from 'i18next';
+import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaInfoCircle } from 'react-icons/fa';
 import { ImCamera } from 'react-icons/im';
@@ -7,7 +8,7 @@ import { IoCalendar } from 'react-icons/io5';
 import { Card, NavigationCard } from '../components';
 
 export function HomePage(): JSX.Element {
-  const { t } = useTranslation();
+  const { t }: { t: TFunction } = useTranslation();
 
   return (
     <div className='w-full'>
@@ -30,9 +31,6 @@ export function HomePage(): JSX.Element {
             {t('home.welcome.title')}
           </h2>
           <Card bordered className='md:p-8 border-[#0164B5]'>
-            <p className='text-base md:text-lg leading-relaxed mb-4'>
-              {t('home.welcome.intro')}
-            </p>
             <p className='text-base md:text-lg leading-relaxed mb-4'>
               {t('home.welcome.description')}
             </p>

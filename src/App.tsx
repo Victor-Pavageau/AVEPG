@@ -1,4 +1,4 @@
-import { JSX } from 'react';
+import type { JSX } from 'react';
 import { Footer, Navbar } from './components';
 import './main.css';
 import RoutingSystem from './routing';

@@ -8,31 +8,31 @@ import commonFr from './translations/fr.json';
 export type Languages = {
   value: string; // BCP 47
   label: string;
-  country_code: string; // ISO 3166-1
-  country_name: string;
+  countryCode: string; // ISO 3166-1
+  countryName: string;
 };
 
 export const AVAILABLE_LANGUAGES: Languages[] = [
   {
     value: 'en-US',
     label: 'English',
-    country_code: 'US',
-    country_name: 'United States',
+    countryCode: 'US',
+    countryName: 'United States',
   },
   {
     value: 'fr-FR',
     label: 'French',
-    country_code: 'FR',
-    country_name: 'France',
+    countryCode: 'FR',
+    countryName: 'France',
   },
 ];
 
-const RESOURCES = {
+const RESOURCES: Record<string, { common: typeof commonEn }> = {
   'en-US': { common: commonEn },
   'fr-FR': { common: commonFr },
 };
 
-const DETECTION_OPTIONS = {
+const DETECTION_OPTIONS: Record<string, string[]> = {
   order: ['localStorage', 'navigator'],
   caches: ['localStorage'],
 };

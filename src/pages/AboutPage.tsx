@@ -1,4 +1,5 @@
-import { JSX } from 'react';
+import type { TFunction } from 'i18next';
+import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   LeadershipSection,
@@ -7,7 +8,7 @@ import {
 } from '../components';
 
 export function AboutPage(): JSX.Element {
-  const { t } = useTranslation();
+  const { t }: { t: TFunction } = useTranslation();
 
   return (
     <div className='w-full px-6 md:px-12 max-w-5xl mx-auto py-8'>
