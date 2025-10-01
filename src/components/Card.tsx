@@ -1,4 +1,4 @@
-import { JSX, ReactNode } from 'react';
+import type { JSX, ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -11,9 +11,9 @@ export function Card({
   className = '',
   bordered = false,
 }: Props): JSX.Element {
-  const baseClasses = 'rounded-lg p-6 shadow-sm';
+  const baseClasses: string = 'rounded-lg p-6 shadow-sm';
 
-  const cardClasses = bordered
+  const cardClasses: string = bordered
     ? 'bg-gray-50 border-l-4'
     : 'bg-white border border-gray-200';
 

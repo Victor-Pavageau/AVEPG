@@ -1,6 +1,7 @@
+import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
-import type { Location } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import type { Location } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { goTo } from '../services';
 import type { Path } from '../types';
@@ -16,7 +17,7 @@ export function NavigationLinks(props: Props): JSX.Element {
   const { isMobile, onLinkClick }: Props = props;
 
   const location: Location = useLocation();
-  const { t } = useTranslation();
+  const { t }: { t: TFunction } = useTranslation();
 
   return (
     <>

@@ -1,10 +1,19 @@
-import { JSX } from 'react';
+import type { TFunction } from 'i18next';
+import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaExternalLinkAlt, FaHandshake } from 'react-icons/fa';
 import { Card, SectionHeader } from '../index';
 
+interface Partner {
+  name: string;
+  fullName: string;
+  description: string;
+  website: string;
+  logo: string;
+}
+
 export function PartnersSection(): JSX.Element {
-  const { t } = useTranslation();
+  const { t }: { t: TFunction } = useTranslation();
 
   return (
     <div className='mb-8'>
@@ -23,14 +32,8 @@ export function PartnersSection(): JSX.Element {
 
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
             {(
-              t('about.partners.list', { returnObjects: true }) as Array<{
-                name: string;
-                fullName: string;
-                description: string;
-                website: string;
-                logo: string;
-              }>
-            ).map((partner, index) => (
+              t('about.partners.list', { returnObjects: true }) as Partner[]
+            ).map((partner: Partner, index: number) => (
               <Card
                 key={index}
                 bordered

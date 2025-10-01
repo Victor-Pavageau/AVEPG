@@ -1,9 +1,10 @@
+import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function Footer(): JSX.Element {
-  const { t } = useTranslation();
-  const currentYear = new Date().getFullYear();
+  const { t }: { t: TFunction } = useTranslation();
+  const currentYear: number = new Date().getFullYear();
 
   return (
     <footer className='bg-gray-800 text-white mt-8'>

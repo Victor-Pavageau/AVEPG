@@ -1,10 +1,11 @@
-import { JSX } from 'react';
+import type { TFunction } from 'i18next';
+import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IoMdPeople } from 'react-icons/io';
 import { Card, SectionHeader } from '../index';
 
 export function LeadershipSection(): JSX.Element {
-  const { t } = useTranslation();
+  const { t }: { t: TFunction } = useTranslation();
 
   return (
     <div className='mb-12'>

@@ -1,3 +1,4 @@
+import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaInfoCircle } from 'react-icons/fa';
@@ -7,7 +8,7 @@ import { IoCalendar } from 'react-icons/io5';
 import { Card, NavigationCard } from '../components';
 
 export function HomePage(): JSX.Element {
-  const { t }: { t: (key: string) => string } = useTranslation();
+  const { t }: { t: TFunction } = useTranslation();
 
   return (
     <div className='w-full'>

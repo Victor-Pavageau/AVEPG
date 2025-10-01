@@ -1,6 +1,6 @@
-import { JSX, ReactNode } from 'react';
+import type { JSX, ReactNode } from 'react';
 import { goTo } from '../services';
-import { Path } from '../types';
+import type { Path } from '../types';
 import { Card } from './Card';
 
 interface Props {
