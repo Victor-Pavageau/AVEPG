@@ -1,18 +1,19 @@
+import { App as AntdApp } from 'antd';
 import type { JSX } from 'react';
 import { Footer, Navbar } from './components';
 import './main.css';
-import RoutingSystem from './routing';
+import { RoutingSystem } from './routing';
 
-function App(): JSX.Element {
+export function App(): JSX.Element {
   return (
-    <div className='min-h-screen flex flex-col'>
-      <Navbar />
-      <main className='flex-1 pt-20'>
-        <RoutingSystem />
-      </main>
-      <Footer />
-    </div>
+    <AntdApp>
+      <div className='min-h-screen flex flex-col'>
+        <Navbar />
+        <main className='flex-1 pt-20'>
+          <RoutingSystem />
+        </main>
+        <Footer />
+      </div>
+    </AntdApp>
   );
 }
-
-export default App;

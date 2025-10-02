@@ -42,6 +42,7 @@ module.exports = defineConfig([
         'tuples': 'always-multiline',
       }],
       '@stylistic/no-multiple-empty-lines': ['error', { 'max': 1 }],
+      'max-lines': ['error', { 'max': 200, 'skipBlankLines': true, 'skipComments': true }],
       'eqeqeq': 'error',
       'no-console': 'warn',
       'curly': 'error',

@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { AboutPage, ContactPage, EventsPage, HomePage, NotFoundPage, PhotosPage } from './pages';
 import { goTo } from './services';
 
-function RoutingSystem(): JSX.Element {
+export function RoutingSystem(): JSX.Element {
   return (
     <Routes>
       <Route
@@ -33,5 +33,3 @@ function RoutingSystem(): JSX.Element {
     </Routes>
   );
 }
-
-export default RoutingSystem;

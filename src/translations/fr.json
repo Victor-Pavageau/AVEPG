@@ -84,7 +84,73 @@
   },
   "events": {},
   "photos": {},
-  "contact": {},
+  "contact": {
+    "title": "Nous Contacter",
+    "description": "Prenez contact avec l'association AVEPG. Que vous ayez des questions sur nos activités, souhaitiez nous rejoindre, ou ayez besoin d'informations sur les véhicules d'époque, nous serons ravis de vous aider !",
+    "form": {
+      "firstName": {
+        "label": "Prénom",
+        "placeholder": "Saisissez votre prénom",
+        "required": "Veuillez saisir votre prénom"
+      },
+      "lastName": {
+        "label": "Nom",
+        "placeholder": "Saisissez votre nom",
+        "required": "Veuillez saisir votre nom"
+      },
+      "email": {
+        "label": "Adresse Email",
+        "placeholder": "Saisissez votre adresse email",
+        "required": "Veuillez saisir votre adresse email",
+        "invalid": "Veuillez saisir une adresse email valide"
+      },
+      "phone": {
+        "label": "Numéro de Téléphone",
+        "placeholder": "Saisissez votre numéro de téléphone (optionnel)",
+        "invalid": "Veuillez saisir un numéro de téléphone valide"
+      },
+      "subject": {
+        "label": "Sujet",
+        "placeholder": "Saisissez l'objet de votre message",
+        "required": "Veuillez saisir un sujet"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Saisissez votre message ici...",
+        "required": "Veuillez saisir votre message",
+        "minLength": "Le message doit contenir au moins 10 caractères"
+      },
+      "submitButton": "Envoyer",
+      "resetButton": "Réinitialiser",
+      "sending": "Envoi en cours...",
+      "cooldown": "Veuillez attendre {{seconds}} secondes avant d'envoyer un autre message"
+    },
+    "success": {
+      "title": "Message envoyé avec succès !",
+      "description": "Merci de nous avoir contactés. Nous vous répondrons dans les plus brefs délais."
+    },
+    "error": {
+      "title": "Erreur lors de l'envoi",
+      "description": "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer.",
+      "noEmail": "Une erreur s'est produite lors de l'envoi de votre message. Veuillez essayer un autre moyen de nous contacter.",
+      "network": "Erreur réseau. Veuillez vérifier votre connexion et réessayer."
+    },
+    "info": {
+      "title": "Autres moyens de nous contacter",
+      "address": {
+        "title": "Adresse Postale",
+        "value": "AVEPG\nPays de Gex\nFrance"
+      },
+      "phone": {
+        "title": "Téléphone",
+        "value": "Contactez-nous par email pour les informations téléphoniques"
+      },
+      "email": {
+        "title": "Email",
+        "value": "Contactez-nous via le formulaire ci-dessus"
+      }
+    }
+  },
   "notFound": {},
   "shared": {
     "navbar": {

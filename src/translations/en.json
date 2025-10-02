@@ -84,7 +84,73 @@
   },
   "events": {},
   "photos": {},
-  "contact": {},
+  "contact": {
+    "title": "Contact Us",
+    "description": "Get in touch with the AVEPG association. Whether you have questions about our activities, want to join us, or need information about vintage vehicles, we'd be happy to help!",
+    "form": {
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Enter your first name",
+        "required": "Please enter your first name"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Enter your last name",
+        "required": "Please enter your last name"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Enter your email address",
+        "required": "Please enter your email address",
+        "invalid": "Please enter a valid email address"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number (optional)",
+        "invalid": "Please enter a valid phone number"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Enter the subject of your message",
+        "required": "Please enter a subject"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Enter your message here...",
+        "required": "Please enter your message",
+        "minLength": "Message must be at least 10 characters long"
+      },
+      "submitButton": "Send Message",
+      "resetButton": "Reset Form",
+      "sending": "Sending...",
+      "cooldown": "Please wait {{seconds}} seconds before sending another message"
+    },
+    "success": {
+      "title": "Message Sent Successfully!",
+      "description": "Thank you for contacting us. We will get back to you as soon as possible."
+    },
+    "error": {
+      "title": "Error sending message",
+      "description": "An error occurred while sending your message. Please try again.",
+      "noEmail": "An error occurred while sending your message. Please try another way to contact us.",
+      "network": "Network error. Please check your connection and try again."
+    },
+    "info": {
+      "title": "Other ways to contact us",
+      "address": {
+        "title": "Postal Address",
+        "value": "AVEPG\nPays de Gex\nFrance"
+      },
+      "phone": {
+        "title": "Phone",
+        "value": "Contact us by email for phone information"
+      },
+      "email": {
+        "title": "Email",
+        "value": "Contact us through the form above"
+      }
+    }
+  },
   "notFound": {},
   "shared": {
     "navbar": {
