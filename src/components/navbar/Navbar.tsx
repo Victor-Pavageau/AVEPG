@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { goTo } from '../services';
+import { goTo } from '../../services';
 import { NavigationLinks } from './NavigationLinks';
 
 export function Navbar(): JSX.Element {
@@ -35,7 +35,6 @@ export function Navbar(): JSX.Element {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className='inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500'
               aria-expanded={isMobileMenuOpen}>
-              <span className='sr-only'>Open main menu</span>
               <GiHamburgerMenu className='h-6 w-6' />
             </button>
           </div>

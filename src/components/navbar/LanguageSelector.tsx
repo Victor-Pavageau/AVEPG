@@ -2,8 +2,8 @@ import { Select } from 'antd';
 import type { i18n } from 'i18next';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { Languages } from '../i18n';
-import { AVAILABLE_LANGUAGES } from '../i18n';
+import type { Languages } from '../../i18n';
+import { AVAILABLE_LANGUAGES } from '../../i18n';
 
 export function LanguageSelector(): JSX.Element {
   const { i18n }: { i18n: i18n } = useTranslation();
