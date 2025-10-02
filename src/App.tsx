@@ -4,6 +4,8 @@ import './main.css';
 import RoutingSystem from './routing';
 
 function App(): JSX.Element {
+  console.log('roll back to react 18 to match ant design recommendations');
+
   return (
     <div className='min-h-screen flex flex-col'>
       <Navbar />
