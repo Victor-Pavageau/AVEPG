@@ -20,5 +20,3 @@ export function AboutPage(): JSX.Element {
     </div>
   );
 }
-
-export default AboutPage;

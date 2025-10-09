@@ -3,9 +3,9 @@ import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Location } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { goTo } from '../services';
-import type { Path } from '../types';
-import { PathsLabels } from '../types';
+import { goTo } from '../../services';
+import type { Path } from '../../types';
+import { PathsLabels } from '../../types';
 import { LanguageSelector } from './LanguageSelector';
 
 interface Props {
@@ -13,9 +13,7 @@ interface Props {
   onLinkClick?: () => void;
 }
 
-export function NavigationLinks(props: Props): JSX.Element {
-  const { isMobile, onLinkClick }: Props = props;
-
+export function NavigationLinks({ isMobile, onLinkClick }: Props): JSX.Element {
   const location: Location = useLocation();
   const { t }: { t: TFunction } = useTranslation();
 
@@ -27,19 +25,19 @@ export function NavigationLinks(props: Props): JSX.Element {
           <a
             key={path}
             href={goTo(path)}
-            className={
+            className={`px-3 py-2 rounded-md ${
               isMobile
-                ? `block px-3 py-2 rounded-md text-base transition-colors ${
+                ? `block text-base transition-colors ${
                     location.pathname === path
-                      ? 'text-[#0164B5] font-extrabold bg-gray-100'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium'
+                      ? 'text-[#0164B5]! font-extrabold bg-gray-100'
+                      : 'text-gray-600! hover:text-gray-900 hover:bg-gray-100 font-medium'
                   }`
-                : `px-3 py-2 rounded-md text-sm transition-colors ${
+                : `text-sm transition-colors ${
                     location.pathname === path
-                      ? 'font-extrabold text-[#0164B5]'
-                      : 'font-medium text-gray-600 hover:text-gray-900'
+                      ? 'font-extrabold text-[#0164B5]!'
+                      : 'font-medium text-gray-600! hover:text-gray-900'
                   }`
-            }
+            }`}
             onClick={onLinkClick}>
             {t(`shared.navbar.${path}`)}
           </a>
