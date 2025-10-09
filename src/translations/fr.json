@@ -151,7 +151,12 @@
       }
     }
   },
-  "notFound": {},
+  "notFound": {
+    "title": "Page Introuvable",
+    "message": "Oups ! La page que vous recherchez n'existe pas.",
+    "description": "La page a peut-être été déplacée, supprimée, ou vous avez saisi une URL incorrecte.",
+    "button": "Retour à l'Accueil"
+  },
   "shared": {
     "navbar": {
       "/": "Accueil",

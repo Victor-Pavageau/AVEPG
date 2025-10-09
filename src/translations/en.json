@@ -151,7 +151,12 @@
       }
     }
   },
-  "notFound": {},
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "Oops! The page you're looking for doesn't exist.",
+    "description": "The page may have been moved, deleted, or you may have entered an incorrect URL.",
+    "button": "Back to Home"
+  },
   "shared": {
     "navbar": {
       "/": "Home",
