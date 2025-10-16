@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { ConfigProvider } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -10,6 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <ConfigProvider theme={{ token: { colorPrimary: '#0164B5' } }}>
         <App />
+        <Analytics />
       </ConfigProvider>
     </BrowserRouter>
   </React.StrictMode>,
