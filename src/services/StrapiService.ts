@@ -1,6 +1,6 @@
 import { buildStrapiQueryUrl } from '../helpers';
 import { languageToIso6391 } from '../i18n';
-import type { Partner, StrapiResponse } from '../types';
+import type { Event, Partner, StrapiResponse } from '../types';
 
 export class StrapiService {
   public static async getPartners(language: string): Promise<Partner[]> {
@@ -12,6 +12,18 @@ export class StrapiService {
     }
 
     const data: StrapiResponse<Partner> = await response.json();
+    return data.data;
+  }
+
+  public static async getEvents(language: string): Promise<Event[]> {
+    const query: string = buildStrapiQueryUrl('events', languageToIso6391(language));
+    const response: Response = await fetch(query);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch events: ${response.status} ${response.statusText}`);
+    }
+
+    const data: StrapiResponse<Event> = await response.json();
     return data.data;
   }
 }

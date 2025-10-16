@@ -1,12 +1,11 @@
-import { Spin } from 'antd';
 import type { i18n, TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaExternalLinkAlt, FaHandshake } from 'react-icons/fa';
+import { FaHandshake } from 'react-icons/fa';
 import { StrapiService } from '../../services';
 import type { Partner } from '../../types';
-import { Card, SectionHeader } from '../index';
+import { Card, LoadingCard, SectionHeader, VisitWebsite } from '../index';
 
 export function PartnersSection(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
@@ -15,18 +14,18 @@ export function PartnersSection(): JSX.Element {
   );
   const [loading, setLoading]: [boolean, (loading: boolean) => void] = useState(true);
 
-  useEffect(() => {
-    const fetchPartners: () => Promise<void> = async (): Promise<void> => {
-      setLoading(true);
-      try {
-        const data: Partner[] = await StrapiService.getPartners(i18n.language);
-        setPartners(data);
-      } catch {
-        setPartners([]);
-      }
-      setLoading(false);
-    };
+  const fetchPartners: () => Promise<void> = async (): Promise<void> => {
+    setLoading(true);
+    try {
+      const data: Partner[] = await StrapiService.getPartners(i18n.language);
+      setPartners(data);
+    } catch {
+      setPartners([]);
+    }
+    setLoading(false);
+  };
 
+  useEffect(() => {
     fetchPartners();
   }, [i18n.language]);
 
@@ -42,12 +41,7 @@ export function PartnersSection(): JSX.Element {
       <div className='mb-6'>
         <Card className='md:p-8'>
           {loading ? (
-            <div className='flex justify-center items-center py-12 bg-gray-50 rounded-lg'>
-              <Spin
-                percent='auto'
-                size='large'
-              />
-            </div>
+            <LoadingCard />
           ) : (
             <>
               <p className='text-base md:text-lg leading-relaxed text-gray-700 mb-8 text-center'>
@@ -78,14 +72,7 @@ export function PartnersSection(): JSX.Element {
                           {partner.description}
                         </p>
 
-                        <a
-                          href={partner.website}
-                          target='_blank'
-                          rel='noopener noreferrer'
-                          className='inline-flex items-center px-4 py-2 bg-[#0164B5] text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 font-medium'>
-                          <span className='mr-2'>{t('about.partners.visitWebsite')}</span>
-                          <FaExternalLinkAlt size={14} />
-                        </a>
+                        <VisitWebsite url={partner.website} />
                       </div>
                     </Card>
                   ))}
