@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { goTo } from '../services';
+import { goTo } from '../helpers';
 import type { Path } from '../types';
 import { Card } from './Card';
 

@@ -2,7 +2,7 @@ import { Select } from 'antd';
 import type { i18n } from 'i18next';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { Languages } from '../../i18n';
+import type { Language } from '../../i18n';
 import { AVAILABLE_LANGUAGES } from '../../i18n';
 
 export function LanguageSelector(): JSX.Element {
@@ -12,15 +12,15 @@ export function LanguageSelector(): JSX.Element {
     i18n.changeLanguage(value);
   }
 
-  const defaultValue: Languages =
-    AVAILABLE_LANGUAGES.find((l: Languages) => l.value === i18n.language) ?? AVAILABLE_LANGUAGES[0];
+  const defaultValue: Language =
+    AVAILABLE_LANGUAGES.find((l: Language) => l.value === i18n.language) ?? AVAILABLE_LANGUAGES[0];
 
   return (
     <Select
       defaultValue={(defaultValue.label, defaultValue.value)}
       onChange={changeLanguage}
       variant='underlined'
-      options={AVAILABLE_LANGUAGES.map((l: Languages) => ({
+      options={AVAILABLE_LANGUAGES.map((l: Language) => ({
         label: (
           <div className='flex items-center gap-3 w-28'>
             <img

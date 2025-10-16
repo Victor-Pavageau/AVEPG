@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { goTo } from '../../services';
+import { goTo } from '../../helpers';
 import { NavigationLinks } from './NavigationLinks';
 
 export function Navbar(): JSX.Element {
