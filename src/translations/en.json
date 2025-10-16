@@ -152,6 +152,9 @@
     "footer": {
       "copyright": "© {{year}} AVEPG. All rights reserved.",
       "photoRights": "The photos on this site are not free of rights"
+    },
+    "error": {
+      "loadingFailed": "An error occurred while loading data. Please try again later."
     }
   }
 }
