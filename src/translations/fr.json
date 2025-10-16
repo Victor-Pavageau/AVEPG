@@ -63,23 +63,7 @@
     "partners": {
       "title": "Nos Partenaires",
       "description": "L'AVEPG collabore étroitement avec des organismes et institutions qui partagent notre passion pour le patrimoine automobile et soutiennent nos activités.",
-      "visitWebsite": "Visiter le site",
-      "list": [
-        {
-          "name": "FFVE",
-          "fullName": "Fédération Française des Véhicules d'Epoque",
-          "description": "Notre fédération nationale qui regroupe les associations de véhicules anciens et défend nos intérêts auprès des pouvoirs publics.",
-          "website": "https://www.ffve.org/",
-          "logo": "/assets/pictures/partners/logo_ffve.png"
-        },
-        {
-          "name": "Ville de Gex",
-          "fullName": "Ville de Gex",
-          "description": "Notre partenaire institutionnel local qui nous soutient dans l'organisation de nos événements et manifestations.",
-          "website": "https://www.gex.fr/",
-          "logo": "/assets/pictures/partners/logo_city_gex.png"
-        }
-      ]
+      "visitWebsite": "Visiter le site"
     }
   },
   "events": {},

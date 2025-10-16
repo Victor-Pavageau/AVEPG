@@ -5,14 +5,14 @@ import { initReactI18next } from 'react-i18next';
 import commonEn from './translations/en.json';
 import commonFr from './translations/fr.json';
 
-export type Languages = {
+export type Language = {
   value: string; // BCP 47
   label: string;
   countryCode: string; // ISO 3166-1
   countryName: string;
 };
 
-export const AVAILABLE_LANGUAGES: Languages[] = [
+export const AVAILABLE_LANGUAGES: Language[] = [
   {
     value: 'en-US',
     label: 'English',
@@ -26,6 +26,10 @@ export const AVAILABLE_LANGUAGES: Languages[] = [
     countryName: 'France',
   },
 ];
+
+export function languageToIso6391(language: string): string {
+  return language.split('-')[0];
+}
 
 const RESOURCES: Record<string, { common: typeof commonEn }> = {
   'en-US': { common: commonEn },

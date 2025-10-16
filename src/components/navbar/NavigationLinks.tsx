@@ -3,7 +3,7 @@ import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Location } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { goTo } from '../../services';
+import { goTo } from '../../helpers';
 import type { Path } from '../../types';
 import { PathsLabels } from '../../types';
 import { LanguageSelector } from './LanguageSelector';

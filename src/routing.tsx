@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { goTo } from './helpers';
 import { AboutPage, ContactPage, EventsPage, HomePage, NotFoundPage, PhotosPage } from './pages';
-import { goTo } from './services';
 
 export function RoutingSystem(): JSX.Element {
   return (
