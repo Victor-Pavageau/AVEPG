@@ -1,10 +1,11 @@
 {
   "home": {
-    "title": "AVEPG - Association des Véhicules d'Epoque du Pays de Gex",
+    "shortTitle": "AVEPG",
+    "title": "Association des Véhicules d'Epoque du Pays de Gex",
     "welcome": {
       "title": "Bienvenue sur le site de l'AVEPG",
       "intro": "Bienvenue sur le site de l'AVEPG - Association Véhicule d'Époque du Pays de Gex. Fondée en 1991, l'AVEPG rassemble les passionnés et propriétaires de véhicules anciens, avec pour mission de préserver, valoriser et partager le patrimoine automobile de notre région.",
-      "description": "L'association propose chaque mois des balades conviviales, favorisant les échanges et la découverte, et organise le salon annuel Gex Rétromobiles, un rendez-vous incontournable pour tous les amateurs de véhicules historiques.",
+      "description": "L'association propose chaque mois des balades conviviales, favorisant les échanges et la découverte, et organise le salon annuel GEXRETROMOBILES, un rendez-vous incontournable pour tous les amateurs de véhicules historiques.",
       "callToAction": "Rejoignez-nous pour vivre et transmettre ensemble la passion de l'automobile d'époque !"
     },
     "navigation": {
@@ -15,7 +16,7 @@
       },
       "events": {
         "title": "Événements",
-        "description": "Calendrier et événements organisés par l'association, actualités et informations sur le salon Gex Rétromobiles"
+        "description": "Calendrier et événements organisés par l'association, actualités et informations sur le salon GEXRETROMOBILES"
       },
       "photos": {
         "title": "Photos",
@@ -71,7 +72,7 @@
       "pastShort": "Passés",
       "upcoming": "Événements à venir",
       "upcomingShort": "À venir",
-      "gexRetromobiles": "Gex Rétromobiles",
+      "gexRetromobiles": "GEXRETROMOBILES",
       "gexRetromobilesShort": "Gex"
     },
     "eventCard": {
@@ -80,11 +81,11 @@
     }
     ,
     "gexRetromobilesCard": {
-      "title": "Ne manquez rien du Gex Rétromobiles",
+      "title": "Ne manquez rien du GEXRETROMOBILES",
       "description": "Suivez-nous sur Facebook et Instagram pour toutes les annonces, horaires et photos.",
       "facebook": "Facebook",
       "instagram": "Instagram",
-      "placeholderTitle": "Gex Rétromobiles",
+      "placeholderTitle": "GEXRETROMOBILES",
       "placeholderDescription": "Informations à venir. Retrouvez-nous sur les réseaux sociaux pour les dernières nouvelles."
     }
   },
@@ -174,6 +175,7 @@
     },
     "footer": {
       "copyright": "© {{year}} AVEPG. Tous droits réservés.",
+      "credit": "Conçu et développé par Victor Pavageau",
       "photoRights": "Les photos de ce site ne sont pas libres de droits"
     },
     "error": {

@@ -37,7 +37,7 @@ export function ContactForm({
 
   return (
     <div className='lg:col-span-1'>
-      <Card className='h-full'>
+      <Card>
         <Form
           form={form}
           layout='vertical'

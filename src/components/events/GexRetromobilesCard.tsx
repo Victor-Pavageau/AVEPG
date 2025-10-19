@@ -61,7 +61,7 @@ export function GexRetromobilesCard({ events = [] }: Props): JSX.Element {
 
           <div className='mt-3 sm:mt-0 flex space-x-3'>
             <a
-              href='https://www.facebook.com'
+              href='https://www.facebook.com/AVEPaysdeGex'
               target='_blank'
               rel='noopener noreferrer'
               className='inline-flex items-center px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm sm:text-base !text-white font-semibold'>
@@ -71,9 +71,8 @@ export function GexRetromobilesCard({ events = [] }: Props): JSX.Element {
               />
               {t('events.gexRetromobilesCard.facebook')}
             </a>
-
             <a
-              href='https://www.instagram.com'
+              href='https://www.instagram.com/avepgex/'
               target='_blank'
               rel='noopener noreferrer'
               className='inline-flex items-center px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm sm:text-base !text-white font-semibold'>

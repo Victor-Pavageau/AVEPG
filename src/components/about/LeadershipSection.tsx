@@ -68,7 +68,7 @@ export function LeadershipSection(): JSX.Element {
       </div>
 
       <div className='flex justify-center'>
-        <div className='w-full max-w-none md:max-w-2xl h-72 md:h-80 overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300'>
+        <div className='w-full max-w-none md:max-w-2xl h-72 md:h-80 overflow-hidden rounded-xl shadow-lg transform transition-transform duration-300'>
           <img
             src='/assets/pictures/members_3.png'
             alt='Membres AVEPG - Photo 3'
