@@ -62,11 +62,32 @@
     },
     "partners": {
       "title": "Nos Partenaires",
-      "description": "L'AVEPG collabore étroitement avec des organismes et institutions qui partagent notre passion pour le patrimoine automobile et soutiennent nos activités.",
-      "visitWebsite": "Visiter le site"
+      "description": "L'AVEPG collabore étroitement avec des organismes et institutions qui partagent notre passion pour le patrimoine automobile et soutiennent nos activités."
     }
   },
-  "events": {},
+  "events": {
+    "tabs": {
+      "past": "Événements passés",
+      "pastShort": "Passés",
+      "upcoming": "Événements à venir",
+      "upcomingShort": "À venir",
+      "gexRetromobiles": "Gex Rétromobiles",
+      "gexRetromobilesShort": "Gex"
+    },
+    "eventCard": {
+      "viewMore": "Voir plus",
+      "viewLess": "Voir moins"
+    }
+    ,
+    "gexRetromobilesCard": {
+      "title": "Ne manquez rien du Gex Rétromobiles",
+      "description": "Suivez-nous sur Facebook et Instagram pour toutes les annonces, horaires et photos.",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "placeholderTitle": "Gex Rétromobiles",
+      "placeholderDescription": "Informations à venir. Retrouvez-nous sur les réseaux sociaux pour les dernières nouvelles."
+    }
+  },
   "photos": {},
   "contact": {
     "title": "Nous Contacter",
@@ -155,6 +176,7 @@
     },
     "error": {
       "loadingFailed": "Une erreur s'est produite lors du chargement des données. Veuillez réessayer plus tard."
-    }
+    },
+    "visitWebsite": "Visiter le site"
   }
 }

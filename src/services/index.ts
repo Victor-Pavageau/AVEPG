@@ -1,1 +1,1 @@
-export { StrapiService } from './strapiService';
+export { StrapiService } from './StrapiService';

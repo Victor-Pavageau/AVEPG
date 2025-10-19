@@ -15,7 +15,7 @@
       },
       "events": {
         "title": "Events",
-        "description": "Calendar and events organized by the association, news and information about the Gex Rétromobiles show"
+        "description": "Calendar and events organized by the association, news and information about the Gex Retromobiles show"
       },
       "photos": {
         "title": "Photos",
@@ -62,11 +62,32 @@
     },
     "partners": {
       "title": "Our Partners",
-      "description": "AVEPG works closely with organizations and institutions that share our passion for automotive heritage and support our activities.",
-      "visitWebsite": "Visit website"
+      "description": "AVEPG works closely with organizations and institutions that share our passion for automotive heritage and support our activities."
     }
   },
-  "events": {},
+  "events": {
+    "tabs": {
+      "past": "Past events",
+      "pastShort": "Past",
+      "upcoming": "Upcoming events",
+      "upcomingShort": "Upcoming",
+      "gexRetromobiles": "Gex Retromobiles",
+      "gexRetromobilesShort": "Gex"
+    },
+    "eventCard": {
+      "viewMore": "View more",
+      "viewLess": "View less"
+    }
+    ,
+    "gexRetromobilesCard": {
+      "title": "Don't miss anything about Gex Retromobiles",
+      "description": "Follow us on Facebook and Instagram for announcements, schedules and photos.",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "placeholderTitle": "Gex Retromobiles",
+      "placeholderDescription": "Information coming soon. Find the latest news on our social networks."
+    }
+  },
   "photos": {},
   "contact": {
     "title": "Contact Us",
@@ -155,6 +176,7 @@
     },
     "error": {
       "loadingFailed": "An error occurred while loading data. Please try again later."
-    }
+    },
+    "visitWebsite": "Visit website"
   }
 }
