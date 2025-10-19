@@ -1,10 +1,11 @@
 {
   "home": {
-    "title": "AVEPG - Association of Vintage Vehicles of the Pays de Gex",
+    "shortTitle": "AVEPG",
+    "title": "Association of Vintage Vehicles of the Pays de Gex",
     "welcome": {
       "title": "Welcome to AVEPG",
       "intro": "Welcome to the AVEPG website - Association of Vintage Vehicles of the Pays de Gex. Founded in 1991, AVEPG brings together enthusiasts and owners of vintage vehicles, with the mission to preserve, promote and share our region's automotive heritage.",
-      "description": "The association organizes monthly friendly rides, fostering exchanges and discovery, and hosts the annual Gex Retromobiles show, an unmissable event for all vintage vehicle enthusiasts.",
+      "description": "The association organizes monthly friendly rides, fostering exchanges and discovery, and hosts the annual GEXRETROMOBILES show, an unmissable event for all vintage vehicle enthusiasts.",
       "callToAction": "Join us to experience and share together the passion for vintage automobiles!"
     },
     "navigation": {
@@ -15,7 +16,7 @@
       },
       "events": {
         "title": "Events",
-        "description": "Calendar and events organized by the association, news and information about the Gex Retromobiles show"
+        "description": "Calendar and events organized by the association, news and information about the GEXRETROMOBILES show"
       },
       "photos": {
         "title": "Photos",
@@ -71,7 +72,7 @@
       "pastShort": "Past",
       "upcoming": "Upcoming events",
       "upcomingShort": "Upcoming",
-      "gexRetromobiles": "Gex Retromobiles",
+      "gexRetromobiles": "GEXRETROMOBILES",
       "gexRetromobilesShort": "Gex"
     },
     "eventCard": {
@@ -80,11 +81,11 @@
     }
     ,
     "gexRetromobilesCard": {
-      "title": "Don't miss anything about Gex Retromobiles",
+      "title": "Don't miss anything about GEXRETROMOBILES",
       "description": "Follow us on Facebook and Instagram for announcements, schedules and photos.",
       "facebook": "Facebook",
       "instagram": "Instagram",
-      "placeholderTitle": "Gex Retromobiles",
+      "placeholderTitle": "GEXRETROMOBILES",
       "placeholderDescription": "Information coming soon. Find the latest news on our social networks."
     }
   },
@@ -174,6 +175,7 @@
     },
     "footer": {
       "copyright": "© {{year}} AVEPG. All rights reserved.",
+      "credit": "Designed and developed by Victor Pavageau",
       "photoRights": "The photos on this site are not free of rights"
     },
     "error": {

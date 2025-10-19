@@ -30,7 +30,7 @@ export function PresentationSection(): JSX.Element {
           </Card>
         </div>
         <div className='flex justify-center lg:justify-end'>
-          <div className='w-full lg:max-w-none h-64 lg:h-full min-h-[200px] overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300'>
+          <div className='w-full lg:max-w-none h-64 lg:h-full min-h-[200px] overflow-hidden rounded-xl shadow-lg transform transition-transform duration-300'>
             <img
               src='/assets/pictures/members_1.png'
               alt='Membres AVEPG - Photo 1'
@@ -65,7 +65,7 @@ export function PresentationSection(): JSX.Element {
           </Card>
         </div>
         <div className='lg:order-1 flex justify-center lg:justify-start'>
-          <div className='w-full lg:max-w-none h-64 lg:h-full min-h-[200px] overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300'>
+          <div className='w-full lg:max-w-none h-64 lg:h-full min-h-[200px] overflow-hidden rounded-xl shadow-lg transform transition-transform duration-300'>
             <img
               src='/assets/pictures/members_2.png'
               alt='Membres AVEPG - Photo 2'

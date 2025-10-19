@@ -19,9 +19,12 @@ export function HomePage(): JSX.Element {
           alt='Cobra Era - Home page cover'
         />
         <div className='absolute top-4 md:top-20 left-4 md:left-16 right-4 md:right-auto'>
-          <h3 className='text-white p-3 bg-gray-800/80 font-bold text-lg md:text-2xl drop-shadow-lg rounded-lg md:max-w-lg'>
-            {t('home.title')}
-          </h3>
+          <div className='text-white bg-gray-800/80 rounded-lg shadow-lg inline-block md:max-w-2xl'>
+            <div className='p-3 md:p-4'>
+              <h3 className='font-bold text-base md:text-lg mb-2'>{t('home.shortTitle')}</h3>
+              <h4 className='font-bold text-lg md:text-2xl leading-tight'>{t('home.title')}</h4>
+            </div>
+          </div>
         </div>
       </div>
 
