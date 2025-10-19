@@ -49,6 +49,7 @@ function HomePage(): JSX.Element {
           </h3>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <NavigationCard
+              className='h-full'
               path='/about'
               icon={<FaInfoCircle size={25} />}
               iconBgColor='bg-blue-100'
@@ -58,6 +59,7 @@ function HomePage(): JSX.Element {
             />
 
             <NavigationCard
+              className='h-full'
               path='/events'
               icon={<IoCalendar size={25} />}
               iconBgColor='bg-green-100'
@@ -67,6 +69,7 @@ function HomePage(): JSX.Element {
             />
 
             <NavigationCard
+              className='h-full'
               path='/photos'
               icon={<ImCamera size={25} />}
               iconBgColor='bg-purple-100'
@@ -76,6 +79,7 @@ function HomePage(): JSX.Element {
             />
 
             <NavigationCard
+              className='h-full'
               path='/contact'
               icon={<IoIosMail size={25} />}
               iconBgColor='bg-orange-100'
