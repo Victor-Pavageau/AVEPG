@@ -88,7 +88,10 @@
       "placeholderDescription": "Information coming soon. Find the latest news on our social networks."
     }
   },
-  "photos": {},
+  "photos": {
+    "pageTitle": "Photos",
+    "photoAlt": "Photo from album {{album}}"
+  },
   "contact": {
     "title": "Contact Us",
     "description": "Get in touch with the AVEPG association. Whether you have questions about our activities, want to join us, or need information about vintage vehicles, we'd be happy to help!",

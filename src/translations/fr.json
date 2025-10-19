@@ -88,7 +88,10 @@
       "placeholderDescription": "Informations à venir. Retrouvez-nous sur les réseaux sociaux pour les dernières nouvelles."
     }
   },
-  "photos": {},
+  "photos": {
+    "pageTitle": "Photos",
+    "photoAlt": "Photo de l'album {{album}}"
+  },
   "contact": {
     "title": "Nous Contacter",
     "description": "Prenez contact avec l'association AVEPG. Que vous ayez des questions sur nos activités, souhaitiez nous rejoindre, ou ayez besoin d'informations sur les véhicules d'époque, nous serons ravis de vous aider !",
