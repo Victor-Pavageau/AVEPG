@@ -47,9 +47,9 @@
       "title": "Board members and official information",
       "contact": {
         "title": "Contact information",
-        "address": "Postal address:",
-        "phone": "Phone: xxxx",
-        "email": "email:",
+        "address": "Postal address: ",
+        "phone": "Phone: ",
+        "email": "email: ",
         "affiliation": "Association affiliated with FFVE - No. 123"
       },
       "bureau": {
@@ -146,8 +146,7 @@
     "info": {
       "title": "Other ways to contact us",
       "address": {
-        "title": "Postal Address",
-        "value": "AVEPG\nPays de Gex\nFrance"
+        "title": "Postal Address"
       },
       "phone": {
         "title": "Phone",

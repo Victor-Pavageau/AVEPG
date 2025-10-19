@@ -53,9 +53,7 @@ export function ContactPage(): JSX.Element {
     setIsSubmitting(true);
 
     try {
-      const emailFormId: string =
-        (import.meta as unknown as { env: Record<string, string> }).env
-          .VITE_CONTACT_EMAIL_FORM_ID ?? '';
+      const emailFormId: string = import.meta.env.VITE_CONTACT_EMAIL_FORM_ID ?? '';
 
       if (!emailFormId) {
         message.error(t('contact.error.noEmail'));
