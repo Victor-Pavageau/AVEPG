@@ -47,9 +47,9 @@
       "title": "Membres de la direction et informations officielles",
       "contact": {
         "title": "Coordonnées",
-        "address": "Adresse postale :",
-        "phone": "Téléphone : xxxx",
-        "email": "mail :",
+        "address": "Adresse postale : ",
+        "phone": "Téléphone : ",
+        "email": "mail : ",
         "affiliation": "Association affiliée à la FFVE - N° 123"
       },
       "bureau": {
@@ -146,8 +146,7 @@
     "info": {
       "title": "Autres moyens de nous contacter",
       "address": {
-        "title": "Adresse Postale",
-        "value": "AVEPG\nPays de Gex\nFrance"
+        "title": "Adresse Postale"
       },
       "phone": {
         "title": "Téléphone",

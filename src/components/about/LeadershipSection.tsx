@@ -7,6 +7,10 @@ import { Card, SectionHeader } from '../index';
 export function LeadershipSection(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
 
+  const contactAddress: string | null = import.meta.env.VITE_CONTACT_ADDRESS ?? null;
+  const contactPhone: string | null = import.meta.env.VITE_CONTACT_PHONE_NUMBER ?? null;
+  const contactEmail: string | null = import.meta.env.VITE_CONTACT_EMAIL_ADDRESS ?? null;
+
   return (
     <div className='mb-12'>
       <SectionHeader
@@ -24,9 +28,24 @@ export function LeadershipSection(): JSX.Element {
             {t('about.leadership.contact.title')}
           </h3>
           <div className='space-y-2 text-base md:text-lg'>
-            <p className='text-gray-700'>{t('about.leadership.contact.address')}</p>
-            <p className='text-gray-700'>{t('about.leadership.contact.phone')}</p>
-            <p className='text-gray-700'>{t('about.leadership.contact.email')}</p>
+            {contactAddress && (
+              <p className='text-gray-700'>
+                {t('about.leadership.contact.address')}
+                {contactAddress}
+              </p>
+            )}
+            {contactPhone && (
+              <p className='text-gray-700'>
+                {t('about.leadership.contact.phone')}
+                {contactPhone}
+              </p>
+            )}
+            {contactEmail && (
+              <p className='text-gray-700'>
+                {t('about.leadership.contact.email')}
+                {contactEmail}
+              </p>
+            )}
             <p className='text-gray-700 font-semibold mt-4'>
               {t('about.leadership.contact.affiliation')}
             </p>

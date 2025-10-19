@@ -8,8 +8,8 @@ import { ContactMap } from './ContactMap';
 export function ContactInfo(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
 
-  const contactEmail: string = import.meta.env.VITE_CONTACT_EMAIL_ADDRESS ?? '';
-  const contactPhone: string = import.meta.env.VITE_CONTACT_PHONE_NUMBER ?? '';
+  const contactEmail: string | null = import.meta.env.VITE_CONTACT_EMAIL_ADDRESS ?? null;
+  const contactPhone: string | null = import.meta.env.VITE_CONTACT_PHONE_NUMBER ?? null;
 
   return (
     <div className='lg:col-span-1'>
