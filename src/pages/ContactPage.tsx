@@ -5,7 +5,7 @@ import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ContactForm, ContactHeader, ContactInfo, type ContactFormData } from '../components';
+import { ContactForm, ContactHeader, ContactInfo, type IContactFormData } from '../components';
 import { useSubmitCooldown } from '../hooks';
 
 export function ContactPage(): JSX.Element {
@@ -42,8 +42,8 @@ export function ContactPage(): JSX.Element {
     return Promise.reject(new Error(t('contact.form.phone.invalid')));
   };
 
-  const handleSubmit: (values: ContactFormData) => Promise<void> = async (
-    values: ContactFormData,
+  const handleSubmit: (values: IContactFormData) => Promise<void> = async (
+    values: IContactFormData,
   ): Promise<void> => {
     if (isInCooldown) {
       message.warning(t('contact.form.cooldown', { seconds: remainingSeconds }));

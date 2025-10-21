@@ -6,20 +6,20 @@ import { useTranslation } from 'react-i18next';
 import { FcFolder } from 'react-icons/fc';
 import { LoadingCard } from '../components';
 import { StrapiService } from '../services';
-import type { Album, StrapiImage } from '../types';
+import type { IAlbum, IStrapiImage } from '../types';
 
 export function PhotosPage(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
 
-  const [albums, setAlbums]: [Album[], (a: Album[]) => void] = useState<Album[]>([]);
+  const [albums, setAlbums]: [IAlbum[], (a: IAlbum[]) => void] = useState<IAlbum[]>([]);
   const [loading, setLoading]: [boolean, (v: boolean) => void] = useState<boolean>(true);
-  const [selectedAlbum, setSelectedAlbum]: [Album | null, (a: Album | null) => void] =
-    useState<Album | null>(null);
+  const [selectedAlbum, setSelectedAlbum]: [IAlbum | null, (a: IAlbum | null) => void] =
+    useState<IAlbum | null>(null);
 
   const fetchAlbums: () => Promise<void> = async (): Promise<void> => {
     setLoading(true);
     try {
-      const data: Album[] = await StrapiService.getAlbums(i18n.language);
+      const data: IAlbum[] = await StrapiService.getAlbums(i18n.language);
       setAlbums(data);
     } catch {
       setAlbums([]);
@@ -31,7 +31,7 @@ export function PhotosPage(): JSX.Element {
     void fetchAlbums();
   }, [i18n.language]);
 
-  function openAlbum(album: Album): void {
+  function openAlbum(album: IAlbum): void {
     setSelectedAlbum(album);
   }
 
@@ -48,7 +48,7 @@ export function PhotosPage(): JSX.Element {
         <div className='text-gray-600'>{t('shared.error.loadingFailed')}</div>
       ) : (
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6'>
-          {albums.map((album: Album) => (
+          {albums.map((album: IAlbum) => (
             <button
               key={album.id}
               onClick={() => openAlbum(album)}
@@ -80,7 +80,7 @@ export function PhotosPage(): JSX.Element {
               </p>
             </div>
             <div className='columns-1 md:columns-2 space-y-4'>
-              {selectedAlbum.photos.map((photo: StrapiImage) => (
+              {selectedAlbum.photos.map((photo: IStrapiImage) => (
                 <div
                   key={photo.id}
                   className='mb-4 break-inside-avoid rounded-lg overflow-hidden shadow-sm'>

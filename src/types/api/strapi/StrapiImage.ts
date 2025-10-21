@@ -1,4 +1,4 @@
-export interface StrapiImage {
+export interface IStrapiImage {
   id: string;
   documentId: string;
   url: string;

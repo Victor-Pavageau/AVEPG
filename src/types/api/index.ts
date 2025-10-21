@@ -1,4 +1,4 @@
-export type { Album } from './Album';
-export type { Event } from './Event';
-export type { Partner } from './Partner';
-export type { StrapiEntity, StrapiImage, StrapiObject, StrapiResponse } from './strapi';
+export type { IAlbum } from './Album';
+export type { IEvent } from './Event';
+export type { IPartner } from './Partner';
+export type { IStrapiImage, IStrapiObject, IStrapiResponse, StrapiEntity } from './strapi';

@@ -1,8 +1,7 @@
-import type { StrapiObject } from './strapi';
-import type { StrapiImage } from './strapi/StrapiImage';
+import type { IStrapiImage, IStrapiObject } from './strapi';
 
-export interface Album extends StrapiObject {
+export interface IAlbum extends IStrapiObject {
   name: string;
   description: string;
-  photos: StrapiImage[];
+  photos: IStrapiImage[];
 }

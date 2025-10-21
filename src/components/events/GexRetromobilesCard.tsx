@@ -4,20 +4,20 @@ import type { JSX } from 'react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
-import type { Event } from '../../types';
+import type { IEvent } from '../../types';
 import { EventCard } from './EventCard';
 
 interface Props {
-  events?: Event[];
+  events?: IEvent[];
 }
 
 export function GexRetromobilesCard({ events = [] }: Props): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
-  const eventsByYear: Array<[number, Event]> = useMemo(() => {
-    const map: Map<number, Event> = new Map<number, Event>();
-    events.forEach((ev: Event) => {
+  const eventsByYear: Array<[number, IEvent]> = useMemo(() => {
+    const map: Map<number, IEvent> = new Map<number, IEvent>();
+    events.forEach((ev: IEvent) => {
       const year: number = new Date(ev.startDate).getFullYear();
-      const existing: Event | undefined = map.get(year);
+      const existing: IEvent | undefined = map.get(year);
       if (!existing) {
         map.set(year, ev);
       } else {
@@ -26,22 +26,24 @@ export function GexRetromobilesCard({ events = [] }: Props): JSX.Element {
         }
       }
     });
-    return Array.from(map.entries()).sort((a: [number, Event], b: [number, Event]) => b[0] - a[0]);
+    return Array.from(map.entries()).sort(
+      (a: [number, IEvent], b: [number, IEvent]) => b[0] - a[0],
+    );
   }, [events]);
 
   const yearOptions: { label: string; value: string }[] = eventsByYear.map(
-    ([year]: [number, Event]) => ({ label: String(year), value: String(year) }),
+    ([year]: [number, IEvent]) => ({ label: String(year), value: String(year) }),
   );
   const defaultYear: string | undefined = yearOptions.length > 0 ? yearOptions[0].value : undefined;
   const [selectedYear, setSelectedYear]: [string | undefined, (value: string | undefined) => void] =
     useState<string | undefined>(defaultYear);
 
-  const selectedEvent: Event | undefined = useMemo<Event | undefined>(() => {
+  const selectedEvent: IEvent | undefined = useMemo<IEvent | undefined>(() => {
     if (!selectedYear) {
       return undefined;
     }
-    const found: [number, Event] | undefined = eventsByYear.find(
-      ([year]: [number, Event]) => String(year) === selectedYear,
+    const found: [number, IEvent] | undefined = eventsByYear.find(
+      ([year]: [number, IEvent]) => String(year) === selectedYear,
     );
     return found ? found[1] : undefined;
   }, [selectedYear, eventsByYear]);

@@ -1,5 +1,5 @@
-import type { StrapiObject } from './StrapiObject';
+import type { IStrapiObject } from './StrapiObject';
 
-export interface StrapiResponse<T extends StrapiObject> {
+export interface IStrapiResponse<T extends IStrapiObject> {
   data: T[];
 }

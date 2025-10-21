@@ -5,7 +5,7 @@ import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '../Card';
 
-export interface ContactFormData {
+export interface IContactFormData {
   firstName: string;
   lastName: string;
   email: string;
@@ -20,7 +20,7 @@ interface Props {
   isInCooldown: boolean;
   remainingSeconds: number;
   validatePhone: (_: unknown, value: string) => Promise<void>;
-  onSubmit: (values: ContactFormData) => Promise<void>;
+  onSubmit: (values: IContactFormData) => Promise<void>;
   onReset: () => void;
 }
 
