@@ -7,7 +7,7 @@ import { IoIosMail } from 'react-icons/io';
 import { IoCalendar } from 'react-icons/io5';
 import { Card, NavigationCard } from '../components';
 
-export function HomePage(): JSX.Element {
+function HomePage(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
 
   return (
@@ -89,3 +89,5 @@ export function HomePage(): JSX.Element {
     </div>
   );
 }
+
+export default HomePage;
