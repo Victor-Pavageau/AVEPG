@@ -3,7 +3,7 @@ import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LeadershipSection, PartnersSection, PresentationSection } from '../components';
 
-export function AboutPage(): JSX.Element {
+export default function AboutPage(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
 
   return (

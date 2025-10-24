@@ -7,7 +7,7 @@ import type { NavigateFunction } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../components';
 
-export function NotFoundPage(): JSX.Element {
+export default function NotFoundPage(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
   const navigate: NavigateFunction = useNavigate();
 
