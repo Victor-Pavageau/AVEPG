@@ -18,7 +18,7 @@ type Tab = {
   children: JSX.Element;
 };
 
-export function EventsPage(): JSX.Element {
+export default function EventsPage(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
   const [searchParams, setSearchParams]: [URLSearchParams, (params: URLSearchParams) => void] =
     useSearchParams();

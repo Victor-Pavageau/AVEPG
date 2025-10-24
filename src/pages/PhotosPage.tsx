@@ -8,7 +8,7 @@ import { LoadingCard } from '../components';
 import { StrapiService } from '../services';
 import type { IAlbum, IStrapiImage } from '../types';
 
-export function PhotosPage(): JSX.Element {
+export default function PhotosPage(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
 
   const [albums, setAlbums]: [IAlbum[], (a: IAlbum[]) => void] = useState<IAlbum[]>([]);

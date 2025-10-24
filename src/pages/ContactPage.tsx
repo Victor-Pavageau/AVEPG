@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { ContactForm, ContactHeader, ContactInfo, type IContactFormData } from '../components';
 import { useSubmitCooldown } from '../hooks';
 
-export function ContactPage(): JSX.Element {
+export default function ContactPage(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
   const [form]: [FormInstance] = Form.useForm();
   const { message }: { message: MessageInstance } = App.useApp();
