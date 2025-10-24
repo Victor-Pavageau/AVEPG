@@ -5,7 +5,7 @@ export {
   ContactHeader,
   ContactInfo,
   ContactMap,
-  type ContactFormData,
+  type IContactFormData,
 } from './contact';
 export { GexRetromobilesCard, PastEventsTimeline, UpcomingEventsCalendar } from './events';
 export { Footer } from './Footer';

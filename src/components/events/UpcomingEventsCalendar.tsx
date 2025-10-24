@@ -12,11 +12,11 @@ import type { JSX } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { languageToIso6391 } from '../../i18n';
-import type { Event } from '../../types';
+import type { IEvent } from '../../types';
 import { EventCard } from './EventCard';
 
 interface Props {
-  events: Event[];
+  events: IEvent[];
 }
 
 export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
@@ -25,22 +25,22 @@ export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
   const { i18n }: { i18n: i18n } = useTranslation();
 
   const [isModalOpen, setIsModalOpen]: [boolean, (v: boolean) => void] = useState<boolean>(false);
-  const [selectedEvent, setSelectedEvent]: [Event | null, (e: Event | null) => void] =
-    useState<Event | null>(null);
+  const [selectedEvent, setSelectedEvent]: [IEvent | null, (e: IEvent | null) => void] =
+    useState<IEvent | null>(null);
 
   useEffect(() => {
     const iso: string = languageToIso6391(i18n.language);
     dayjs.locale(iso);
   }, []);
 
-  const eventsByDate: Record<string, Event[]> = {};
-  const eventsByMonth: Record<string, Event[]> = {};
+  const eventsByDate: Record<string, IEvent[]> = {};
+  const eventsByMonth: Record<string, IEvent[]> = {};
 
   // TODO :
   // Clicking on an event in date view should open a modal with event details (eventCard component)
   // Ensure responsivity
 
-  events.forEach((event: Event): void => {
+  events.forEach((event: IEvent): void => {
     const start: Dayjs = dayjs(event.startDate);
     const end: Dayjs = event.endDate ? dayjs(event.endDate) : start;
 
@@ -71,12 +71,12 @@ export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
 
   const dateCellRender: (date: Dayjs) => JSX.Element | null = (date: Dayjs): JSX.Element | null => {
     const dateKey: string = date.format('YYYY-MM-DD');
-    const dayEvents: Event[] = eventsByDate[dateKey] || [];
+    const dayEvents: IEvent[] = eventsByDate[dateKey] || [];
 
     if (dayEvents.length > 0) {
       return (
         <div className='events-container max-h-15 overflow-hidden'>
-          {dayEvents.map((event: Event, index: number) => (
+          {dayEvents.map((event: IEvent, index: number) => (
             <div
               key={`${event.id}-${index}`}
               onClick={() => {
@@ -105,11 +105,11 @@ export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
     date: Dayjs,
   ): JSX.Element | null => {
     const monthKey: string = date.format('YYYY-MM');
-    const monthEvents: Event[] = eventsByMonth[monthKey] || [];
+    const monthEvents: IEvent[] = eventsByMonth[monthKey] || [];
 
     return (
       <div className='flex flex-col overflow-hidden'>
-        {monthEvents.map((event: Event, idx: number) => (
+        {monthEvents.map((event: IEvent, idx: number) => (
           <div
             key={`${event.id}-${idx}`}
             onClick={() => {

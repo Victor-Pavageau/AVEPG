@@ -4,20 +4,20 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHandshake } from 'react-icons/fa';
 import { StrapiService } from '../../services';
-import type { Partner } from '../../types';
+import type { IPartner } from '../../types';
 import { Card, LoadingCard, SectionHeader, VisitWebsite } from '../index';
 
 export function PartnersSection(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
-  const [partners, setPartners]: [Partner[], (partners: Partner[]) => void] = useState<Partner[]>(
-    [],
-  );
+  const [partners, setPartners]: [IPartner[], (partners: IPartner[]) => void] = useState<
+    IPartner[]
+  >([]);
   const [loading, setLoading]: [boolean, (loading: boolean) => void] = useState(true);
 
   const fetchPartners: () => Promise<void> = async (): Promise<void> => {
     setLoading(true);
     try {
-      const data: Partner[] = await StrapiService.getPartners(i18n.language);
+      const data: IPartner[] = await StrapiService.getPartners(i18n.language);
       setPartners(data);
     } catch {
       setPartners([]);
@@ -52,7 +52,7 @@ export function PartnersSection(): JSX.Element {
                 <p className='text-center text-gray-600'>{t('shared.error.loadingFailed')}</p>
               ) : (
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-                  {partners.map((partner: Partner) => (
+                  {partners.map((partner: IPartner) => (
                     <Card
                       key={partner.id}
                       bordered

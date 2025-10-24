@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { IoCalendar } from 'react-icons/io5';
 import { VisitWebsite } from '../';
-import type { Event, Partner } from '../../types';
+import type { IEvent, IPartner } from '../../types';
 
 interface Props {
-  event: Event;
+  event: IEvent;
 }
 
 export function EventCard({ event }: Props): JSX.Element {
@@ -89,7 +89,7 @@ export function EventCard({ event }: Props): JSX.Element {
           <div className='flex items-center space-x-2'>
             {event.partners.length > 0 && (
               <div className='flex items-center space-x-1'>
-                {event.partners.map((partner: Partner) => (
+                {event.partners.map((partner: IPartner) => (
                   <div
                     key={partner.id}
                     className='w-6 h-6 bg-gray-50 rounded-full flex items-center justify-center overflow-hidden border border-gray-200'

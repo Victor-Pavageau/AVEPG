@@ -8,9 +8,9 @@ import { MdDirectionsCar, MdEventAvailable } from 'react-icons/md';
 import { useSearchParams } from 'react-router-dom';
 import { LoadingCard, PastEventsTimeline, UpcomingEventsCalendar } from '../components';
 import { GexRetromobilesCard } from '../components/events';
-import { splitEventsByDate, type SplitEventsResult } from '../helpers';
+import { splitEventsByDate, type ISplitEventsResult } from '../helpers';
 import { StrapiService } from '../services';
-import type { Event } from '../types';
+import type { IEvent } from '../types';
 
 type Tab = {
   key: string;
@@ -22,9 +22,11 @@ export default function EventsPage(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
   const [searchParams, setSearchParams]: [URLSearchParams, (params: URLSearchParams) => void] =
     useSearchParams();
-  const [pastEvents, setPastEvents]: [Event[], (events: Event[]) => void] = useState<Event[]>([]);
-  const [upcomingEvents, setUpcomingEvents]: [Event[], (events: Event[]) => void] = useState<
-    Event[]
+  const [pastEvents, setPastEvents]: [IEvent[], (events: IEvent[]) => void] = useState<IEvent[]>(
+    [],
+  );
+  const [upcomingEvents, setUpcomingEvents]: [IEvent[], (events: IEvent[]) => void] = useState<
+    IEvent[]
   >([]);
   const [loading, setLoading]: [boolean, (loading: boolean) => void] = useState(true);
 
@@ -37,8 +39,8 @@ export default function EventsPage(): JSX.Element {
   const fetchEvents: () => Promise<void> = async (): Promise<void> => {
     setLoading(true);
     try {
-      const events: Event[] = await StrapiService.getEvents(i18n.language);
-      const { past, upcoming }: SplitEventsResult = splitEventsByDate(events);
+      const events: IEvent[] = await StrapiService.getEvents(i18n.language);
+      const { past, upcoming }: ISplitEventsResult = splitEventsByDate(events);
 
       setPastEvents(past);
       setUpcomingEvents(upcoming);

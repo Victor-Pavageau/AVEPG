@@ -1,4 +1,4 @@
 export type { StrapiEntity } from './StrapiEntity';
-export type { StrapiImage } from './StrapiImage';
-export type { StrapiObject } from './StrapiObject';
-export type { StrapiResponse } from './StrapiResponse';
+export type { IStrapiImage } from './StrapiImage';
+export type { IStrapiObject } from './StrapiObject';
+export type { IStrapiResponse } from './StrapiResponse';

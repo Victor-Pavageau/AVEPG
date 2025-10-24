@@ -3,14 +3,14 @@ import { useCallback, useEffect, useState } from 'react';
 const COOLDOWN_KEY: string = 'contact_form_last_submit';
 const COOLDOWN_DURATION: number = 60000; // 60 seconds (1 minute) in milliseconds
 
-interface UseSubmitCooldownReturn {
+interface IUseSubmitCooldownReturn {
   isInCooldown: boolean;
   remainingSeconds: number;
   startCooldown: () => void;
   resetCooldown: () => void;
 }
 
-export function useSubmitCooldown(): UseSubmitCooldownReturn {
+export function useSubmitCooldown(): IUseSubmitCooldownReturn {
   const [isInCooldown, setIsInCooldown]: [boolean, (value: boolean) => void] =
     useState<boolean>(false);
   const [remainingSeconds, setRemainingSeconds]: [number, (value: number) => void] =

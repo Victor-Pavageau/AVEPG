@@ -1,14 +1,13 @@
-import type { Partner } from './Partner';
-import type { StrapiObject } from './strapi';
-import type { StrapiImage } from './strapi/StrapiImage';
+import type { IPartner } from './Partner';
+import type { IStrapiImage, IStrapiObject } from './strapi';
 
-export interface Event extends StrapiObject {
+export interface IEvent extends IStrapiObject {
   title: string;
   description: string;
   startDate: Date;
   endDate?: Date;
-  cover: StrapiImage;
-  partners: Partner[];
+  cover: IStrapiImage;
+  partners: IPartner[];
   location?: string;
   website?: string;
 }

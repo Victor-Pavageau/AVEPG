@@ -1,9 +1,9 @@
-import type { StrapiImage, StrapiObject } from './strapi';
+import type { IStrapiImage, IStrapiObject } from './strapi';
 
-export interface Partner extends StrapiObject {
+export interface IPartner extends IStrapiObject {
   name: string;
   shortName: string;
   description: string;
   website: string;
-  logo: StrapiImage;
+  logo: IStrapiImage;
 }
