@@ -3,43 +3,14 @@ import { lazy, Suspense, type JSX } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { goTo } from './helpers';
 
-const HomePage: LazyExoticComponent<ComponentType<Record<string, unknown>>> = lazy(() =>
-  import('./pages/HomePage').then((m: { default: ComponentType<Record<string, unknown>> }) => ({
-    default: m.default,
-  })),
-);
+const HomePage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/HomePage'));
+const AboutPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/AboutPage'));
+const EventsPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/EventsPage'));
+const PhotosPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/PhotosPage'));
+const ContactPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/ContactPage'));
+const NotFoundPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/NotFoundPage'));
 
-const AboutPage: LazyExoticComponent<ComponentType<Record<string, unknown>>> = lazy(() =>
-  import('./pages/AboutPage').then((m: { default: ComponentType<Record<string, unknown>> }) => ({
-    default: m.default,
-  })),
-);
-
-const EventsPage: LazyExoticComponent<ComponentType<Record<string, unknown>>> = lazy(() =>
-  import('./pages/EventsPage').then((m: { default: ComponentType<Record<string, unknown>> }) => ({
-    default: m.default,
-  })),
-);
-
-const PhotosPage: LazyExoticComponent<ComponentType<Record<string, unknown>>> = lazy(() =>
-  import('./pages/PhotosPage').then((m: { default: ComponentType<Record<string, unknown>> }) => ({
-    default: m.default,
-  })),
-);
-
-const ContactPage: LazyExoticComponent<ComponentType<Record<string, unknown>>> = lazy(() =>
-  import('./pages/ContactPage').then((m: { default: ComponentType<Record<string, unknown>> }) => ({
-    default: m.default,
-  })),
-);
-
-const NotFoundPage: LazyExoticComponent<ComponentType<Record<string, unknown>>> = lazy(() =>
-  import('./pages/NotFoundPage').then((m: { default: ComponentType<Record<string, unknown>> }) => ({
-    default: m.default,
-  })),
-);
-
-export function RoutingSystem(): JSX.Element {
+export default function RoutingSystem(): JSX.Element {
   return (
     <Suspense fallback={<div>Chargement...</div>}>
       {/* TODO: Add a loading spinner */}

@@ -1,10 +1,12 @@
-import { App as AntdApp } from 'antd';
-import type { JSX } from 'react';
+import AntdApp from 'antd/es/app/App';
+import type { ComponentType, LazyExoticComponent } from 'react';
+import { lazy, type JSX } from 'react';
 import { Footer, Navbar } from './components';
 import './main.css';
-import { RoutingSystem } from './routing';
 
-export function App(): JSX.Element {
+const RoutingSystem: LazyExoticComponent<ComponentType> = lazy(() => import('./routing.tsx'));
+
+export default function App(): JSX.Element {
   return (
     <AntdApp>
       <div className='min-h-screen flex flex-col'>

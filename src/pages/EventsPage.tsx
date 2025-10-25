@@ -1,4 +1,4 @@
-import { Tabs } from 'antd';
+import Tabs from 'antd/es/tabs';
 import type { TFunction, i18n } from 'i18next';
 import type { JSX } from 'react';
 import { useEffect, useState } from 'react';

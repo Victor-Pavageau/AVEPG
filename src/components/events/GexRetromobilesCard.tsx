@@ -1,4 +1,4 @@
-import { Segmented } from 'antd';
+import Segmented from 'antd/es/segmented';
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useMemo, useState } from 'react';
@@ -51,7 +51,7 @@ export function GexRetromobilesCard({ events = [] }: Props): JSX.Element {
   return (
     <section className='space-y-6'>
       <div className='mx-4 sm:mx-0'>
-        <div className='bg-gradient-to-r from-green-600 to-green-500 text-white rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between shadow-md'>
+        <div className='bg-linear-to-r from-green-600 to-green-500 text-white rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between shadow-md'>
           <div className='space-y-1'>
             <h4 className='text-sm sm:text-base font-semibold'>
               {t('events.gexRetromobilesCard.title')}
@@ -66,7 +66,7 @@ export function GexRetromobilesCard({ events = [] }: Props): JSX.Element {
               href='https://www.facebook.com/AVEPaysdeGex'
               target='_blank'
               rel='noopener noreferrer'
-              className='inline-flex items-center px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm sm:text-base !text-white font-semibold'>
+              className='inline-flex items-center px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm sm:text-base text-white! font-semibold'>
               <FaFacebookF
                 className='mr-2 text-white'
                 size={20}
@@ -77,7 +77,7 @@ export function GexRetromobilesCard({ events = [] }: Props): JSX.Element {
               href='https://www.instagram.com/avepgex/'
               target='_blank'
               rel='noopener noreferrer'
-              className='inline-flex items-center px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm sm:text-base !text-white font-semibold'>
+              className='inline-flex items-center px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm sm:text-base text-white! font-semibold'>
               <FaInstagram
                 className='mr-2 text-white'
                 size={20}

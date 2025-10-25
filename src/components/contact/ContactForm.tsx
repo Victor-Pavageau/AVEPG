@@ -1,5 +1,7 @@
-import type { FormInstance } from 'antd';
-import { Button, Form, Input } from 'antd';
+import Button from 'antd/es/button/button';
+import type { FormInstance } from 'antd/es/form';
+import Form from 'antd/es/form';
+import Input from 'antd/es/input';
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';

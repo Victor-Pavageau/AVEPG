@@ -1,5 +1,8 @@
-import type { CalendarMode } from 'antd';
-import { Calendar, ConfigProvider, Modal, type CalendarProps } from 'antd';
+import Calendar from 'antd/es/calendar';
+import type { CalendarMode } from 'antd/es/calendar/generateCalendar';
+import ConfigProvider from 'antd/es/config-provider';
+import Modal from 'antd/es/modal/Modal';
+import type { CalendarProps } from 'antd/lib/calendar/generateCalendar';
 import enGB from 'antd/locale/en_GB';
 import frFR from 'antd/locale/fr_FR';
 import type { Dayjs } from 'dayjs';
@@ -35,10 +38,6 @@ export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
 
   const eventsByDate: Record<string, IEvent[]> = {};
   const eventsByMonth: Record<string, IEvent[]> = {};
-
-  // TODO :
-  // Clicking on an event in date view should open a modal with event details (eventCard component)
-  // Ensure responsivity
 
   events.forEach((event: IEvent): void => {
     const start: Dayjs = dayjs(event.startDate);
@@ -80,7 +79,6 @@ export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
             <div
               key={`${event.id}-${index}`}
               onClick={() => {
-                // In month mode, open modal with event details. In other modes, do nothing here.
                 if (mode === 'month') {
                   setSelectedEvent(event);
                   setIsModalOpen(true);
@@ -89,7 +87,7 @@ export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
               className='flex items-start pb-3 cursor-pointer'>
               <span
                 title={event.title}
-                className='leading-tight line-clamp-2 !text-sm'>
+                className='leading-tight line-clamp-2 text-sm!'>
                 {event.title}
               </span>
             </div>
@@ -157,28 +155,25 @@ export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
 
   return (
     <ConfigProvider locale={languageToIso6391(i18n.language) === 'fr' ? frFR : enGB}>
-      <>
-        <Calendar
-          mode={mode}
-          onPanelChange={handlePanelChange}
-          value={value}
-          cellRender={cellRender}
-          className='w-full'
-        />
-
-        <Modal
-          open={isModalOpen}
-          onCancel={closeModal}
-          footer={null}
-          closable
-          centered>
-          {selectedEvent && (
-            <div className='pt-6 flex justify-center'>
-              <EventCard event={selectedEvent} />
-            </div>
-          )}
-        </Modal>
-      </>
+      <Calendar
+        mode={mode}
+        onPanelChange={handlePanelChange}
+        value={value}
+        cellRender={cellRender}
+        className='w-full'
+      />
+      <Modal
+        open={isModalOpen}
+        onCancel={closeModal}
+        footer={null}
+        closable
+        centered>
+        {selectedEvent && (
+          <div className='pt-6 flex justify-center'>
+            <EventCard event={selectedEvent} />
+          </div>
+        )}
+      </Modal>
     </ConfigProvider>
   );
 }

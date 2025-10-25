@@ -1,4 +1,4 @@
-import { Spin } from 'antd';
+import Spin from 'antd/es/spin';
 import type { JSX } from 'react';
 
 export function LoadingCard(): JSX.Element {
