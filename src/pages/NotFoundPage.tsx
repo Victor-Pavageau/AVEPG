@@ -1,5 +1,6 @@
 import { HomeOutlined } from '@ant-design/icons';
-import { Button, Result } from 'antd';
+import Button from 'antd/es/button/button';
+import Result from 'antd/es/result';
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';

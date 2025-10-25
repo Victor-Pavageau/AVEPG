@@ -1,4 +1,4 @@
-import { Modal } from 'antd';
+import Modal from 'antd/es/modal/Modal';
 import type { i18n, TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useEffect, useState } from 'react';
@@ -57,7 +57,7 @@ export default function PhotosPage(): JSX.Element {
               <div className='w-20 h-16 flex items-center justify-center'>
                 <FcFolder size={80} />
               </div>
-              <span className='mt-3 text-sm text-gray-800 text-center break-words w-full'>
+              <span className='mt-3 text-sm text-gray-800 text-center wrap-break-word w-full'>
                 {album.name}
               </span>
             </button>

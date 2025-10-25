@@ -1,10 +1,12 @@
 import { Analytics } from '@vercel/analytics/react';
-import { ConfigProvider } from 'antd';
-import React from 'react';
+import ConfigProvider from 'antd/es/config-provider/index';
+import type { ComponentType, LazyExoticComponent } from 'react';
+import React, { lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { App } from './App.tsx';
 import './i18n.ts';
+
+const App: LazyExoticComponent<ComponentType> = lazy(() => import('./App'));
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

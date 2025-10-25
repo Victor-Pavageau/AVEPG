@@ -1,5 +1,6 @@
-import type { FormInstance } from 'antd';
-import { App, Form } from 'antd';
+import App from 'antd/es/app';
+import type { FormInstance } from 'antd/es/form';
+import Form from 'antd/es/form';
 import type { MessageInstance } from 'antd/es/message/interface';
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';

@@ -12,7 +12,7 @@ function HomePage(): JSX.Element {
 
   return (
     <div className='w-full'>
-      <div className='mb-8 overflow-hidden h-[20rem] sm:h-[30rem] lg:h-[40rem] relative'>
+      <div className='mb-8 overflow-hidden h-80 sm:h-120 lg:h-160 relative'>
         <img
           className='h-full w-full object-cover object-[center_30%] md:object-center'
           src='/assets/pictures/home_page.png'

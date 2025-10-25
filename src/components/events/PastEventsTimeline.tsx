@@ -1,5 +1,5 @@
-import type { TimelineItemProps } from 'antd';
-import { Timeline } from 'antd';
+import Timeline from 'antd/es/timeline/Timeline';
+import type { TimelineItemProps } from 'antd/es/timeline/TimelineItem';
 import type { JSX } from 'react';
 import type { IEvent } from '../../types';
 import { EventCard } from './EventCard';
@@ -47,7 +47,7 @@ export function PastEventsTimeline({ events }: Props): JSX.Element {
           <Timeline
             mode='left'
             items={mobileTimelineItems}
-            className='py-4 [&_.ant-timeline-item-tail]:!border-green-300 [&_.ant-timeline-item-tail]:!border-width-2'
+            className='py-4 [&_.ant-timeline-item-tail]:border-green-300! [&_.ant-timeline-item-tail]:border-width-2!'
           />
         </div>
       </div>
@@ -57,7 +57,7 @@ export function PastEventsTimeline({ events }: Props): JSX.Element {
           <Timeline
             mode='alternate'
             items={desktopTimelineItems}
-            className='[&_.ant-timeline-item-tail]:!border-green-300 [&_.ant-timeline-item-tail]:!border-width-2'
+            className='[&_.ant-timeline-item-tail]:border-green-300! [&_.ant-timeline-item-tail]:border-width-2!'
           />
         </div>
       </div>

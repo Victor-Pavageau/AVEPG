@@ -22,7 +22,7 @@ export function ContactInfo(): JSX.Element {
           <div className='border-t border-gray-200'></div>
 
           <div className='flex items-start space-x-4'>
-            <div className='flex-shrink-0'>
+            <div className='shrink-0'>
               <div className='w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center'>
                 <FaEnvelope className='text-green-600' />
               </div>
@@ -40,7 +40,7 @@ export function ContactInfo(): JSX.Element {
           <div className='border-t border-gray-200'></div>
 
           <div className='flex items-start space-x-4'>
-            <div className='flex-shrink-0'>
+            <div className='shrink-0'>
               <div className='w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center'>
                 <FaPhone className='text-orange-600' />
               </div>
