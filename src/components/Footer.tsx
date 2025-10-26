@@ -21,7 +21,7 @@ export function Footer(): JSX.Element {
               target='_blank'
               rel='noopener noreferrer'
               aria-label='Link to AVEPG Facebook'
-              className='!text-gray-400 hover:!text-white transition-colors'>
+              className='text-gray-400! hover:text-white! transition-colors'>
               <FaFacebookF size={20} />
             </a>
 
@@ -30,7 +30,7 @@ export function Footer(): JSX.Element {
               target='_blank'
               rel='noopener noreferrer'
               aria-label='Link to AVEPG Instagram'
-              className='!text-gray-400 hover:!text-white transition-colors'>
+              className='text-gray-400! hover:text-white! transition-colors'>
               <FaInstagram size={20} />
             </a>
           </div>

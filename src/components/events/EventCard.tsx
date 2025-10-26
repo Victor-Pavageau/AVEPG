@@ -106,7 +106,7 @@ export function EventCard({ event }: Props): JSX.Element {
           </div>
 
           {event.website && (
-            <div className='flex-shrink-0'>
+            <div className='shrink-0'>
               <VisitWebsite url={event.website} />
             </div>
           )}
