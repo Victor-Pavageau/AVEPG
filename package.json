@@ -16,7 +16,7 @@
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-intervalplural-postprocessor": "^3.0.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.2.0",
     "react-i18next": "^16.2.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.9.4"
@@ -29,7 +29,7 @@
     "@tailwindcss/postcss": "^4.1.16",
     "@tailwindcss/vite": "^4.1.16",
     "@types/react": "^18.3.26",
-    "@types/react-dom": "^18.3.7",
+    "@types/react-dom": "^19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
     "@vitejs/plugin-react": "^5.1.0",
