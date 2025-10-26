@@ -68,9 +68,7 @@ export function PartnersSection(): JSX.Element {
 
                         <h3 className='text-xl font-bold text-gray-900 mb-2'>{partner.name}</h3>
 
-                        <p className='text-base text-gray-700 mb-4 flex-grow'>
-                          {partner.description}
-                        </p>
+                        <p className='text-base text-gray-700 mb-4 grow'>{partner.description}</p>
 
                         <VisitWebsite url={partner.website} />
                       </div>
