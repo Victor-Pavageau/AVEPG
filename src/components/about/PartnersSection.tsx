@@ -1,5 +1,5 @@
 import type { i18n, TFunction } from 'i18next';
-import type { JSX } from 'react';
+import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHandshake } from 'react-icons/fa';
@@ -9,23 +9,23 @@ import { Card, LoadingCard, SectionHeader, VisitWebsite } from '../index';
 
 export function PartnersSection(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
-  const [partners, setPartners]: [IPartner[], (partners: IPartner[]) => void] = useState<
+  const [partners, setPartners]: [IPartner[], Dispatch<SetStateAction<IPartner[]>>] = useState<
     IPartner[]
   >([]);
-  const [loading, setLoading]: [boolean, (loading: boolean) => void] = useState(true);
-
-  const fetchPartners: () => Promise<void> = async (): Promise<void> => {
-    setLoading(true);
-    try {
-      const data: IPartner[] = await StrapiService.getPartners(i18n.language);
-      setPartners(data);
-    } catch {
-      setPartners([]);
-    }
-    setLoading(false);
-  };
+  const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
 
   useEffect(() => {
+    const fetchPartners: () => Promise<void> = async (): Promise<void> => {
+      setLoading(true);
+      try {
+        const data: IPartner[] = await StrapiService.getPartners(i18n.language);
+        setPartners(data);
+      } catch {
+        setPartners([]);
+      }
+      setLoading(false);
+    };
+
     fetchPartners();
   }, [i18n.language]);
 

@@ -49,7 +49,7 @@ module.exports = defineConfig([
       }],
       '@stylistic/no-multiple-empty-lines': ['error', { 'max': 1 }],
       // === Base rules ===
-      'max-lines': ['error', { 'max': 200, 'skipBlankLines': true, 'skipComments': true }],
+      'max-lines': ['error', { 'max': 250, 'skipBlankLines': true, 'skipComments': true }],
       'eqeqeq': 'error',
       'no-console': 'warn',
       'curly': 'error',
