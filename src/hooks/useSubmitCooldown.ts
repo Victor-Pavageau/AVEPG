@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 
 const COOLDOWN_KEY: string = 'contact_form_last_submit';
@@ -11,9 +12,9 @@ interface IUseSubmitCooldownReturn {
 }
 
 export function useSubmitCooldown(): IUseSubmitCooldownReturn {
-  const [isInCooldown, setIsInCooldown]: [boolean, (value: boolean) => void] =
+  const [isInCooldown, setIsInCooldown]: [boolean, Dispatch<SetStateAction<boolean>>] =
     useState<boolean>(false);
-  const [remainingSeconds, setRemainingSeconds]: [number, (value: number) => void] =
+  const [remainingSeconds, setRemainingSeconds]: [number, Dispatch<SetStateAction<number>>] =
     useState<number>(0);
 
   const calculateRemainingTime: () => number = useCallback((): number => {
@@ -54,7 +55,7 @@ export function useSubmitCooldown(): IUseSubmitCooldownReturn {
       }
     }, 1000);
 
-    const handleStorageChange: (e: StorageEvent) => void = (e: StorageEvent): void => {
+    const handleStorageChange = (e: StorageEvent): void => {
       if (e.key === COOLDOWN_KEY) {
         updateCooldownState();
       }

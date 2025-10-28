@@ -1,31 +1,37 @@
 const js = require('@eslint/js');
-const reactHooks = require('eslint-plugin-react-hooks');
-const reactRefresh = require('eslint-plugin-react-refresh');
 const { defineConfig, globalIgnores } = require('eslint/config');
 const globals = require('globals');
-const tseslint = require('typescript-eslint');
+
+const reactHooks = require('eslint-plugin-react-hooks');
+const reactRefresh = require('eslint-plugin-react-refresh');
+const stylistic = require('@stylistic/eslint-plugin');
+const tsPlugin = require('@typescript-eslint/eslint-plugin');
+const tsParser = require('@typescript-eslint/parser');
 
 module.exports = defineConfig([
   globalIgnores(['dist']),
   {
     files: ['**/*.{ts,tsx}'],
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
-    ],
     plugins: {
-      '@stylistic': require('@stylistic/eslint-plugin'),
-      reactHooks,
-      reactRefresh,
-      tseslint,
+      '@stylistic': stylistic,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+      '@typescript-eslint': tsPlugin,
     },
     languageOptions: {
       ecmaVersion: 2022,
-      globals: globals.browser,
+      sourceType: 'module',
+      parser: tsParser,
+      globals: {
+        ...globals.browser,
+        ...globals.es2022,
+      },
     },
+    extends: [
+      js.configs.recommended,
+    ],
     rules: {
+      // === Stylistic rules ===
       '@stylistic/indent': ['off', 2], // Disabled due to conflicts with Prettier
       '@stylistic/semi': ['error', 'always'],
       '@stylistic/quotes': ['error', 'single'],
@@ -42,18 +48,22 @@ module.exports = defineConfig([
         'tuples': 'always-multiline',
       }],
       '@stylistic/no-multiple-empty-lines': ['error', { 'max': 1 }],
-      'max-lines': ['error', { 'max': 200, 'skipBlankLines': true, 'skipComments': true }],
+      // === Base rules ===
+      'max-lines': ['error', { 'max': 250, 'skipBlankLines': true, 'skipComments': true }],
       'eqeqeq': 'error',
       'no-console': 'warn',
       'curly': 'error',
       'no-eval': 'error',
       'prefer-const': 'warn',
       'camelcase': 'error', // Currently frozen
+      // === React / Hooks ===
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
-      'react-hooks/exhaustive-deps': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      // === TypeScript rules ===
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/explicit-member-accessibility': 'error',
@@ -66,9 +76,9 @@ module.exports = defineConfig([
         'parameter': true,
         'propertyDeclaration': true,
         'variableDeclaration': true,
-        'variableDeclarationIgnoreFunction': false,
+        'variableDeclarationIgnoreFunction': true,
       }],
-      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/no-inferrable-types': 'off', // Allow explicit types even if inferrable
       '@typescript-eslint/consistent-type-imports': 'error',
     },

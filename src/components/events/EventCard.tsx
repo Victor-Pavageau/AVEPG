@@ -1,5 +1,5 @@
 import type { TFunction, i18n } from 'i18next';
-import type { JSX } from 'react';
+import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaMapMarkerAlt } from 'react-icons/fa';
@@ -13,10 +13,12 @@ interface Props {
 
 export function EventCard({ event }: Props): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
-  const [isDescriptionExpanded, setIsDescriptionExpanded]: [boolean, (value: boolean) => void] =
-    useState<boolean>(false);
+  const [isDescriptionExpanded, setIsDescriptionExpanded]: [
+    boolean,
+    Dispatch<SetStateAction<boolean>>,
+  ] = useState<boolean>(false);
 
-  const formatDate: (date: Date) => string = (date: Date): string => {
+  const formatDate = (date: Date): string => {
     return new Intl.DateTimeFormat(i18n.language, {
       day: 'numeric',
       month: 'short',
