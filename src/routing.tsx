@@ -1,6 +1,7 @@
 import type { ComponentType, LazyExoticComponent } from 'react';
 import { lazy, Suspense, type JSX } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { LoadingCard } from './components';
 import { goTo } from './helpers';
 
 const HomePage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/HomePage'));
@@ -12,8 +13,7 @@ const NotFoundPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pa
 
 export default function RoutingSystem(): JSX.Element {
   return (
-    <Suspense fallback={<div>Chargement...</div>}>
-      {/* TODO: Add a loading spinner */}
+    <Suspense fallback={<LoadingCard />}>
       <Routes>
         <Route
           path={goTo('/')}
