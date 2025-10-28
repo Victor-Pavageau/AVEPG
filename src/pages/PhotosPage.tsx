@@ -1,6 +1,6 @@
 import Modal from 'antd/es/modal/Modal';
 import type { i18n, TFunction } from 'i18next';
-import type { JSX } from 'react';
+import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FcFolder } from 'react-icons/fc';
@@ -11,23 +11,28 @@ import type { IAlbum, IStrapiImage } from '../types';
 export default function PhotosPage(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
 
-  const [albums, setAlbums]: [IAlbum[], (a: IAlbum[]) => void] = useState<IAlbum[]>([]);
-  const [loading, setLoading]: [boolean, (v: boolean) => void] = useState<boolean>(true);
-  const [selectedAlbum, setSelectedAlbum]: [IAlbum | null, (a: IAlbum | null) => void] =
-    useState<IAlbum | null>(null);
-
-  const fetchAlbums: () => Promise<void> = async (): Promise<void> => {
-    setLoading(true);
-    try {
-      const data: IAlbum[] = await StrapiService.getAlbums(i18n.language);
-      setAlbums(data);
-    } catch {
-      setAlbums([]);
-    }
-    setLoading(false);
-  };
+  const [albums, setAlbums]: [IAlbum[], Dispatch<SetStateAction<IAlbum[]>>] = useState<IAlbum[]>(
+    [],
+  );
+  const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] =
+    useState<boolean>(true);
+  const [selectedAlbum, setSelectedAlbum]: [
+    IAlbum | null,
+    Dispatch<SetStateAction<IAlbum | null>>,
+  ] = useState<IAlbum | null>(null);
 
   useEffect(() => {
+    const fetchAlbums: () => Promise<void> = async (): Promise<void> => {
+      setLoading(true);
+      try {
+        const data: IAlbum[] = await StrapiService.getAlbums(i18n.language);
+        setAlbums(data);
+      } catch {
+        setAlbums([]);
+      }
+      setLoading(false);
+    };
+
     void fetchAlbums();
   }, [i18n.language]);
 

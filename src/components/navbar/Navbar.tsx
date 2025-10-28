@@ -1,11 +1,11 @@
-import type { JSX } from 'react';
+import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { goTo } from '../../helpers';
 import { NavigationLinks } from './NavigationLinks';
 
 export function Navbar(): JSX.Element {
-  const [isMobileMenuOpen, setIsMobileMenuOpen]: [boolean, (value: boolean) => void] =
+  const [isMobileMenuOpen, setIsMobileMenuOpen]: [boolean, Dispatch<SetStateAction<boolean>>] =
     useState(false);
 
   return (

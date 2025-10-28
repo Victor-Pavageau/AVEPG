@@ -11,7 +11,7 @@ import 'dayjs/locale/en';
 import 'dayjs/locale/fr';
 import type { i18n } from 'i18next';
 import type { CellRenderInfo } from 'rc-picker/lib/interface';
-import type { JSX } from 'react';
+import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { languageToIso6391 } from '../../i18n';
@@ -23,18 +23,22 @@ interface Props {
 }
 
 export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
-  const [mode, setMode]: [CalendarMode, (m: CalendarMode) => void] = useState<CalendarMode>('year');
-  const [value, setValue]: [Dayjs, (d: Dayjs) => void] = useState<Dayjs>(dayjs());
+  const [mode, setMode]: [CalendarMode, Dispatch<SetStateAction<CalendarMode>>] =
+    useState<CalendarMode>('year');
+  const [value, setValue]: [Dayjs, Dispatch<SetStateAction<Dayjs>>] = useState<Dayjs>(dayjs());
   const { i18n }: { i18n: i18n } = useTranslation();
 
-  const [isModalOpen, setIsModalOpen]: [boolean, (v: boolean) => void] = useState<boolean>(false);
-  const [selectedEvent, setSelectedEvent]: [IEvent | null, (e: IEvent | null) => void] =
-    useState<IEvent | null>(null);
+  const [isModalOpen, setIsModalOpen]: [boolean, Dispatch<SetStateAction<boolean>>] =
+    useState<boolean>(false);
+  const [selectedEvent, setSelectedEvent]: [
+    IEvent | null,
+    Dispatch<SetStateAction<IEvent | null>>,
+  ] = useState<IEvent | null>(null);
 
   useEffect(() => {
     const iso: string = languageToIso6391(i18n.language);
     dayjs.locale(iso);
-  }, []);
+  }, [i18n.language]);
 
   const eventsByDate: Record<string, IEvent[]> = {};
   const eventsByMonth: Record<string, IEvent[]> = {};
@@ -68,7 +72,7 @@ export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
     }
   });
 
-  const dateCellRender: (date: Dayjs) => JSX.Element | null = (date: Dayjs): JSX.Element | null => {
+  const dateCellRender = (date: Dayjs): JSX.Element | null => {
     const dateKey: string = date.format('YYYY-MM-DD');
     const dayEvents: IEvent[] = eventsByDate[dateKey] || [];
 
@@ -99,9 +103,7 @@ export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
     }
   };
 
-  const monthCellRender: (date: Dayjs) => JSX.Element | null = (
-    date: Dayjs,
-  ): JSX.Element | null => {
+  const monthCellRender = (date: Dayjs): JSX.Element | null => {
     const monthKey: string = date.format('YYYY-MM');
     const monthEvents: IEvent[] = eventsByMonth[monthKey] || [];
 
@@ -145,10 +147,7 @@ export function UpcomingEventsCalendar({ events }: Props): JSX.Element {
     return null;
   };
 
-  const handlePanelChange: (value: Dayjs, mode: CalendarMode) => void = (
-    newValue: Dayjs,
-    newMode: CalendarMode,
-  ): void => {
+  const handlePanelChange = (newValue: Dayjs, newMode: CalendarMode): void => {
     setValue(newValue);
     setMode(newMode);
   };

@@ -1,6 +1,6 @@
 import Segmented from 'antd/es/segmented';
 import type { TFunction } from 'i18next';
-import type { JSX } from 'react';
+import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
@@ -35,8 +35,10 @@ export function GexRetromobilesCard({ events = [] }: Props): JSX.Element {
     ([year]: [number, IEvent]) => ({ label: String(year), value: String(year) }),
   );
   const defaultYear: string | undefined = yearOptions.length > 0 ? yearOptions[0].value : undefined;
-  const [selectedYear, setSelectedYear]: [string | undefined, (value: string | undefined) => void] =
-    useState<string | undefined>(defaultYear);
+  const [selectedYear, setSelectedYear]: [
+    string | undefined,
+    Dispatch<SetStateAction<string | undefined>>,
+  ] = useState<string | undefined>(defaultYear);
 
   const selectedEvent: IEvent | undefined = useMemo<IEvent | undefined>(() => {
     if (!selectedYear) {
