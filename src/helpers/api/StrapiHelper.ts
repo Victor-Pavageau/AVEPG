@@ -1,11 +1,12 @@
 import type { StrapiEntity } from '../../types';
 
-export function buildStrapiQueryUrl(entity: StrapiEntity, locale: string): string {
+export function buildStrapiQueryUrl(entity: StrapiEntity, locale: string | null = null): string {
   const apiUrl: string = import.meta.env.VITE_STRAPI_BASE_URL ?? '';
 
-  const pagination: string = '?pagination[pageSize]=100';
+  const paginationParam: string = '?pagination[pageSize]=100';
+  const localeParam: string = locale !== null ? `&locale=${locale}` : '';
 
-  return `https://${apiUrl}/api/${entity}${pagination}&locale=${locale}${getPopulateParams(entity)}`;
+  return `https://${apiUrl}/api/${entity}${paginationParam}${localeParam}${getPopulateParams(entity)}`;
 }
 
 function getPopulateParams(entity: StrapiEntity): string {
@@ -16,6 +17,10 @@ function getPopulateParams(entity: StrapiEntity): string {
       return getPopulateImageParams('photos');
     case 'partners':
       return getPopulateImageParams('logo');
+    case 'gex-retromobiles-news':
+      return getPopulateImageParams('photo');
+    case 'home-page-carousels':
+      return getPopulateImageParams('photos');
     default:
       return '';
   }
