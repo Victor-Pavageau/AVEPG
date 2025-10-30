@@ -1,6 +1,13 @@
 import { buildStrapiQueryUrl } from '../helpers';
 import { languageToIso6391 } from '../i18n';
-import type { IAlbum, IEvent, IPartner, IStrapiResponse } from '../types';
+import type {
+  IAlbum,
+  IEvent,
+  IGexRetromobilesNew,
+  IHomePageCarousel,
+  IPartner,
+  IStrapiResponse,
+} from '../types';
 
 export class StrapiService {
   public static async getPartners(language: string): Promise<IPartner[]> {
@@ -36,6 +43,34 @@ export class StrapiService {
     }
 
     const data: IStrapiResponse<IAlbum> = await response.json();
+    return data.data;
+  }
+
+  public static async getHomePageCarousel(): Promise<IHomePageCarousel> {
+    const query: string = buildStrapiQueryUrl('home-page-carousels');
+    const response: Response = await fetch(query);
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch home page carousel: ${response.status} ${response.statusText}`,
+      );
+    }
+
+    const data: IStrapiResponse<IHomePageCarousel> = await response.json();
+    return data.data[0]; // There is only one home page carousel entry
+  }
+
+  public static async getGexRetromobilesNews(): Promise<IGexRetromobilesNew[]> {
+    const query: string = buildStrapiQueryUrl('gex-retromobiles-news');
+    const response: Response = await fetch(query);
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch Gex Retromobiles news: ${response.status} ${response.statusText}`,
+      );
+    }
+
+    const data: IStrapiResponse<IGexRetromobilesNew> = await response.json();
     return data.data;
   }
 }

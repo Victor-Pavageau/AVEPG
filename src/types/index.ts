@@ -1,6 +1,8 @@
 export type {
   IAlbum,
   IEvent,
+  IGexRetromobilesNew,
+  IHomePageCarousel,
   IPartner,
   IStrapiImage,
   IStrapiObject,
