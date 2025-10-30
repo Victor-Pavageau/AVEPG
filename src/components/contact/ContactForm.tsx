@@ -19,19 +19,14 @@ export interface IContactFormData {
 }
 
 interface Props {
-  form: FormInstance;
   isInCooldown: boolean;
   remainingSeconds: number;
   startCooldown: () => void;
 }
 
-export function ContactForm({
-  form,
-  isInCooldown,
-  remainingSeconds,
-  startCooldown,
-}: Props): JSX.Element {
+export function ContactForm({ isInCooldown, remainingSeconds, startCooldown }: Props): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
+  const [form]: [FormInstance] = Form.useForm();
   const { message }: { message: MessageInstance } = App.useApp();
   const [isSubmitting, setIsSubmitting]: [boolean, Dispatch<SetStateAction<boolean>>] =
     useState<boolean>(false);
@@ -74,9 +69,14 @@ export function ContactForm({
       formData.append('phone', values.phone ?? '');
       formData.append('subject', `[Contact from AVEPG.fr] ${values.subject}`);
       formData.append('message', values.message);
+      formData.append('_captcha', 'false');
+      formData.append('_template', 'box');
 
       const response: Response = await fetch(`https://formsubmit.co/${emailFormId}`, {
         method: 'POST',
+        headers: {
+          Accept: 'application/json',
+        },
         body: formData,
       });
 
