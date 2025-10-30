@@ -5,29 +5,14 @@ import { FaInfoCircle } from 'react-icons/fa';
 import { ImCamera } from 'react-icons/im';
 import { IoIosMail } from 'react-icons/io';
 import { IoCalendar } from 'react-icons/io5';
-import { Card, NavigationCard } from '../components';
+import { Card, HomePageCarousel, NavigationCard } from '../components';
 
 function HomePage(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
 
   return (
     <div className='w-full'>
-      <div className='mb-8 overflow-hidden h-80 sm:h-120 lg:h-160 relative'>
-        <img
-          className='h-full w-full object-cover object-[center_30%] md:object-center'
-          src='/assets/pictures/home_page.png'
-          alt='Cobra Era - Home page cover'
-        />
-        <div className='absolute top-4 md:top-20 left-4 md:left-16 right-4 md:right-auto'>
-          <div className='text-white bg-gray-800/80 rounded-lg shadow-lg inline-block md:max-w-2xl'>
-            <div className='p-3 md:p-4'>
-              <h3 className='font-bold text-base md:text-lg mb-2'>{t('home.shortTitle')}</h3>
-              <h4 className='font-bold text-lg md:text-2xl leading-tight'>{t('home.title')}</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <HomePageCarousel />
       <div className='px-6 md:px-12 max-w-5xl mx-auto'>
         <div className='text-gray-800 leading-relaxed mb-12'>
           <h2 className='text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center'>

@@ -1,0 +1,1 @@
+export { HomePageCarousel } from './HomePageCarousel';

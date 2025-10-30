@@ -1,6 +1,10 @@
 @import 'https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap';
 @import 'tailwindcss';
 
+:root {
+  --main-style: #0164b5;
+}
+
 * {
   font-family: 'Noto Sans', sans-serif;
 }
@@ -10,4 +14,13 @@ h2,
 h3,
 h4 {
   font-family: Outfit, sans-serif;
+}
+
+/* Override antd carousel active dot color */
+.ant-carousel .slick-dots li.slick-active::after {
+  background: var(--main-style) !important;
+}
+
+.ant-carousel .slick-dots li {
+  background: rgb(1 100 181 / 40%);
 }
