@@ -59,9 +59,6 @@ export function PresentationSection(): JSX.Element {
                 </li>
               ))}
             </ul>
-            <p className='text-base md:text-lg leading-relaxed mt-6 italic text-gray-700'>
-              {t('about.presentation.spirit')}
-            </p>
           </Card>
         </div>
         <div className='lg:order-1 flex justify-center lg:justify-start'>

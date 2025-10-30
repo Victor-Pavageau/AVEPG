@@ -26,7 +26,7 @@ export function ContactMap(): JSX.Element {
 
       <div className='hidden sm:block w-full rounded-lg overflow-hidden shadow-sm border border-gray-200'>
         <iframe
-          src='https://www.google.com/maps/embed?pb=!1m17!1m11!1m3!1d126.8637920945285!2d6.058624590047473!3d46.332800889605394!2m2!1f349.3058737457088!2f45!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x478c6030ccec3b5b%3A0x9104b86e8a5c639a!2sMairie!5e1!3m2!1sfr!2sfr!4v1760886824708!5m2!1sfr!2sfr'
+          src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.2323915436214!2d6.06316837706711!3d46.33773457110171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c6069b42b9af1%3A0x203c35f76154d955!2s99%20Rue%20de%20l&#39;Oudar%2C%2001170%20Gex!5e1!3m2!1sfr!2sfr!4v1761684998608!5m2!1sfr!2sfr'
           width='100%'
           height='280'
           style={{ border: 0 }}
