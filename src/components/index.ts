@@ -9,6 +9,7 @@ export {
 } from './contact';
 export { GexRetromobilesCard, PastEventsTimeline, UpcomingEventsCalendar } from './events';
 export { Footer } from './Footer';
+export { HomePageCarousel } from './home';
 export { LoadingCard } from './LoadingCard';
 export { LanguageSelector, Navbar, NavigationLinks } from './navbar';
 export { NavigationCard } from './NavigationCard';
