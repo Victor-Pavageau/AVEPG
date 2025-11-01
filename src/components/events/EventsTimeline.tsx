@@ -8,7 +8,7 @@ interface Props {
   events: IEvent[];
 }
 
-export function PastEventsTimeline({ events }: Props): JSX.Element {
+export function EventsTimeline({ events }: Props): JSX.Element {
   const sortedEvents: IEvent[] = events.sort(
     (a: IEvent, b: IEvent) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime(),
   );
