@@ -67,12 +67,12 @@
   },
   "events": {
     "tabs": {
-      "past": "Past events",
-      "pastShort": "Past",
-      "upcoming": "Upcoming events",
-      "upcomingShort": "Upcoming",
       "gexRetromobiles": "Gex Retromobiles",
       "gexRetromobilesShort": "Gex"
+    },
+    "error": {
+      "title": "Error",
+      "message": "An error happened while fetching events, try again later."
     },
     "eventCard": {
       "viewMore": "View more",
@@ -84,7 +84,8 @@
       "facebook": "Facebook",
       "instagram": "Instagram",
       "placeholderTitle": "Gex Retromobiles",
-      "placeholderDescription": "Information coming soon. Find the latest news on our social networks."
+      "placeholderDescription": "Information coming soon. Find the latest news on our social networks.",
+      "noNews": "No news at the moment. Check back soon for the latest updates!"
     }
   },
   "photos": {

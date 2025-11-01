@@ -1,14 +1,10 @@
 import Tabs from 'antd/es/tabs';
-import type { TFunction, i18n } from 'i18next';
+import type { i18n, TFunction } from 'i18next';
 import type { Dispatch, JSX, SetStateAction } from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IoCalendar } from 'react-icons/io5';
-import { MdDirectionsCar, MdEventAvailable } from 'react-icons/md';
 import { useSearchParams } from 'react-router-dom';
-import { LoadingCard, PastEventsTimeline, UpcomingEventsCalendar } from '../components';
-import { GexRetromobilesCard } from '../components/events';
-import { splitEventsByDate, type ISplitEventsResult } from '../helpers';
+import { EventsTimeline, GexRetromobilesNewsTab, LoadingCard } from '../components';
 import { StrapiService } from '../services';
 import type { IEvent } from '../types';
 
@@ -24,94 +20,69 @@ export default function EventsPage(): JSX.Element {
     URLSearchParams,
     Dispatch<SetStateAction<URLSearchParams>>,
   ] = useSearchParams();
-  const [pastEvents, setPastEvents]: [IEvent[], Dispatch<SetStateAction<IEvent[]>>] = useState<
-    IEvent[]
-  >([]);
-  const [upcomingEvents, setUpcomingEvents]: [IEvent[], Dispatch<SetStateAction<IEvent[]>>] =
-    useState<IEvent[]>([]);
+  const [events, setEvents]: [IEvent[], Dispatch<SetStateAction<IEvent[]>>] = useState<IEvent[]>(
+    [],
+  );
   const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
+  const [tabs, setTabs]: [Tab[], Dispatch<SetStateAction<Tab[]>>] = useState<Tab[]>([]);
 
   const defaultActiveKey: string = 'gex-retromobiles';
 
-  const wrapWithPadding = (content: JSX.Element): JSX.Element => (
-    <div className='pt-6'>{content}</div>
-  );
-
   useEffect(() => {
-    const fetchEvents: () => Promise<void> = async (): Promise<void> => {
+    const fetchEvents = async (): Promise<void> => {
       setLoading(true);
       try {
-        const events: IEvent[] = await StrapiService.getEvents(i18n.language);
-        const { past, upcoming }: ISplitEventsResult = splitEventsByDate(events);
-
-        setPastEvents(past);
-        setUpcomingEvents(upcoming);
+        const fetchedEvents: IEvent[] = await StrapiService.getEvents(i18n.language);
+        setEvents(fetchedEvents);
       } catch {
-        setPastEvents([]);
-        setUpcomingEvents([]);
+        setEvents([]);
+        setTabs([]);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
+
     fetchEvents();
   }, [i18n.language]);
 
-  const tabs: Tab[] = useMemo<Tab[]>(
-    () => [
-      {
-        key: 'past',
+  useEffect(() => {
+    const gexRetromobilesTab: Tab = {
+      key: defaultActiveKey,
+      label: (
+        <span className='flex items-center gap-1 md:gap-2 text-sm md:text-base'>
+          <span className='hidden md:inline'>{t('events.tabs.gexRetromobiles')}</span>
+          <span className='md:hidden'>{t('events.tabs.gexRetromobilesShort')}</span>
+        </span>
+      ),
+      children: (
+        <div className='pt-6'>
+          <GexRetromobilesNewsTab />
+        </div>
+      ),
+    };
+
+    const eventYears: Set<number> = new Set<number>(
+      events.map((ev: IEvent) => new Date(ev.startDate).getFullYear()),
+    );
+
+    const yearTabs: Tab[] = Array.from(eventYears).map((year: number): Tab => {
+      return {
+        key: `year-${year}`,
         label: (
-          <span className='flex items-center gap-1 md:gap-2 text-sm md:text-base'>
-            <IoCalendar
-              size={16}
-              className='sm:w-5 sm:h-5'
+          <span className='flex items-center gap-1 md:gap-2 text-sm md:text-base'>{year}</span>
+        ),
+        children: (
+          <div className='pt-6'>
+            <EventsTimeline
+              events={events.filter((ev: IEvent) => new Date(ev.startDate).getFullYear() === year)}
             />
-            <span className='hidden md:inline'>{t('events.tabs.past')}</span>
-            <span className='md:hidden'>{t('events.tabs.pastShort')}</span>
-          </span>
+          </div>
         ),
-        children: wrapWithPadding(
-          loading ? <LoadingCard /> : <PastEventsTimeline events={pastEvents} />,
-        ),
-      },
-      {
-        key: 'upcoming',
-        label: (
-          <span className='flex items-center gap-1 md:gap-2 text-sm md:text-base'>
-            <MdEventAvailable
-              size={16}
-              className='sm:w-5 sm:h-5'
-            />
-            <span className='hidden md:inline'>{t('events.tabs.upcoming')}</span>
-            <span className='md:hidden'>{t('events.tabs.upcomingShort')}</span>
-          </span>
-        ),
-        children: wrapWithPadding(
-          loading ? <LoadingCard /> : <UpcomingEventsCalendar events={upcomingEvents} />,
-        ),
-      },
-      {
-        key: defaultActiveKey,
-        label: (
-          <span className='flex items-center gap-1 md:gap-2 text-sm md:text-base'>
-            <MdDirectionsCar
-              size={16}
-              className='sm:w-5 sm:h-5'
-            />
-            <span className='hidden md:inline'>{t('events.tabs.gexRetromobiles')}</span>
-            <span className='md:hidden'>{t('events.tabs.gexRetromobilesShort')}</span>
-          </span>
-        ),
-        children: wrapWithPadding(
-          loading ? (
-            <LoadingCard />
-          ) : (
-            <GexRetromobilesCard events={[...pastEvents, ...upcomingEvents]} />
-          ),
-        ),
-      },
-    ],
-    [t, loading, pastEvents, upcomingEvents, defaultActiveKey],
-  );
+      };
+    });
+
+    setTabs([...yearTabs, gexRetromobilesTab]);
+  }, [events, loading, t]);
 
   const getActiveTab = (): string => {
     const tabParam: string | null = searchParams.get('tab');
@@ -138,18 +109,27 @@ export default function EventsPage(): JSX.Element {
 
   return (
     <div className='w-full px-4 md:px-6 lg:px-12 max-w-7xl mx-auto py-4 md:py-6 lg:py-8'>
-      <Tabs
-        activeKey={getActiveTab()}
-        centered
-        type='card'
-        size='large'
-        items={tabs}
-        className='w-full'
-        tabBarStyle={{
-          marginBottom: 0,
-        }}
-        onChange={handleTabChange}
-      />
+      {loading ? (
+        <LoadingCard />
+      ) : tabs.length === 0 || events.length === 0 ? (
+        <div className='bg-red-50 border border-red-200 text-red-800 rounded-md p-6'>
+          <h3 className='text-lg font-medium'>{t('events.error.title')}</h3>
+          <p className='mt-2'>{t('events.error.message')}</p>
+        </div>
+      ) : (
+        <Tabs
+          activeKey={getActiveTab()}
+          centered
+          type='card'
+          size='large'
+          items={tabs}
+          className='w-full'
+          tabBarStyle={{
+            marginBottom: 0,
+          }}
+          onChange={handleTabChange}
+        />
+      )}
     </div>
   );
 }
