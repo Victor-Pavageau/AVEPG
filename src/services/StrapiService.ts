@@ -60,8 +60,8 @@ export class StrapiService {
     return data.data[0]; // There is only one home page carousel entry
   }
 
-  public static async getGexRetromobilesNews(): Promise<IGexRetromobilesNew[]> {
-    const query: string = buildStrapiQueryUrl('gex-retromobiles-news');
+  public static async getGexRetromobilesNews(language: string): Promise<IGexRetromobilesNew[]> {
+    const query: string = buildStrapiQueryUrl('gex-retromobiles-news', languageToIso6391(language));
     const response: Response = await fetch(query);
 
     if (!response.ok) {
