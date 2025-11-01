@@ -1,4 +1,4 @@
 export { EventCard } from './EventCard';
-export { GexRetromobilesCard } from './GexRetromobilesCard';
-export { PastEventsTimeline } from './PastEventsTimeline';
-export { UpcomingEventsCalendar } from './UpcomingEventsCalendar';
+export { EventsTimeline } from './EventsTimeline';
+export { GexRetromobilesNewsTab } from './GexRetromobilesNewsTab';
+export { GexRetromobilesNewsCard } from './GexRetromobilesNewsCard';

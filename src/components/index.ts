@@ -7,7 +7,7 @@ export {
   ContactMap,
   type IContactFormData,
 } from './contact';
-export { GexRetromobilesCard, PastEventsTimeline, UpcomingEventsCalendar } from './events';
+export { EventsTimeline, GexRetromobilesNewsCard, GexRetromobilesNewsTab } from './events';
 export { Footer } from './Footer';
 export { HomePageCarousel } from './home';
 export { LoadingCard } from './LoadingCard';
