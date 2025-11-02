@@ -1,6 +1,5 @@
 import AntdApp from 'antd/es/app/App';
-import type { ComponentType, LazyExoticComponent } from 'react';
-import { lazy, type JSX } from 'react';
+import { lazy, type ComponentType, type JSX, type LazyExoticComponent } from 'react';
 import { Footer, Navbar } from './components';
 import './main.css';
 

@@ -9,8 +9,7 @@ interface Props {
 }
 
 export function EventsTimeline({ events }: Readonly<Props>): JSX.Element {
-  const sortedEvents: IEvent[] = [...events];
-  sortedEvents.sort(
+  const sortedEvents: IEvent[] = events.toSorted(
     (a: IEvent, b: IEvent) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime(),
   );
 
