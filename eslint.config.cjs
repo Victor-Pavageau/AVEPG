@@ -19,12 +19,12 @@ module.exports = defineConfig([
       '@typescript-eslint': tsPlugin,
     },
     languageOptions: {
-      ecmaVersion: 2022,
+      ecmaVersion: 2024,
       sourceType: 'module',
       parser: tsParser,
       globals: {
         ...globals.browser,
-        ...globals.es2022,
+        ...globals.es2024,
       },
     },
     extends: [
