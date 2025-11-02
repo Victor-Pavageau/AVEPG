@@ -2,10 +2,12 @@ import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import pkg from '../../package.json';
 
 export function Footer(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
   const currentYear: number = new Date().getFullYear();
+  const appVersion: string = pkg.version;
 
   return (
     <footer className='bg-gray-800 text-white mt-8'>
@@ -38,6 +40,7 @@ export function Footer(): JSX.Element {
           <div className='border-t border-gray-700 pt-4 space-y-2'>
             <p className='text-gray-300 text-sm'>
               {t('shared.footer.copyright', { year: currentYear })}
+              <span className='text-gray-400 ml-2'>v{appVersion}</span>
             </p>
 
             <p className='text-gray-400 text-xs mt-2'>{t('shared.footer.credit')}</p>
