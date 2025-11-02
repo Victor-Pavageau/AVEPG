@@ -19,12 +19,16 @@ export interface IContactFormData {
 }
 
 interface Props {
-  isInCooldown: boolean;
-  remainingSeconds: number;
-  startCooldown: () => void;
+  readonly isInCooldown: boolean;
+  readonly remainingSeconds: number;
+  readonly startCooldown: () => void;
 }
 
-export function ContactForm({ isInCooldown, remainingSeconds, startCooldown }: Props): JSX.Element {
+export function ContactForm({
+  isInCooldown,
+  remainingSeconds,
+  startCooldown,
+}: Readonly<Props>): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
   const [form]: [FormInstance] = Form.useForm();
   const { message }: { message: MessageInstance } = App.useApp();

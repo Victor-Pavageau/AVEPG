@@ -1,7 +1,6 @@
 import Segmented from 'antd/es/segmented';
 import type { TFunction, i18n } from 'i18next';
-import type { Dispatch, SetStateAction } from 'react';
-import { useEffect, useState, type JSX } from 'react';
+import { useEffect, useState, type Dispatch, type JSX, type SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { StrapiService } from '../../services';

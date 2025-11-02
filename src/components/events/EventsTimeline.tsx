@@ -5,11 +5,12 @@ import type { IEvent } from '../../types';
 import { EventCard } from './EventCard';
 
 interface Props {
-  events: IEvent[];
+  readonly events: IEvent[];
 }
 
-export function EventsTimeline({ events }: Props): JSX.Element {
-  const sortedEvents: IEvent[] = events.sort(
+export function EventsTimeline({ events }: Readonly<Props>): JSX.Element {
+  const sortedEvents: IEvent[] = [...events];
+  sortedEvents.sort(
     (a: IEvent, b: IEvent) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime(),
   );
 

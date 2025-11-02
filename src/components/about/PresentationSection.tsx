@@ -1,4 +1,5 @@
 import type { TFunction } from 'i18next';
+import { nanoid } from 'nanoid';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaInfoCircle } from 'react-icons/fa';
@@ -33,7 +34,7 @@ export function PresentationSection(): JSX.Element {
           <div className='w-full lg:max-w-none h-64 lg:h-full min-h-[200px] overflow-hidden rounded-xl shadow-lg transform transition-transform duration-300'>
             <img
               src='/assets/pictures/members_1.png'
-              alt='Membres AVEPG - Photo 1'
+              alt='AVEPG members 1'
               className='w-full h-full object-cover'
             />
           </div>
@@ -51,9 +52,9 @@ export function PresentationSection(): JSX.Element {
                 t('about.presentation.values', {
                   returnObjects: true,
                 }) as string[]
-              ).map((value: string, index: number) => (
+              ).map((value: string) => (
                 <li
-                  key={index}
+                  key={nanoid()}
                   className='text-base md:text-lg leading-relaxed pl-2'>
                   {value}
                 </li>
@@ -65,7 +66,7 @@ export function PresentationSection(): JSX.Element {
           <div className='w-full lg:max-w-none h-64 lg:h-full min-h-[200px] overflow-hidden rounded-xl shadow-lg transform transition-transform duration-300'>
             <img
               src='/assets/pictures/members_2.png'
-              alt='Membres AVEPG - Photo 2'
+              alt='AVEPG members 2'
               className='w-full h-full object-cover'
             />
           </div>

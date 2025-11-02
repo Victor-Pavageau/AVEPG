@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
 interface Props {
-  url: string;
+  readonly url: string;
 }
 
-export function VisitWebsite({ url }: Props): JSX.Element {
+export function VisitWebsite({ url }: Readonly<Props>): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
   return (
     <a

@@ -1,12 +1,12 @@
 import type { JSX, ReactNode } from 'react';
 
 interface Props {
-  children: ReactNode;
-  className?: string;
-  bordered?: boolean;
+  readonly children: ReactNode;
+  readonly className?: string;
+  readonly bordered?: boolean;
 }
 
-export function Card({ children, className = '', bordered = false }: Props): JSX.Element {
+export function Card({ children, className = '', bordered = false }: Readonly<Props>): JSX.Element {
   const baseClasses: string = 'rounded-lg p-6 shadow-sm';
 
   const cardClasses: string = bordered

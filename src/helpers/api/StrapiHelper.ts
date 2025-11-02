@@ -4,7 +4,7 @@ export function buildStrapiQueryUrl(entity: StrapiEntity, locale: string | null 
   const apiUrl: string = import.meta.env.VITE_STRAPI_BASE_URL ?? '';
 
   const paginationParam: string = '?pagination[pageSize]=100';
-  const localeParam: string = locale !== null ? `&locale=${locale}` : '';
+  const localeParam: string = locale === null ? '' : `&locale=${locale}`;
 
   return `https://${apiUrl}/api/${entity}${paginationParam}${localeParam}${getPopulateParams(entity)}`;
 }

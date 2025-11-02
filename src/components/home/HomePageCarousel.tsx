@@ -1,7 +1,6 @@
 import Carousel from 'antd/es/carousel';
 import type { TFunction } from 'i18next';
-import type { Dispatch, SetStateAction } from 'react';
-import { useEffect, useState, type JSX } from 'react';
+import { useEffect, useState, type JSX, type Dispatch, type SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StrapiService } from '../../services';
 import type { IHomePageCarousel, IStrapiImage } from '../../types';

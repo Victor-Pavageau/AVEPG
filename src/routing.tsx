@@ -1,5 +1,4 @@
-import type { ComponentType, LazyExoticComponent } from 'react';
-import { lazy, Suspense, type JSX } from 'react';
+import { lazy, Suspense, type ComponentType, type JSX, type LazyExoticComponent } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { LoadingCard } from './components';
 import { goTo } from './helpers';
