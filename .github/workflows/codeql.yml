@@ -29,6 +29,7 @@ jobs:
         with:
           languages: javascript-typescript
           build-mode: none
+          queries: security-extended
 
       - name: Run CodeQL analysis
         uses: github/codeql-action/analyze@v4
