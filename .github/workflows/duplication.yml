@@ -1,0 +1,21 @@
+name: Detect duplicate code
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  sonarqube:
+    name: SonarQube Scan
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+    - name: SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v6.0.0
