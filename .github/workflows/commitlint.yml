@@ -1,0 +1,39 @@
+name: Check Conventional Commits
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  security-events: write
+  checks: write
+  packages: read
+
+jobs:
+  lint-commits:
+    name: Validate commit messages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Install commitlint
+        run: |
+          npm install -g @commitlint/{config-conventional,cli}
+
+      - name: Get all commits in the PR
+        run: |
+          git log origin/${{ github.base_ref }}..HEAD --pretty=format:"%s" > commits.txt
+          echo "Commits to validate:"
+          cat commits.txt
+
+      - name: Validate commits using local config
+        run: |
+          while IFS= read -r commit; do
+            echo "Checking commit: $commit"
+            echo "$commit" | commitlint --config .commitlintrc.yml || exit 1
+          done < commits.txt
