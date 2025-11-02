@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import type { IGexRetromobilesNew } from '../../types';
 
 interface Props {
-  eventNew: IGexRetromobilesNew;
+  readonly eventNew: IGexRetromobilesNew;
 }
 
-export function GexRetromobilesNewsCard({ eventNew }: Props): JSX.Element {
+export function GexRetromobilesNewsCard({ eventNew }: Readonly<Props>): JSX.Element {
   const { i18n }: { i18n: i18n } = useTranslation();
   const updated: Date = new Date(eventNew.updatedAt);
   const dateStr: string = updated.toLocaleDateString(i18n.language, {

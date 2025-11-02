@@ -1,11 +1,11 @@
 import type { JSX, ReactNode } from 'react';
 
 interface Props {
-  icon: ReactNode;
-  iconBgColor: string;
-  iconColor: string;
-  title: string;
-  className?: string;
+  readonly icon: ReactNode;
+  readonly iconBgColor: string;
+  readonly iconColor: string;
+  readonly title: string;
+  readonly className?: string;
 }
 
 export function SectionHeader({
@@ -14,7 +14,7 @@ export function SectionHeader({
   iconColor,
   title,
   className = 'mb-6',
-}: Props): JSX.Element {
+}: Readonly<Props>): JSX.Element {
   return (
     <div className={`flex items-center ${className}`}>
       <div className={`${iconBgColor} rounded-full p-3 mr-4`}>

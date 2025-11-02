@@ -9,11 +9,11 @@ import { PathsLabels } from '../../types';
 import { LanguageSelector } from './LanguageSelector';
 
 interface Props {
-  isMobile: boolean;
-  onLinkClick?: () => void;
+  readonly isMobile: boolean;
+  readonly onLinkClick?: () => void;
 }
 
-export function NavigationLinks({ isMobile, onLinkClick }: Props): JSX.Element {
+export function NavigationLinks({ isMobile, onLinkClick }: Readonly<Props>): JSX.Element {
   const location: Location = useLocation();
   const { t }: { t: TFunction } = useTranslation();
 

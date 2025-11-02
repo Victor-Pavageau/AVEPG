@@ -1,6 +1,6 @@
 import type { Path } from '../../types';
 
-export function goTo(path: Path, replace?: string[]): Path | string {
+export function goTo(path: Path, replace?: string[]): string {
   if (!replace) {
     return path;
   }
@@ -8,7 +8,7 @@ export function goTo(path: Path, replace?: string[]): Path | string {
 }
 
 function replacePlaceholders(url: Path, replaceArray: string[]): string {
-  const expression: RegExp = /:[\w-_]+/g;
+  const expression: RegExp = /:[\w-]+/g;
   const array: string[] = url.match(expression) ?? [];
   if (array.length !== replaceArray.length) {
     throw new Error(`Expected array of ${array.length} strings. Found ${replaceArray.length}`);

@@ -4,13 +4,13 @@ import type { Path } from '../types';
 import { Card } from './Card';
 
 interface Props {
-  path: Path;
-  icon: ReactNode;
-  iconBgColor: string;
-  iconColor: string;
-  title: string;
-  description: string;
-  className?: string;
+  readonly path: Path;
+  readonly icon: ReactNode;
+  readonly iconBgColor: string;
+  readonly iconColor: string;
+  readonly title: string;
+  readonly description: string;
+  readonly className?: string;
 }
 
 export function NavigationCard({
@@ -21,7 +21,7 @@ export function NavigationCard({
   title,
   description,
   className,
-}: Props): JSX.Element {
+}: Readonly<Props>): JSX.Element {
   return (
     <a
       href={goTo(path)}

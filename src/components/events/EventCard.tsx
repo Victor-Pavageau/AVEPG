@@ -8,10 +8,10 @@ import { VisitWebsite } from '../';
 import type { IEvent, IPartner } from '../../types';
 
 interface Props {
-  event: IEvent;
+  readonly event: IEvent;
 }
 
-export function EventCard({ event }: Props): JSX.Element {
+export function EventCard({ event }: Readonly<Props>): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
   const [isDescriptionExpanded, setIsDescriptionExpanded]: [
     boolean,

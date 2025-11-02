@@ -23,7 +23,7 @@ export function useSubmitCooldown(): IUseSubmitCooldownReturn {
       return 0;
     }
 
-    const timePassed: number = Date.now() - parseInt(lastSubmitTime, 10);
+    const timePassed: number = Date.now() - Number.parseInt(lastSubmitTime, 10);
     const remaining: number = Math.max(0, COOLDOWN_DURATION - timePassed);
     return Math.ceil(remaining / 1000);
   }, []);
@@ -61,11 +61,11 @@ export function useSubmitCooldown(): IUseSubmitCooldownReturn {
       }
     };
 
-    window.addEventListener('storage', handleStorageChange);
+    globalThis.addEventListener('storage', handleStorageChange);
 
     return (): void => {
       clearInterval(interval);
-      window.removeEventListener('storage', handleStorageChange);
+      globalThis.removeEventListener('storage', handleStorageChange);
     };
   }, [isInCooldown, updateCooldownState]);
 
