@@ -25,8 +25,7 @@ export default function PhotosPage(): JSX.Element {
     const fetchAlbums: () => Promise<void> = async (): Promise<void> => {
       setLoading(true);
       try {
-        const data: IAlbum[] = await StrapiService.getAlbums(i18n.language);
-        setAlbums(data);
+        StrapiService.getAlbums(i18n.language).then(setAlbums);
       } catch {
         setAlbums([]);
       }

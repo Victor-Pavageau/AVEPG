@@ -1,78 +1,80 @@
-import type { IDBPDatabase } from 'idb';
-import { openDB } from 'idb';
+export class CacheService {
+  private static buildUrl(resource: string, locale?: string): string {
+    const params: URLSearchParams = new URLSearchParams({ resource });
 
-const DB_NAME: string = 'avepg-cache';
-const DB_VERSION: number = 1;
-const STORE_NAME: string = 'responses';
+    if (locale) {
+      params.set('locale', locale);
+    }
 
-interface CacheMeta {
-  fetchedAt: number;
-  locale?: string;
-}
+    return `/api/cache?${params.toString()}`;
+  }
 
-export interface CacheEntry<T> {
-  payload: T;
-  meta: CacheMeta;
-}
+  /**
+   * Read cached value from the serverless cache. Returns null when not found or on error.
+   */
+  public static async readCached<T = unknown>(
+    resource: string,
+    locale?: string,
+  ): Promise<T | null> {
+    try {
+      const url: string = this.buildUrl(resource, locale);
+      const res: Response = await fetch(url);
 
-let dbPromise: Promise<IDBPDatabase<unknown>> | null = null;
-
-function getDB(): Promise<IDBPDatabase<unknown>> {
-  dbPromise ??= openDB(DB_NAME, DB_VERSION, {
-    upgrade(db: IDBPDatabase<unknown>) {
-      if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME);
+      if (!res.ok) {
+        return null;
       }
-    },
-  });
 
-  return dbPromise;
-}
-
-export function makeKey(resource: string, locale?: string): string {
-  return locale ? `${resource}::${locale}` : resource;
-}
-
-export async function readCached<T = unknown>(
-  resource: string,
-  locale?: string,
-): Promise<CacheEntry<T> | null> {
-  try {
-    const db: IDBPDatabase<unknown> = await getDB();
-    const key: string = makeKey(resource, locale);
-    const entry: CacheEntry<T> = await db.get(STORE_NAME, key);
-    return entry ?? null;
-  } catch {
-    return null;
+      const data: T = (await res.json()) as T;
+      return data;
+    } catch {
+      return null;
+    }
   }
-}
 
-export async function setCache<T = unknown>(
-  resource: string,
-  payload: T,
-  locale?: string,
-): Promise<void> {
-  const db: IDBPDatabase<unknown> = await getDB();
-  const key: string = makeKey(resource, locale);
-  const entry: CacheEntry<T> = { payload, meta: { fetchedAt: Date.now(), locale } };
-  await db.put(STORE_NAME, entry, key);
-}
+  /**
+   * Store a payload in the cache. Returns true when the request succeeded.
+   */
+  public static async setCache<T = unknown>(
+    resource: string,
+    payload: T,
+    locale?: string,
+  ): Promise<boolean> {
+    try {
+      const url: string = this.buildUrl(resource, locale);
+      const res: Response = await fetch(url, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-export async function clearCache(resource?: string, locale?: string): Promise<void> {
-  const db: IDBPDatabase<unknown> = await getDB();
-  if (resource) {
-    const key: string = makeKey(resource, locale);
-    await db.delete(STORE_NAME, key);
-  } else {
-    await db.clear(STORE_NAME);
+      if (!res.ok) {
+        return false;
+      }
+
+      return true;
+    } catch {
+      return false;
+    }
   }
-}
 
-export async function fetchAndUpdateCache<T = unknown>(
-  resource: string,
-  fetcher: () => Promise<T>,
-  locale?: string,
-): Promise<void> {
-  const newPayload: T = await fetcher();
-  await setCache(resource, newPayload, locale);
+  /**
+   * Try to return cached data; if missing, call the provided fetcher and update the cache.
+   * The cache update is attempted but failures do not prevent returning the fresh data.
+   */
+  public static async fetchAndUpdateCache<T = unknown>(
+    resource: string,
+    fetcher: () => Promise<T>,
+    locale?: string,
+  ): Promise<T> {
+    const cached: T | null = await this.readCached<T>(resource, locale);
+    if (cached !== null && typeof cached !== 'undefined') {
+      return cached;
+    }
+
+    const fresh: T = await fetcher();
+
+    this.setCache(resource, fresh, locale).catch();
+
+    return fresh;
+  }
 }

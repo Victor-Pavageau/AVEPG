@@ -8,152 +8,148 @@ import type {
   IPartner,
   IStrapiResponse,
 } from '../types';
-import type { CacheEntry } from './CacheService';
-import { fetchAndUpdateCache, readCached, setCache } from './CacheService';
+import { CacheService } from './CacheService';
 
 export class StrapiService {
   public static async getPartners(language: string): Promise<IPartner[]> {
-    const locale: string = languageToIso6391(language);
-    const cached: CacheEntry<IPartner[]> | null = await readCached<IPartner[]>('partners', locale);
-    if (cached?.payload) {
-      void fetchAndUpdateCache<IPartner[]>(
-        'partners',
-        () => this.fetchPartners(language),
-        locale,
-      ).catch(() => undefined);
-      return cached.payload;
+    const cached: IPartner[] | null = await CacheService.readCached<IPartner[] | null>(
+      'partners',
+      language,
+    );
+
+    if (cached) {
+      this.updatePartners(language).catch();
+
+      return cached;
     }
 
-    const payload: IPartner[] = await this.fetchPartners(language);
-    await setCache<IPartner[]>('partners', payload, locale);
-    return payload;
+    return await this.updatePartners(language);
   }
 
-  private static async fetchPartners(language: string): Promise<IPartner[]> {
+  private static async updatePartners(language: string): Promise<IPartner[]> {
     const query: string = buildStrapiQueryUrl('partners', languageToIso6391(language));
     const response: Response = await fetch(query);
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch partners: ${response.status} ${response.statusText}`);
+      throw new Error('Failed to fetch partners');
     }
 
-    const data: IStrapiResponse<IPartner> = await response.json();
-    return data.data;
+    const data: IPartner[] = await response.json();
+    await CacheService.setCache('partners', data, language);
+
+    return data;
   }
 
   public static async getEvents(language: string): Promise<IEvent[]> {
-    const locale: string = languageToIso6391(language);
-    const cached: CacheEntry<IEvent[]> | null = await readCached<IEvent[]>('events', locale);
-    if (cached?.payload) {
-      void fetchAndUpdateCache<IEvent[]>('events', () => this.fetchEvents(language), locale).catch(
-        () => undefined,
-      );
-      return cached.payload;
+    const cached: IEvent[] | null = await CacheService.readCached<IEvent[] | null>(
+      'events',
+      language,
+    );
+
+    if (cached) {
+      this.updateEvents(language).catch();
+
+      return cached;
     }
 
-    const payload: IEvent[] = await this.fetchEvents(language);
-    await setCache<IEvent[]>('events', payload, locale);
-    return payload;
+    return await this.updateEvents(language);
   }
 
-  private static async fetchEvents(language: string): Promise<IEvent[]> {
+  private static async updateEvents(language: string): Promise<IEvent[]> {
     const query: string = buildStrapiQueryUrl('events', languageToIso6391(language));
     const response: Response = await fetch(query);
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch events: ${response.status} ${response.statusText}`);
+      throw new Error('Failed to fetch events');
     }
 
-    const data: IStrapiResponse<IEvent> = await response.json();
-    return data.data;
+    const data: IEvent[] = await response.json();
+    await CacheService.setCache('events', data, language);
+
+    return data;
   }
 
   public static async getAlbums(language: string): Promise<IAlbum[]> {
-    const locale: string = languageToIso6391(language);
-    const cached: CacheEntry<IAlbum[]> | null = await readCached<IAlbum[]>('albums', locale);
-    if (cached?.payload) {
-      void fetchAndUpdateCache<IAlbum[]>('albums', () => this.fetchAlbums(language), locale).catch(
-        () => undefined,
-      );
-      return cached.payload;
+    const cached: IAlbum[] | null = await CacheService.readCached<IAlbum[] | null>(
+      'albums',
+      language,
+    );
+
+    if (cached) {
+      void this.updateAlbums(language);
+
+      return cached;
     }
 
-    const payload: IAlbum[] = await this.fetchAlbums(language);
-    await setCache<IAlbum[]>('albums', payload, locale);
-    return payload;
+    return await this.updateAlbums(language);
   }
 
-  private static async fetchAlbums(language: string): Promise<IAlbum[]> {
+  private static async updateAlbums(language: string): Promise<IAlbum[]> {
     const query: string = buildStrapiQueryUrl('albums', languageToIso6391(language));
     const response: Response = await fetch(query);
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch albums: ${response.status} ${response.statusText}`);
+      throw new Error('Failed to fetch albums');
     }
 
     const data: IStrapiResponse<IAlbum> = await response.json();
+    await CacheService.setCache('albums', data.data, language);
+
     return data.data;
   }
 
   public static async getHomePageCarousel(): Promise<IHomePageCarousel> {
-    const cached: CacheEntry<IHomePageCarousel> | null =
-      await readCached<IHomePageCarousel>('home-page-carousels');
-    if (cached?.payload) {
-      void fetchAndUpdateCache<IHomePageCarousel>('home-page-carousels', () =>
-        this.fetchHomePageCarousel(),
-      ).catch(() => undefined);
-      return cached.payload;
+    const cached: IHomePageCarousel | null =
+      await CacheService.readCached<IHomePageCarousel>('home-page-carousels');
+
+    if (cached) {
+      this.updateHomePageCarousel().catch();
+
+      return cached;
     }
 
-    const payload: IHomePageCarousel = await this.fetchHomePageCarousel();
-    await setCache<IHomePageCarousel>('home-page-carousels', payload);
-    return payload;
+    return await this.updateHomePageCarousel();
   }
 
-  private static async fetchHomePageCarousel(): Promise<IHomePageCarousel> {
+  private static async updateHomePageCarousel(): Promise<IHomePageCarousel> {
     const query: string = buildStrapiQueryUrl('home-page-carousels');
     const response: Response = await fetch(query);
 
     if (!response.ok) {
-      throw new Error(
-        `Failed to fetch home page carousel: ${response.status} ${response.statusText}`,
-      );
+      throw new Error('Failed to fetch home page carousel');
     }
 
     const data: IStrapiResponse<IHomePageCarousel> = await response.json();
-    return data.data[0]; // There is only one home page carousel entry
+    await CacheService.setCache('home-page-carousels', data.data[0]); // There should be only one carousel
+
+    return data.data[0]; // There should be only one carousel
   }
 
   public static async getGexRetromobilesNews(language: string): Promise<IGexRetromobilesNew[]> {
-    const locale: string = languageToIso6391(language);
-    const cached: CacheEntry<IGexRetromobilesNew[]> | null = await readCached<
-      IGexRetromobilesNew[]
-    >('gex-retromobiles-news', locale);
-    if (cached?.payload) {
-      void fetchAndUpdateCache<IGexRetromobilesNew[]>(
-        'gex-retromobiles-news',
-        () => this.fetchGexRetromobilesNews(language),
-        locale,
-      ).catch(() => undefined);
-      return cached.payload;
+    const cached: IGexRetromobilesNew[] | null = await CacheService.readCached<
+      IGexRetromobilesNew[] | null
+    >('gex-retromobiles-news', language);
+
+    if (cached) {
+      this.updateGexRetromobilesNews(language).catch();
+
+      return cached;
     }
 
-    const payload: IGexRetromobilesNew[] = await this.fetchGexRetromobilesNews(language);
-    await setCache<IGexRetromobilesNew[]>('gex-retromobiles-news', payload, locale);
-    return payload;
+    return await this.updateGexRetromobilesNews(language);
   }
 
-  private static async fetchGexRetromobilesNews(language: string): Promise<IGexRetromobilesNew[]> {
+  private static async updateGexRetromobilesNews(language: string): Promise<IGexRetromobilesNew[]> {
     const query: string = buildStrapiQueryUrl('gex-retromobiles-news', languageToIso6391(language));
     const response: Response = await fetch(query);
 
     if (!response.ok) {
-      throw new Error(
-        `Failed to fetch Gex Retromobiles news: ${response.status} ${response.statusText}`,
-      );
+      throw new Error('Failed to fetch Gex Retromobiles news');
     }
 
-    const data: IStrapiResponse<IGexRetromobilesNew> = await response.json();
-    return data.data;
+    const data: IGexRetromobilesNew[] = await response.json();
+    await CacheService.setCache('gex-retromobiles-news', data, language);
+
+    return data;
   }
 }
