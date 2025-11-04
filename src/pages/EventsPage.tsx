@@ -32,8 +32,7 @@ export default function EventsPage(): JSX.Element {
     const fetchEvents = async (): Promise<void> => {
       setLoading(true);
       try {
-        const fetchedEvents: IEvent[] = await StrapiService.getEvents(i18n.language);
-        setEvents(fetchedEvents);
+        await StrapiService.getEvents(i18n.language).then(setEvents);
       } catch {
         setEvents([]);
         setTabs([]);

@@ -1,6 +1,6 @@
 import Carousel from 'antd/es/carousel';
 import type { TFunction } from 'i18next';
-import { useEffect, useState, type JSX, type Dispatch, type SetStateAction } from 'react';
+import { useEffect, useState, type Dispatch, type JSX, type SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StrapiService } from '../../services';
 import type { IHomePageCarousel, IStrapiImage } from '../../types';
@@ -20,8 +20,7 @@ export function HomePageCarousel(): JSX.Element {
     const fetchCarousel: () => Promise<void> = async (): Promise<void> => {
       setLoading(true);
       try {
-        const data: IHomePageCarousel = await StrapiService.getHomePageCarousel();
-        setCarousel(data);
+        await StrapiService.getHomePageCarousel().then(setCarousel);
       } catch {
         setCarousel(null);
       }
