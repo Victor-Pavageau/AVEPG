@@ -18,8 +18,7 @@ export function PartnersSection(): JSX.Element {
     const fetchPartners: () => Promise<void> = async (): Promise<void> => {
       setLoading(true);
       try {
-        const data: IPartner[] = await StrapiService.getPartners(i18n.language);
-        setPartners(data);
+        await StrapiService.getPartners(i18n.language).then(setPartners);
       } catch {
         setPartners([]);
       }

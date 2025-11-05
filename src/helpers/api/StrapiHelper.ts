@@ -1,4 +1,4 @@
-import type { StrapiEntity } from '../../types';
+import type { IStrapiObject, IStrapiResponse, StrapiEntity } from '../../types';
 
 export function buildStrapiQueryUrl(entity: StrapiEntity, locale: string | null = null): string {
   const apiUrl: string = import.meta.env.VITE_STRAPI_BASE_URL ?? '';
@@ -37,4 +37,11 @@ function getPopulateRelationParams(
   return imageObjectName
     ? `&[populate][${relationObjectName}][populate][${imageObjectName}][fields][0]=url`
     : `&populate=${relationObjectName}`;
+}
+
+export function areStrapiResponsesEqual<T = IStrapiResponse<IStrapiObject>>(
+  responseA: T,
+  responseB: T,
+): boolean {
+  return JSON.stringify(responseA) === JSON.stringify(responseB);
 }
