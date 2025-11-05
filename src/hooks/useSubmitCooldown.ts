@@ -49,7 +49,7 @@ export function useSubmitCooldown(): IUseSubmitCooldownReturn {
   useEffect(() => {
     updateCooldownState();
 
-    const interval: number = setInterval(() => {
+    const interval: ReturnType<typeof setInterval> = setInterval(() => {
       if (isInCooldown) {
         updateCooldownState();
       }
