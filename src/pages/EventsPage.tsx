@@ -86,6 +86,7 @@ export default function EventsPage(): JSX.Element {
   const getActiveTab = (): string => {
     const tabParam: string | null = searchParams.get('tab');
     const validKeys: string[] = tabs.map((tab: Tab) => tab.key);
+
     return tabParam && validKeys.includes(tabParam) ? tabParam : defaultActiveKey;
   };
 

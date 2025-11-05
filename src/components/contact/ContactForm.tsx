@@ -52,6 +52,7 @@ export function ContactForm({
   const handleSubmit = async (values: IContactFormData): Promise<void> => {
     if (isInCooldown) {
       message.warning(t('contact.form.cooldown', { seconds: remainingSeconds }));
+
       return;
     }
 
@@ -62,6 +63,7 @@ export function ContactForm({
 
       if (!emailFormId) {
         message.error(t('contact.error.noEmail'));
+
         return;
       }
 

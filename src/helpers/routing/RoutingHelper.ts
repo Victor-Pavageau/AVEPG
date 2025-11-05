@@ -4,6 +4,7 @@ export function goTo(path: Path, replace?: string[]): string {
   if (!replace) {
     return path;
   }
+
   return replacePlaceholders(path, replace);
 }
 
@@ -17,5 +18,6 @@ function replacePlaceholders(url: Path, replaceArray: string[]): string {
   for (let i: number = 0; i < array.length; i++) {
     result = result.replace(array[i], replaceArray[i]);
   }
+
   return result;
 }

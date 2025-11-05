@@ -25,6 +25,7 @@ export function useSubmitCooldown(): IUseSubmitCooldownReturn {
 
     const timePassed: number = Date.now() - Number.parseInt(lastSubmitTime, 10);
     const remaining: number = Math.max(0, COOLDOWN_DURATION - timePassed);
+
     return Math.ceil(remaining / 1000);
   }, []);
 
