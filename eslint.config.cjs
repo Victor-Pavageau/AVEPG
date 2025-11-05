@@ -81,6 +81,10 @@ module.exports = defineConfig([
       '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/no-inferrable-types': 'off', // Allow explicit types even if inferrable
       '@typescript-eslint/consistent-type-imports': 'error',
+      'padding-line-between-statements': [
+        'error',
+        { blankLine: 'always', prev: '*', next: 'return' },
+      ],
     },
   },
 ]);

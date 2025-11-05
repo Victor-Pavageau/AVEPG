@@ -9,6 +9,7 @@ interface Props {
 
 export function VisitWebsite({ url }: Readonly<Props>): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
+
   return (
     <a
       href={url}
