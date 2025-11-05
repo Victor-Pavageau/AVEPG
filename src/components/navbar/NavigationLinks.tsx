@@ -24,7 +24,7 @@ export function NavigationLinks({ isMobile, onLinkClick }: Readonly<Props>): JSX
         .map((path: Path) => (
           <a
             key={path}
-            href={goTo(path)}
+            href={location.pathname === path ? undefined : goTo(path)}
             className={`px-3 py-2 rounded-md ${
               isMobile
                 ? `block text-base transition-colors ${
