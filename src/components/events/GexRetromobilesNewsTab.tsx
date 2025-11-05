@@ -33,7 +33,7 @@ export function GexRetromobilesNewsTab(): JSX.Element {
         setNews(data);
         setNewsYears(
           Array.from(new Set(data.map((n: IGexRetromobilesNew) => n.year))).sort(
-            (a: number, b: number) => b - a,
+            (a: number, b: number) => a - b,
           ),
         );
       } catch {
