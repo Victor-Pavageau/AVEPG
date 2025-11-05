@@ -33,8 +33,10 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
       if (startDate === endDate) {
         return startDate;
       }
+
       return `${startDate} - ${endDate}`;
     }
+
     return startDate;
   };
 
