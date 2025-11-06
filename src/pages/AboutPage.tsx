@@ -1,13 +1,17 @@
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LeadershipSection, PartnersSection, PresentationSection } from '../components';
+import { LeadershipSection, PartnersSection, PresentationSection, Seo } from '../components';
 
 export default function AboutPage(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
 
   return (
     <div className='w-full px-6 md:px-12 max-w-5xl mx-auto py-8'>
+      <Seo
+        title={t('about.title')}
+        description={t('about.presentation.founded')}
+      />
       <div className='text-gray-800'>
         <h1 className='text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center'>
           {t('about.title')}

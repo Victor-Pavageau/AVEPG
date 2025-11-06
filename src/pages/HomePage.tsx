@@ -5,13 +5,17 @@ import { FaInfoCircle } from 'react-icons/fa';
 import { ImCamera } from 'react-icons/im';
 import { IoIosMail } from 'react-icons/io';
 import { IoCalendar } from 'react-icons/io5';
-import { Card, HomePageCarousel, NavigationCard } from '../components';
+import { Card, HomePageCarousel, NavigationCard, Seo } from '../components';
 
 function HomePage(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
 
   return (
     <div className='w-full'>
+      <Seo
+        title={t('home.title')}
+        description={t('home.welcome.description')}
+      />
       <HomePageCarousel />
       <div className='px-6 md:px-12 max-w-5xl mx-auto'>
         <div className='text-gray-800 leading-relaxed mb-12'>

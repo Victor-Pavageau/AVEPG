@@ -13,5 +13,7 @@ export { HomePageCarousel } from './home';
 export { LoadingCard } from './LoadingCard';
 export { LanguageSelector, Navbar, NavigationLinks } from './navbar';
 export { NavigationCard } from './NavigationCard';
+export { OrganizationJsonLd } from './OrganizationJsonLd';
 export { SectionHeader } from './SectionHeader';
+export { Seo } from './Seo';
 export { VisitWebsite } from './VisitWebsite';

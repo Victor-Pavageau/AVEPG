@@ -4,7 +4,7 @@ import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
-import { EventsTimeline, GexRetromobilesNewsTab, LoadingCard } from '../components';
+import { EventsTimeline, GexRetromobilesNewsTab, LoadingCard, Seo } from '../components';
 import { StrapiService } from '../services';
 import type { IEvent } from '../types';
 
@@ -109,6 +109,10 @@ export default function EventsPage(): JSX.Element {
 
   return (
     <div className='w-full px-4 md:px-6 lg:px-12 max-w-7xl mx-auto py-4 md:py-6 lg:py-8'>
+      <Seo
+        title={t('home.navigation.events.title')}
+        description={t('home.navigation.events.description')}
+      />
       {loading ? (
         <LoadingCard />
       ) : tabs.length === 0 || events.length === 0 ? (

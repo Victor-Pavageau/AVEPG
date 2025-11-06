@@ -4,7 +4,7 @@ import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FcFolder } from 'react-icons/fc';
-import { LoadingCard } from '../components';
+import { LoadingCard, Seo } from '../components';
 import { StrapiService } from '../services';
 import type { IAlbum, IStrapiImage } from '../types';
 
@@ -45,6 +45,10 @@ export default function PhotosPage(): JSX.Element {
 
   return (
     <div className='w-full px-4 md:px-6 lg:px-12 max-w-7xl mx-auto py-4 md:py-6 lg:py-8'>
+      <Seo
+        title={t('photos.pageTitle')}
+        description={t('home.navigation.photos.description')}
+      />
       <h1 className='text-2xl font-bold mb-10 text-center'>{t('photos.pageTitle')}</h1>
       {loading ? (
         <LoadingCard />
