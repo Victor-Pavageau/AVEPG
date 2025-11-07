@@ -1,5 +1,6 @@
 import type { TFunction } from 'i18next';
-import type { JSX } from 'react';
+import type { Dispatch, JSX, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import pkg from '../../package.json';
@@ -9,6 +10,35 @@ export function Footer(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
   const currentYear: number = new Date().getFullYear();
   const appVersion: string = pkg.version;
+  const [blogUrl, setBlogUrl]: [string, Dispatch<SetStateAction<string>>] = useState<string>('');
+
+  useEffect(() => {
+    async function fetchGitHubProfile(): Promise<void> {
+      const res: Response = await fetch('https://api.github.com/users/victor-pavageau', {
+        headers: {
+          Accept: 'application/vnd.github+json',
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+      });
+
+      if (!res.ok) {
+        return;
+      }
+
+      const data: unknown = await res.json();
+
+      if (
+        typeof data === 'object' &&
+        data !== null &&
+        'blog' in data &&
+        typeof data.blog === 'string'
+      ) {
+        setBlogUrl(data.blog.trim());
+      }
+    }
+
+    fetchGitHubProfile();
+  }, []);
 
   return (
     <footer className='bg-gray-800 text-white mt-8'>
@@ -45,7 +75,19 @@ export function Footer(): JSX.Element {
               <span className='text-gray-400 ml-2'>v{appVersion}</span>
             </p>
 
-            <p className='text-gray-400 text-xs mt-2'>{t('shared.footer.credit')}</p>
+            {blogUrl.length > 0 ? (
+              <p className='text-gray-400 text-xs mt-2'>
+                <a
+                  href={blogUrl}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-gray-400! hover:text-white! transition-colors'>
+                  {t('shared.footer.credit')}
+                </a>
+              </p>
+            ) : (
+              <p className='text-gray-400 text-xs mt-2'>{t('shared.footer.credit')}</p>
+            )}
           </div>
         </div>
       </div>
