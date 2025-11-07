@@ -6,7 +6,7 @@ import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { NavigateFunction } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { Card } from '../components';
+import { Card, Seo } from '../components';
 
 export default function NotFoundPage(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
@@ -18,6 +18,10 @@ export default function NotFoundPage(): JSX.Element {
 
   return (
     <div className='w-full px-6 md:px-12 max-w-4xl mx-auto py-8 min-h-[70vh] flex items-center justify-center'>
+      <Seo
+        title={t('notFound.title')}
+        description={t('notFound.description')}
+      />
       <Card
         className='w-full text-center border-[#0164B5]'
         bordered>

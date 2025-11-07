@@ -1,5 +1,7 @@
+import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
-import { ContactForm, ContactHeader, ContactInfo } from '../components';
+import { useTranslation } from 'react-i18next';
+import { ContactForm, ContactHeader, ContactInfo, Seo } from '../components';
 import { useSubmitCooldown } from '../hooks';
 
 export default function ContactPage(): JSX.Element {
@@ -13,8 +15,14 @@ export default function ContactPage(): JSX.Element {
     startCooldown: () => void;
   } = useSubmitCooldown();
 
+  const { t }: { t: TFunction } = useTranslation();
+
   return (
     <div className='w-full px-6 md:px-12 max-w-7xl mx-auto py-8'>
+      <Seo
+        title={t('contact.title')}
+        description={t('contact.description')}
+      />
       <div className='text-gray-800'>
         <ContactHeader />
 

@@ -1,11 +1,12 @@
 {
   "name": "avepg",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "type": "module",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "start": "vite --port 3000",
+    "prebuild": "node ./scripts/generate-sitemap.mjs",
     "build": "tsc && vite build",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
