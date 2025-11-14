@@ -1,12 +1,15 @@
 import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import type { Location } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { goTo } from '../../helpers';
 import { NavigationLinks } from './NavigationLinks';
 
 export function Navbar(): JSX.Element {
   const [isMobileMenuOpen, setIsMobileMenuOpen]: [boolean, Dispatch<SetStateAction<boolean>>] =
     useState(false);
+  const location: Location = useLocation();
 
   return (
     <nav className='fixed top-0 left-0 right-0 z-50 shadow-md bg-white border-b border-gray-200 select-none'>
@@ -14,7 +17,7 @@ export function Navbar(): JSX.Element {
         <div className='flex items-center justify-between h-20'>
           <a
             className='h-full'
-            href={goTo('/')}>
+            href={location.pathname === '/' ? undefined : goTo('/')}>
             <img
               src='/assets/logo.png'
               alt='AVEPG Logo'
