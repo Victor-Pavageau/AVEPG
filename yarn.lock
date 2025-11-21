@@ -2024,9 +2024,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:^5.28.0":
-  version: 5.28.0
-  resolution: "antd@npm:5.28.0"
+"antd@npm:^5.29.1":
+  version: 5.29.1
+  resolution: "antd@npm:5.29.1"
   dependencies:
     "@ant-design/colors": "npm:^7.2.1"
     "@ant-design/cssinjs": "npm:^1.23.0"
@@ -2080,7 +2080,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 10c0/06c08308a7fc93085770e957d7980c367f7839938aa8b87e018f88dd6b12a12abc230ff80eeda78afa33a4357122ead19da6d16ea1adbe534bc1c352d37fbc8f
+  checksum: 10c0/e4d5698294839ec30de306a40adcdf297a21cbdbf73a7be03a3739244aa949f6d7b1b8df274b5e3d95585e5ab853f2f4e2079116970b99302daa22369bffbd78
   languageName: node
   linkType: hard
 
@@ -2178,7 +2178,7 @@ __metadata:
     "@vercel/blob": "npm:^2.0.0"
     "@vercel/node": "npm:^5.5.6"
     "@vitejs/plugin-react": "npm:^5.1.1"
-    antd: "npm:^5.28.0"
+    antd: "npm:^5.29.1"
     autoprefixer: "npm:^10.4.22"
     dotenv: "npm:^17.2.3"
     eslint: "npm:^9.39.1"

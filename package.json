@@ -15,7 +15,7 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/blob": "^2.0.0",
     "@vercel/node": "^5.5.6",
-    "antd": "^5.28.0",
+    "antd": "^5.29.1",
     "i18next": "^25.6.2",
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-intervalplural-postprocessor": "^3.0.0",
