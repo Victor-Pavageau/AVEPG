@@ -12,7 +12,11 @@ export function buildStrapiQueryUrl(entity: StrapiEntity, locale: string | null 
 function getPopulateParams(entity: StrapiEntity): string {
   switch (entity) {
     case 'events':
-      return getPopulateImageParams('cover') + getPopulateRelationParams('partners', 'logo');
+      return (
+        getPopulateImageParams('cover') +
+        getPopulateRelationParams('partners', 'logo') +
+        getPopulateRelationParams('album')
+      );
     case 'albums':
       return getPopulateImageParams('photos');
     case 'partners':

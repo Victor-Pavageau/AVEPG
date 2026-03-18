@@ -31,6 +31,10 @@ export default function RoutingSystem(): JSX.Element {
           element={<PhotosPage />}
         />
         <Route
+          path={goTo('/photos/:albumId')}
+          element={<PhotosPage />}
+        />
+        <Route
           path={goTo('/contact')}
           element={<ContactPage />}
         />
