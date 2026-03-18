@@ -48,7 +48,7 @@ export function GexRetromobilesNewsTab(): JSX.Element {
 
   useEffect(() => {
     if (newsYears.length > 0) {
-      setSelectedYear(newsYears[newsYears.length - 1]);
+      setSelectedYear(newsYears.at(-1) ?? null);
     }
   }, [newsYears]);
 
