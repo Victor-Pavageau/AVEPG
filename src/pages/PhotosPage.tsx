@@ -4,7 +4,10 @@ import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FcFolder } from 'react-icons/fc';
+import type { NavigateFunction } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { LoadingCard, Seo } from '../components';
+import { goTo } from '../helpers';
 import { StrapiService } from '../services';
 import type { IAlbum, IStrapiImage } from '../types';
 
@@ -35,12 +38,33 @@ export default function PhotosPage(): JSX.Element {
     void fetchAlbums();
   }, [i18n.language]);
 
+  const { albumId }: { albumId?: string } = useParams<{ albumId?: string }>();
+  const navigate: NavigateFunction = useNavigate();
+
+  useEffect(() => {
+    if (!albumId || albums.length === 0) {
+      return;
+    }
+
+    const found: IAlbum | undefined = albums.find(
+      (a: IAlbum) => a.documentId === albumId || a.id === albumId,
+    );
+
+    if (found) {
+      setSelectedAlbum(found);
+    }
+  }, [albums, albumId]);
+
   function openAlbum(album: IAlbum): void {
+    // update URL to include album id so the modal is addressable
+    navigate(goTo('/photos/:albumId', [album.documentId]));
     setSelectedAlbum(album);
   }
 
   function closeAlbum(): void {
     setSelectedAlbum(null);
+    // remove album id from URL so refresh won't re-open the modal
+    navigate(goTo('/photos'), { replace: true });
   }
 
   return (
