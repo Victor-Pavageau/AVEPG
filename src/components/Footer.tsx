@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import pkg from '../../package.json';
-import { OrganizationJsonLd } from './OrganizationJsonLd';
 
 export function Footer(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
@@ -42,7 +41,6 @@ export function Footer(): JSX.Element {
 
   return (
     <footer className='bg-gray-800 text-white mt-8'>
-      <OrganizationJsonLd />
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6'>
         <div className='text-center'>
           <div className='mb-4'>

@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "vite --port 3000",
-    "build": "tsc && node ./scripts/generate-sitemap.mjs && vite build",
+    "build": "tsc && node ./scripts/generate-sitemap.mjs && vite build && node ./scripts/prerender-postbuild.mjs",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
