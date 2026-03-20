@@ -1,6 +1,7 @@
 import AntdApp from 'antd/es/app/App';
 import { lazy, type ComponentType, type JSX, type LazyExoticComponent } from 'react';
 import { Footer, Navbar } from './components';
+import { OrganizationJsonLd } from './components/OrganizationJsonLd';
 import './main.css';
 
 const RoutingSystem: LazyExoticComponent<ComponentType> = lazy(() => import('./routing.tsx'));
@@ -8,6 +9,7 @@ const RoutingSystem: LazyExoticComponent<ComponentType> = lazy(() => import('./r
 export default function App(): JSX.Element {
   return (
     <AntdApp>
+      <OrganizationJsonLd />
       <div className='min-h-screen flex flex-col'>
         <Navbar />
         <main className='flex-1 pt-20'>

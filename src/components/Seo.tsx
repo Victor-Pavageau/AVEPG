@@ -1,6 +1,8 @@
 import type { i18n, TFunction } from 'i18next';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { makeAbsolute, SITE_URL } from '../config/site';
+import pagesMeta from '../seo/pagesMeta.json';
 
 type Props = {
   title?: string;
@@ -15,21 +17,35 @@ export function Seo({ title, description, image, url }: Props): null {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
 
   const siteName: string = t('home.shortTitle', { defaultValue: 'AVEPG' });
-  const fullTitle: string = title ? `${title} — ${siteName}` : siteName;
 
-  // Read Vite runtime env if exposed to client (VITE_SITE_URL). Use unknown cast to avoid `any` lint.
-  const viteSiteUrl: string = import.meta.env.VITE_SITE_URL ?? '';
+  // Prefer centralized SITE_URL; fall back to runtime location when unavailable.
+  const viteSiteUrl: string = SITE_URL ?? import.meta.env.VITE_SITE_URL ?? '';
+
+  interface RouteMeta {
+    title?: string;
+    desc?: string;
+    image?: string;
+  }
 
   useEffect((): void => {
+    const path: string =
+      typeof globalThis !== 'undefined' && globalThis.location ? globalThis.location.pathname : '/';
+    const routeMeta: RouteMeta =
+      (pagesMeta as Record<string, RouteMeta>)[path] ??
+      (pagesMeta as Record<string, RouteMeta>)['/'];
+
+    const resolvedTitle: string = title ?? routeMeta.title ?? siteName;
+    const fullTitle: string = resolvedTitle ? `${resolvedTitle} — ${siteName}` : siteName;
     // set document title
     document.title = fullTitle;
 
     // description
-    const descContent: string = description || t('home.welcome.description', { defaultValue: '' });
+    const descContent: string =
+      description || routeMeta.desc || t('home.welcome.description', { defaultValue: '' });
     setMeta('name', 'description', descContent);
 
-    // Build canonical URL
-    const base: string = viteSiteUrl ?? globalThis.location.origin;
+    // Build canonical URL and ensure it always points to configured SITE_URL.
+    const base: string = viteSiteUrl || globalThis.location.origin;
     const canonicalHref: string =
       url ??
       `${base.replace(/\/$/, '')}${globalThis.location.pathname + globalThis.location.search}`;
@@ -49,7 +65,7 @@ export function Seo({ title, description, image, url }: Props): null {
 
     // Image: use provided image or fallback to site-wide default
     const fallback: string = '/assets/og_default.jpg';
-    const finalImage: string = makeAbsoluteUrl(image ?? fallback, base);
+    const finalImage: string = makeAbsolute(image ?? routeMeta.image ?? fallback) ?? '';
     if (finalImage) {
       setMeta('property', 'og:image', finalImage);
       setMeta('name', 'twitter:image', finalImage);
@@ -94,18 +110,7 @@ export function Seo({ title, description, image, url }: Props): null {
         /* ignore */
       }
     }
-
-    function makeAbsoluteUrl(input: string, baseUrl: string): string {
-      if (!input) {
-        return input;
-      }
-      try {
-        return new URL(input, baseUrl || undefined).toString();
-      } catch {
-        return input;
-      }
-    }
-  }, [fullTitle, description, image, url, t, i18n, viteSiteUrl]);
+  }, [title, description, image, url, t, i18n, viteSiteUrl, siteName]);
 
   return null;
 }
