@@ -2,7 +2,7 @@ import type { JSX } from 'react';
 import { SITE_URL } from '../config/site';
 
 export function OrganizationJsonLd(): JSX.Element {
-  const siteUrl: string = SITE_URL ?? (globalThis.location && globalThis.location.origin) ?? '';
+  const siteUrl: string = SITE_URL ?? globalThis?.location.origin ?? '';
 
   const organization: Record<string, unknown> = {
     '@context': 'https://schema.org',

@@ -25,47 +25,51 @@ try {
     { route: '/photos', title: 'Photos', desc: 'Photos' },
     { route: '/contact', title: 'Contact', desc: 'Contact' },
   ];
+
+  console.warn(
+    `Warning: Could not load page metadata from ${pagesMetaPath}. Using defaults. Error:`,
+    e,
+  );
 }
 
-async function run() {
-  try {
-    const indexHtmlPath = path.join(distDir, 'index.html');
-    const indexHtml = await fs.readFile(indexHtmlPath, 'utf8');
+try {
+  const indexHtmlPath = path.join(distDir, 'index.html');
+  const indexHtml = await fs.readFile(indexHtmlPath, 'utf8');
 
-    for (const p of pages) {
-      const outDir = p.route === '/' ? distDir : path.join(distDir, p.route.replace(/^\//, ''));
-      await fs.mkdir(outDir, { recursive: true });
+  for (const p of pages) {
+    const outDir = p.route === '/' ? distDir : path.join(distDir, p.route.replace(/^\//, ''));
+    await fs.mkdir(outDir, { recursive: true });
 
-      // Build head insertion (minimal, conservative)
-      const canonical = `${SITE}${p.route === '/' ? '/' : p.route}`;
-      const title = `${p.title} — AVEPG`;
-      const description = p.desc;
-      const ogImage = `${SITE}/assets/og_default.jpg`;
+    // Build head insertion (minimal, conservative)
+    const canonical = `${SITE}${p.route === '/' ? '/' : p.route}`;
+    const title = `${p.title} — AVEPG`;
+    const description = p.desc;
+    const ogImage = `${SITE}/assets/og_default.jpg`;
 
-      const jsonLdOrg = JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'AVEPG',
-        url: SITE,
-        logo: `${SITE}/assets/logo.png`,
-        sameAs: ['https://www.facebook.com/AVEPaysdeGex', 'https://www.instagram.com/avepgex/'],
-      });
+    const jsonLdOrg = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'AVEPG',
+      url: SITE,
+      logo: `${SITE}/assets/logo.png`,
+      sameAs: ['https://www.facebook.com/AVEPaysdeGex', 'https://www.instagram.com/avepgex/'],
+    });
 
-      const jsonLdWeb = JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: 'AVEPG',
-        url: SITE,
-      });
+    const jsonLdWeb = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'AVEPG',
+      url: SITE,
+    });
 
-      const jsonLdNav = JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'SiteNavigationElement',
-        name: ['Home', 'Events', 'Photos', 'Contact'],
-        url: [`${SITE}/`, `${SITE}/events`, `${SITE}/photos`, `${SITE}/contact`],
-      });
+    const jsonLdNav = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SiteNavigationElement',
+      name: ['Home', 'Events', 'Photos', 'Contact'],
+      url: [`${SITE}/`, `${SITE}/events`, `${SITE}/photos`, `${SITE}/contact`],
+    });
 
-      const metaBlock = `
+    const metaBlock = `
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeHtml(description)}" />
     <link rel="canonical" href="${canonical}" />
@@ -84,30 +88,27 @@ async function run() {
     <script type="application/ld+json">${jsonLdNav}</script>
 `;
 
-      // Inject metaBlock before </head> (do not duplicate existing title)
-      const outHtml = indexHtml.replace(
-        /<\/head>/i,
-        `${metaBlock}
+    // Inject metaBlock before </head> (do not duplicate existing title)
+    const outHtml = indexHtml.replace(
+      /<\/head>/i,
+      `${metaBlock}
     </head>`,
-      );
+    );
 
-      const targetPath = path.join(outDir, 'index.html');
-      await fs.writeFile(targetPath, outHtml, 'utf8');
-      console.log(`Wrote prerendered HTML for ${p.route} -> ${targetPath}`);
-    }
-  } catch (err) {
-    console.error('Prerender failed:', err);
-    process.exit(1);
+    const targetPath = path.join(outDir, 'index.html');
+    await fs.writeFile(targetPath, outHtml, 'utf8');
+    console.log(`Wrote prerendered HTML for ${p.route} -> ${targetPath}`);
   }
+} catch (err) {
+  console.error('Prerender failed:', err);
+  process.exit(1);
 }
 
 function escapeHtml(s) {
   return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
 }
-
-run();
