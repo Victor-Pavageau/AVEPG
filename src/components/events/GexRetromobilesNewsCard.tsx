@@ -1,13 +1,15 @@
 import type { i18n } from 'i18next';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaThumbtack } from 'react-icons/fa';
 import type { IGexRetromobilesNew } from '../../types';
 
 interface Props {
   readonly eventNew: IGexRetromobilesNew;
+  readonly isPinned: boolean;
 }
 
-export function GexRetromobilesNewsCard({ eventNew }: Readonly<Props>): JSX.Element {
+export function GexRetromobilesNewsCard({ eventNew, isPinned }: Readonly<Props>): JSX.Element {
   const { i18n }: { i18n: i18n } = useTranslation();
   const updated: Date = new Date(eventNew.updatedAt);
   const dateStr: string = updated.toLocaleDateString(i18n.language, {
@@ -34,8 +36,15 @@ export function GexRetromobilesNewsCard({ eventNew }: Readonly<Props>): JSX.Elem
       )}
 
       <div className='flex-1 text-left'>
-        <div className='text-xs font-semibold text-green-800/80 mb-1'>
-          {dateStr} — {timeStr}
+        <div className='flex items-center justify-between text-xs font-semibold text-green-800/80 mb-1'>
+          <div className='text-left'>
+            {dateStr} — {timeStr}
+          </div>
+          {isPinned && (
+            <div className='text-right text-gray-400 ml-3'>
+              <FaThumbtack size={14} />
+            </div>
+          )}
         </div>
 
         <h4 className='text-sm sm:text-base font-semibold mb-2'>{eventNew.title}</h4>

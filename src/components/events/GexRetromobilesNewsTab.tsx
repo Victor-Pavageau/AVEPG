@@ -16,8 +16,10 @@ export function GexRetromobilesNewsTab(): JSX.Element {
     number[]
   >([]);
   const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
-  const [selectedYear, setSelectedYear]: [number | null, Dispatch<SetStateAction<number | null>>] =
-    useState<number | null>(null);
+  const [selectedYear, setSelectedYear]: [
+    number | undefined,
+    Dispatch<SetStateAction<number | undefined>>,
+  ] = useState<number | undefined>();
 
   useEffect(() => {
     const fetchNews: () => Promise<void> = async (): Promise<void> => {
@@ -48,9 +50,17 @@ export function GexRetromobilesNewsTab(): JSX.Element {
 
   useEffect(() => {
     if (newsYears.length > 0) {
-      setSelectedYear(newsYears.at(-1) ?? null);
+      setSelectedYear(newsYears.at(-1));
     }
   }, [newsYears]);
+
+  const pinnedNewsForYear: IGexRetromobilesNew[] = news.filter(
+    (n: IGexRetromobilesNew) => n.year === selectedYear && n.isPinned,
+  );
+
+  const otherNewsForYear: IGexRetromobilesNew[] = news.filter(
+    (n: IGexRetromobilesNew) => n.year === selectedYear && !n.isPinned,
+  );
 
   return (
     <section className='space-y-6'>
@@ -103,21 +113,34 @@ export function GexRetromobilesNewsTab(): JSX.Element {
               {newsYears.length > 0 && (
                 <Segmented
                   options={newsYears.map((y: number) => ({ label: String(y), value: y }))}
-                  value={selectedYear ?? undefined}
+                  value={selectedYear}
                   onChange={(val: string | number) => setSelectedYear(Number(val))}
                   className='mb-3'
                 />
               )}
             </div>
 
-            {news
-              .filter((n: IGexRetromobilesNew) => n.year === selectedYear)
-              .map((n: IGexRetromobilesNew) => (
-                <GexRetromobilesNewsCard
-                  eventNew={n}
-                  key={n.id}
-                />
-              ))}
+            {pinnedNewsForYear.map((n: IGexRetromobilesNew) => (
+              <GexRetromobilesNewsCard
+                eventNew={n}
+                isPinned
+                key={n.id}
+              />
+            ))}
+
+            {pinnedNewsForYear.length > 0 && otherNewsForYear.length > 0 && (
+              <div className='px-24 my-6'>
+                <div className='border-t border-gray-300/40' />
+              </div>
+            )}
+
+            {otherNewsForYear.map((n: IGexRetromobilesNew) => (
+              <GexRetromobilesNewsCard
+                eventNew={n}
+                key={n.id}
+                isPinned={false}
+              />
+            ))}
           </>
         )}
       </div>
