@@ -1,7 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const VITE_SITE_URL = process.env.VITE_SITE_URL || 'https://www.avepg.fr';
+const rawSite = (process.env.VITE_SITE_URL || 'https://www.avepg.fr').toString();
+// normalize: trim whitespace and remove trailing slash
+const VITE_SITE_URL = rawSite.trim().replace(/\/$/, '');
 const outPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 
 // List of routes to include in the sitemap. Add or extend as needed.
@@ -30,7 +32,7 @@ try {
   // If a robots.txt exists, update an existing Sitemap: line or append one at the end.
   // If it doesn't exist, write a sensible default including the Sitemap line.
   const robotsPath = path.resolve(process.cwd(), 'public', 'robots.txt');
-  const sitemapLine = `Sitemap: ${VITE_SITE_URL.replace(/\/$/, '')}/sitemap.xml`;
+  const sitemapLine = `Sitemap: ${VITE_SITE_URL}/sitemap.xml`;
 
   // Read robots.txt if it exists; handle missing file gracefully.
   // Use a safe .catch to turn a read error into an empty string.

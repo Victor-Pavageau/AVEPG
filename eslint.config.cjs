@@ -78,7 +78,16 @@ module.exports = defineConfig([
         'variableDeclaration': true,
         'variableDeclarationIgnoreFunction': true,
       }],
-      '@typescript-eslint/no-unused-vars': 'error',
+      'no-unused-vars': ['error', {
+        varsIgnorePattern: '^_$',
+        argsIgnorePattern: '^_$',
+        caughtErrorsIgnorePattern: '^_$',
+      }],
+      '@typescript-eslint/no-unused-vars': ['error', {
+        varsIgnorePattern: '^_$',
+        argsIgnorePattern: '^_$',
+        caughtErrorsIgnorePattern: '^_$',
+      }],
       '@typescript-eslint/no-inferrable-types': 'off', // Allow explicit types even if inferrable
       '@typescript-eslint/consistent-type-imports': 'error',
       'padding-line-between-statements': [
