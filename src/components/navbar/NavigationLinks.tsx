@@ -20,7 +20,8 @@ export function NavigationLinks({ isMobile, onLinkClick }: Readonly<Props>): JSX
   return (
     <>
       {(Object.keys(PathsLabels) as Path[])
-        .filter((path: Path) => path !== '*') // Exclude the Not Found path
+        // Only keep path that have ONE slash (to avoid showing not found and subpaths in the navbar)
+        .filter((path: Path) => path.toString().split('/').length === 2)
         .map((path: Path) => (
           <a
             key={path}

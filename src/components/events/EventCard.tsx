@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { IoCalendar } from 'react-icons/io5';
 import { VisitWebsite } from '../';
+import { goTo } from '../../helpers';
 import type { IEvent, IPartner } from '../../types';
 
 interface Props {
@@ -42,13 +43,21 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
 
   return (
     <div className='max-w-sm bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100'>
-      <div className='h-60 bg-gray-100 overflow-hidden select-none'>
+      <div className='relative h-60 bg-gray-100 overflow-hidden select-none'>
         <img
           src={event.cover.url}
           alt={event.title}
           className='w-full h-full object-cover'
           loading='lazy'
         />
+
+        {event.album && (
+          <a href={goTo('/photos/:albumId', [event.album.documentId])}>
+            <span className='absolute right-3 bottom-3 bg-gray-100/60 text-gray-900 text-xs px-2 py-1 rounded-md hover:bg-gray-100/80 transition cursor-pointer'>
+              {t('events.eventCard.viewPhotos')}
+            </span>
+          </a>
+        )}
       </div>
 
       <div className='p-4 space-y-3'>

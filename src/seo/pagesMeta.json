@@ -1,0 +1,27 @@
+{
+  "/": {
+    "title": "Home",
+    "desc": "AVEPG — Association des Villes et Entreprises du Pays de Gex. Discover events, photos and contact information.",
+    "image": "/assets/og_default.jpg"
+  },
+  "/about": {
+    "title": "About",
+    "desc": "Learn about AVEPG, our mission, leadership and partners. Get to know the organisation and how to contact us.",
+    "image": "/assets/og_default.jpg"
+  },
+  "/events": {
+    "title": "Events",
+    "desc": "Discover upcoming and past events organised by AVEPG. Timelines, news and event details.",
+    "image": "/assets/og_default.jpg"
+  },
+  "/photos": {
+    "title": "Photos",
+    "desc": "Browse the AVEPG photo galleries showcasing events and community highlights.",
+    "image": "/assets/og_default.jpg"
+  },
+  "/contact": {
+    "title": "Contact",
+    "desc": "Get in touch with AVEPG. Contact details, map and how to reach us.",
+    "image": "/assets/og_default.jpg"
+  }
+}
