@@ -3,4 +3,5 @@ export type StrapiEntity =
   | 'albums'
   | 'partners'
   | 'gex-retromobiles-news'
+  | 'gex-retromobiles-infos'
   | 'home-page-carousels';

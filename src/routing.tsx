@@ -6,6 +6,9 @@ import { goTo } from './helpers';
 const HomePage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/HomePage'));
 const AboutPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/AboutPage'));
 const EventsPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/EventsPage'));
+const GexRetromobilesPage: LazyExoticComponent<ComponentType> = lazy(
+  () => import('./pages/GexRetromobilesPage'),
+);
 const PhotosPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/PhotosPage'));
 const ContactPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/ContactPage'));
 const NotFoundPage: LazyExoticComponent<ComponentType> = lazy(() => import('./pages/NotFoundPage'));
@@ -25,6 +28,10 @@ export default function RoutingSystem(): JSX.Element {
         <Route
           path={goTo('/events')}
           element={<EventsPage />}
+        />
+        <Route
+          path={goTo('/gexretromobiles')}
+          element={<GexRetromobilesPage />}
         />
         <Route
           path={goTo('/photos')}

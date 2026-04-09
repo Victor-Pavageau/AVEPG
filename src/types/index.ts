@@ -1,6 +1,7 @@
 export type {
   IAlbum,
   IEvent,
+  IGexRetromobileInfos,
   IGexRetromobilesNew,
   IHomePageCarousel,
   IPartner,

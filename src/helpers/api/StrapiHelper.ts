@@ -23,6 +23,12 @@ function getPopulateParams(entity: StrapiEntity): string {
       return getPopulateImageParams('logo');
     case 'gex-retromobiles-news':
       return getPopulateImageParams('photo');
+    case 'gex-retromobiles-infos':
+      return (
+        getPopulateImageParams('posterImage') +
+        getPopulateImageParams('programImage') +
+        getPopulateImageParams('exhibitorImage')
+      );
     case 'home-page-carousels':
       return getPopulateImageParams('photos');
     default:
