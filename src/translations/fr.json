@@ -171,6 +171,7 @@
       "/about": "À propos",
       "/events": "Événements",
       "/photos": "Photos",
+      "/gexretromobiles": "GEX Rétromobiles",
       "/contact": "Contact"
     },
     "footer": {
@@ -182,5 +183,63 @@
       "loadingFailed": "Une erreur s'est produite lors du chargement des données. Veuillez réessayer plus tard."
     },
     "visitWebsite": "Visiter le site"
+  },
+
+  "gexRetromobilesPage": {
+    "hero": {
+      "title": "GEXretromobiles {{year}}",
+      "tagline": "Le grand rendez-vous des véhicules d'époque au cœur du Pays de Gex",
+      "badges": {
+        "location": "Gex (01) – près de Genève",
+        "dates": "{{start}} & {{end}}"
+      }
+    },
+    "welcome": {
+      "heading": "Bienvenue à GEXRetromobiles {{year}}",
+      "intro": "Retrouvez-nous à Gex pour la spectaculaire {{edition}} édition de GEXRetromobiles ! Pendant deux jours, plongez dans l'univers fascinant des véhicules d'époque, des mécaniques de légende et du patrimoine roulant.",
+      "pills": [
+        "Un événement familial, festif et intergénérationnel",
+        "Pensé pour les passionnés comme pour les curieux de tout âge",
+        "Au cœur d'un cadre convivial, à deux pas de Genève"
+      ]
+    },
+    "experience": {
+      "immersiveTitle": "Animations immersives",
+      "immersiveItems": [
+        "Défilés de voitures anciennes",
+        "Démonstrations mécaniques",
+        "Concours d'élégance",
+        "Spectacles musicaux et de danse",
+        "Animations dédiées aux enfants"
+      ],
+      "meetTitle": "Rencontres & passion",
+      "meetItems": [
+        "Collectionneurs et clubs automobile",
+        "Experts et passionnés partageant leur savoir-faire"
+      ]
+    },
+    "practical": {
+      "venue": "Lieu",
+      "ticket": "Accès à la halle",
+      "petsAllowed": "Animaux acceptés",
+      "petsNotAllowed": "Animaux non acceptés",
+      "extra": "Informations pratiques"
+    },
+    "contact": {
+      "teaser": "Suivez-nous pour découvrir les exposants, animations & surprises à venir !"
+    },
+    "joinCta": {
+      "heading": "Rejoignez l'aventure GEXRetromobiles",
+      "text": "Que vous soyez collectionneur, amateur, passionné ou simple curieux, GEXRetromobiles {{year}} vous promet un week-end hors du temps.",
+      "tagline": "🚘 Faites rouler votre passion jusqu'à Gex !"
+    },
+    "exhibitors": {
+      "heading": "Vous souhaitez exposer votre véhicule ?",
+      "contactButton": "Contactez-nous"
+    },
+    "noInfo": {
+      "title": "Aucune information disponible pour le moment",
+      "message": "Aucune information pour la prochaine édition de GEXRetromobiles pour le moment, revenez bientôt !"
+    }
   }
 }

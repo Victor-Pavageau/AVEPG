@@ -3,6 +3,7 @@ import { languageToIso6391 } from '../i18n';
 import type {
   IAlbum,
   IEvent,
+  IGexRetromobileInfos,
   IGexRetromobilesNew,
   IHomePageCarousel,
   IPartner,
@@ -132,5 +133,22 @@ export class StrapiService {
       );
 
     return data.data;
+  }
+
+  public static async getGexRetromobileInfos(
+    language: string,
+  ): Promise<IGexRetromobileInfos | null> {
+    const query: string = buildStrapiQueryUrl(
+      'gex-retromobiles-infos',
+      languageToIso6391(language),
+    );
+    const data: IStrapiResponse<IGexRetromobileInfos> =
+      await StrapiService.fetchWithFallback<IGexRetromobileInfos>(
+        'gex-retromobile-infos',
+        query,
+        language,
+      );
+
+    return data.data.length > 0 ? data.data[0] : null;
   }
 }
