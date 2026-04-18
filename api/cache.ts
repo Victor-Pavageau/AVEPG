@@ -1,5 +1,5 @@
-import type { ListBlobResult, ListBlobResultBlob } from '@vercel/blob';
-import { list, put } from '@vercel/blob';
+import type { HeadBlobResult, ListBlobResult, ListBlobResultBlob } from '@vercel/blob';
+import { head, list, put } from '@vercel/blob';
 import type { VercelRequest, VercelRequestBody, VercelResponse } from '@vercel/node';
 
 /**
@@ -35,22 +35,45 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
 
   try {
     if (method === 'GET') {
-      const blobs: ListBlobResult = await list({ prefix: key });
-      const blob: ListBlobResultBlob | undefined = blobs.blobs.find(
-        (b: ListBlobResultBlob) => b.pathname === key,
-      );
+      try {
+        const meta: HeadBlobResult = await head(key);
 
-      if (!blob) {
-        res.status(404).json({ error: 'Not found' });
+        const resp: Response = await fetch(meta.url);
+        const data: unknown = await resp.json();
+        res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=300');
+        res.status(200).json(data);
+
+        return;
+      } catch (err: unknown) {
+        // If the blob was not found, return 404.
+        // The head() call throws a BlobNotFoundError when missing.
+        // Fallback to the original list() behaviour for compatibility on unexpected errors.
+        const e: Error = err as Error;
+        if (e && e.name === 'BlobNotFoundError') {
+          res.status(404).json({ error: 'Not found' });
+
+          return;
+        }
+
+        // Fallback to listing (advanced op) only if head() failed for another reason.
+        const blobs: ListBlobResult = await list({ prefix: key });
+        const blob: ListBlobResultBlob | undefined = blobs.blobs.find(
+          (b: ListBlobResultBlob) => b.pathname === key,
+        );
+
+        if (!blob) {
+          res.status(404).json({ error: 'Not found' });
+
+          return;
+        }
+
+        const resp2: Response = await fetch(blob.url);
+        const data2: unknown = await resp2.json();
+        res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=300');
+        res.status(200).json(data2);
 
         return;
       }
-
-      const resp: Response = await fetch(blob.url);
-      const data: unknown = await resp.json();
-      res.status(200).json(data);
-
-      return;
     }
 
     if (method === 'PUT') {
