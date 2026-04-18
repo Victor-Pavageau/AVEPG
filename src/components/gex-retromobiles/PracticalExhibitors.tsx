@@ -1,26 +1,33 @@
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
-import { Card, ContactInfo } from '../../components';
+import { Card } from '../../components';
 import { goTo } from '../../helpers';
 import type { IGexRetromobileInfos } from '../../types';
 
 interface Props {
   readonly infos: IGexRetromobileInfos;
   readonly t: TFunction;
+  readonly locationBadge: string | null;
 }
 
-export default function PracticalExhibitors({ infos, t }: Readonly<Props>): JSX.Element {
+export default function PracticalExhibitors({
+  infos,
+  t,
+  locationBadge,
+}: Readonly<Props>): JSX.Element {
   return (
     <>
-      <section className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
-        <div className='lg:col-span-2 space-y-4'>
+      <section className='grid grid-cols-1 gap-6'>
+        <div className='space-y-4 w-full mx-auto'>
           <Card>
-            <h3 className='text-xl font-semibold mb-3'>
-              {t('gexRetromobilesPage.practical.venue')}
-            </h3>
-            <div className='text-gray-700 mb-4'>
-              {[infos.venueName, infos.venueCity].filter(Boolean).join(' — ')}
-            </div>
+            {locationBadge && (
+              <>
+                <h3 className='text-xl font-semibold mb-3'>
+                  {t('gexRetromobilesPage.practical.venue')}
+                </h3>
+                <div className='text-gray-700 mb-4'>{locationBadge}</div>
+              </>
+            )}
 
             {infos.ticketPriceEur !== null && (
               <div className='mb-3'>
@@ -46,8 +53,6 @@ export default function PracticalExhibitors({ infos, t }: Readonly<Props>): JSX.
             )}
           </Card>
         </div>
-
-        <ContactInfo />
       </section>
 
       <section>

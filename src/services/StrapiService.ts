@@ -9,6 +9,7 @@ import type {
   IPartner,
   IStrapiObject,
   IStrapiResponse,
+  StrapiEntity,
 } from '../types';
 import { CacheService } from './CacheService';
 
@@ -22,7 +23,7 @@ export class StrapiService {
   }
 
   private static async fetchWithFallback<T extends IStrapiObject>(
-    resource: string,
+    resource: StrapiEntity,
     query: string,
     locale?: string,
   ): Promise<IStrapiResponse<T>> {
@@ -144,7 +145,7 @@ export class StrapiService {
     );
     const data: IStrapiResponse<IGexRetromobileInfos> =
       await StrapiService.fetchWithFallback<IGexRetromobileInfos>(
-        'gex-retromobile-infos',
+        'gex-retromobiles-infos',
         query,
         language,
       );
