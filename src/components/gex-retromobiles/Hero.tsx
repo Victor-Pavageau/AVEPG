@@ -6,13 +6,11 @@ interface Props {
   readonly infos: IGexRetromobileInfos;
   readonly t: TFunction;
   readonly language: string;
+  readonly locationBadge: string | null;
 }
 
-export default function Hero({ infos, t, language }: Readonly<Props>): JSX.Element {
+export default function Hero({ infos, t, language, locationBadge }: Readonly<Props>): JSX.Element {
   const posterUrl: string | undefined = infos.posterImage?.url ?? undefined;
-
-  const locationBadge: string | null =
-    [infos.venueName, infos.venueCity].filter(Boolean).join(' — ') || null;
 
   const start: Date | null = infos.dateStart ? new Date(infos.dateStart) : null;
   const end: Date | null = infos.dateEnd ? new Date(infos.dateEnd) : null;

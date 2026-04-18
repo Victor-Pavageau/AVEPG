@@ -2,13 +2,13 @@ import type { i18n, TFunction } from 'i18next';
 import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LoadingCard, Seo } from '../components';
+import { LoadingCard, PartnersSection, Seo } from '../components';
+import Hero from '../components/gex-retromobiles/Hero';
+import PracticalExhibitors from '../components/gex-retromobiles/PracticalExhibitors';
+import Program from '../components/gex-retromobiles/Program';
+import WelcomeExperience from '../components/gex-retromobiles/WelcomeExperience';
 import { StrapiService } from '../services';
 import type { IGexRetromobileInfos } from '../types';
-import Hero from './gex-retromobiles/Hero';
-import PracticalExhibitors from './gex-retromobiles/PracticalExhibitors';
-import Program from './gex-retromobiles/Program';
-import WelcomeExperience from './gex-retromobiles/WelcomeExperience';
 
 export default function GexRetromobilesPage(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
@@ -37,6 +37,14 @@ export default function GexRetromobilesPage(): JSX.Element {
     void fetch();
   }, [i18n.language]);
 
+  const getLocationInfos: () => string | null = () => {
+    if (!infos) {
+      return null;
+    }
+
+    return [infos.venueName, infos.venueCity].filter(Boolean).join(', ') || null;
+  };
+
   const seoYear: number = infos?.year ?? new Date().getFullYear();
 
   return (
@@ -60,23 +68,23 @@ export default function GexRetromobilesPage(): JSX.Element {
             infos={infos as IGexRetromobileInfos}
             t={t}
             language={i18n.language}
+            locationBadge={getLocationInfos()}
           />
-
           <WelcomeExperience
             t={t}
             infos={infos as IGexRetromobileInfos}
             language={i18n.language}
           />
-
           <Program
             infos={infos as IGexRetromobileInfos}
             t={t}
           />
-
           <PracticalExhibitors
             infos={infos as IGexRetromobileInfos}
             t={t}
+            locationBadge={getLocationInfos()}
           />
+          <PartnersSection />
         </div>
       )}
     </div>

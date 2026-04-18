@@ -1,4 +1,4 @@
-export { LeadershipSection, PartnersSection, PresentationSection } from './about';
+export { LeadershipSection, PresentationSection } from './about';
 export { Card } from './Card';
 export {
   ContactForm,
@@ -16,4 +16,5 @@ export { NavigationCard } from './NavigationCard';
 export { OrganizationJsonLd } from './OrganizationJsonLd';
 export { SectionHeader } from './SectionHeader';
 export { Seo } from './Seo';
+export { PartnersSection } from './shared/PartnersSection';
 export { VisitWebsite } from './VisitWebsite';
