@@ -11,10 +11,14 @@ export interface IGexRetromobileInfos extends IStrapiObject {
 
   venueName: string | null;
   venueCity: string | null;
+  venueMapsImage: IStrapiImage | null;
+
   ticketPriceEur: number | null;
   petsAllowed: boolean;
   practicalInfoExtra: string | null;
 
   exhibitorImage: IStrapiImage | null;
   exhibitorExtra: string | null;
+
+  sponsorsImage: IStrapiImage | null;
 }

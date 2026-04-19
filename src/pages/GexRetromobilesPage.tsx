@@ -46,6 +46,7 @@ export default function GexRetromobilesPage(): JSX.Element {
   };
 
   const seoYear: number = infos?.year ?? new Date().getFullYear();
+  const sponsorsImageUrl: string | undefined = infos?.sponsorsImage?.url;
 
   return (
     <div className='w-full px-6 md:px-12 max-w-5xl mx-auto py-8'>
@@ -53,37 +54,47 @@ export default function GexRetromobilesPage(): JSX.Element {
         title={t('gexRetromobilesPage.hero.title', { year: seoYear })}
         description={t('gexRetromobilesPage.hero.tagline')}
       />
-      {!loading && infos === null ? (
+      {loading && <LoadingCard />}
+      {infos === null && !loading && (
         <div className='max-w-3xl mx-auto'>
           <div className='bg-white rounded-lg shadow p-8 text-center'>
             <h3 className='text-xl font-semibold mb-2'>{t('gexRetromobilesPage.noInfo.title')}</h3>
             <p className='text-gray-700'>{t('gexRetromobilesPage.noInfo.message')}</p>
           </div>
         </div>
-      ) : loading ? (
-        <LoadingCard />
-      ) : (
+      )}
+      {infos !== null && !loading && (
         <div className='text-gray-800 space-y-12'>
           <Hero
-            infos={infos as IGexRetromobileInfos}
+            infos={infos}
             t={t}
             language={i18n.language}
             locationBadge={getLocationInfos()}
           />
           <WelcomeExperience
             t={t}
-            infos={infos as IGexRetromobileInfos}
+            infos={infos}
             language={i18n.language}
           />
           <Program
-            infos={infos as IGexRetromobileInfos}
+            infos={infos}
             t={t}
           />
           <PracticalExhibitors
-            infos={infos as IGexRetromobileInfos}
+            infos={infos}
             t={t}
             locationBadge={getLocationInfos()}
           />
+          <h3>{t('gexRetromobilesPage.sponsors.heading')}</h3>
+          {sponsorsImageUrl && (
+            <div className='mt-6 flex justify-center'>
+              <img
+                src={sponsorsImageUrl}
+                alt={t('gexRetromobilesPage.sponsors.alt')}
+                className='max-h-40 md:max-h-64 w-auto max-w-full object-contain rounded-lg'
+              />
+            </div>
+          )}
           <PartnersSection />
         </div>
       )}

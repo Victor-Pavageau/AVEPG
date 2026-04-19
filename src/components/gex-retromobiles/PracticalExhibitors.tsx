@@ -20,13 +20,24 @@ export default function PracticalExhibitors({
       <section className='grid grid-cols-1 gap-6'>
         <div className='space-y-4 w-full mx-auto'>
           <Card>
-            {locationBadge && (
-              <>
-                <h3 className='text-xl font-semibold mb-3'>
-                  {t('gexRetromobilesPage.practical.venue')}
-                </h3>
-                <div className='text-gray-700 mb-4'>{locationBadge}</div>
-              </>
+            {(locationBadge || infos.venueMapsImage?.url) && (
+              <div className='mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 items-start'>
+                <div>
+                  <h3 className='text-xl font-semibold mb-3'>
+                    {t('gexRetromobilesPage.practical.venue')}
+                  </h3>
+                  {locationBadge && <div className='text-gray-700 mb-4'>{locationBadge}</div>}
+                </div>
+                {infos.venueMapsImage?.url ? (
+                  <div className='w-full flex justify-center items-center overflow-hidden rounded-lg'>
+                    <img
+                      src={infos.venueMapsImage.url}
+                      alt={`${t('gexRetromobilesPage.practical.venue')} map`}
+                      className='max-h-96 md:max-h-140 w-auto max-w-full object-contain rounded-lg'
+                    />
+                  </div>
+                ) : null}
+              </div>
             )}
 
             {infos.ticketPriceEur !== null && (
@@ -70,11 +81,11 @@ export default function PracticalExhibitors({
           </div>
 
           {infos.exhibitorImage?.url ? (
-            <div>
+            <div className='flex justify-center'>
               <img
                 src={infos.exhibitorImage.url}
-                alt={t('gexRetromobilesPage.exhibitors.heading')}
-                className='w-full h-64 object-cover rounded-lg'
+                alt={t('gexRetromobilesPage.sponsors.heading')}
+                className='max-h-96 md:max-h-140 w-auto max-w-full object-contain rounded-lg'
               />
             </div>
           ) : null}

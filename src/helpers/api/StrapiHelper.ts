@@ -27,7 +27,9 @@ function getPopulateParams(entity: StrapiEntity): string {
       return (
         getPopulateImageParams('posterImage') +
         getPopulateImageParams('programImage') +
-        getPopulateImageParams('exhibitorImage')
+        getPopulateImageParams('venueMapsImage') +
+        getPopulateImageParams('exhibitorImage') +
+        getPopulateImageParams('sponsorsImage')
       );
     case 'home-page-carousels':
       return getPopulateImageParams('photos');
