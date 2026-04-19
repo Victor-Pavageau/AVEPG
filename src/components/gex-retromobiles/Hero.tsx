@@ -52,7 +52,7 @@ export default function Hero({ infos, t, language, locationBadge }: Readonly<Pro
           <img
             src={posterUrl}
             alt={t('gexRetromobilesPage.hero.title')}
-            className='w-full max-w-sm object-cover rounded-lg'
+            className='max-h-96 md:max-h-140 w-auto max-w-full object-contain rounded-lg'
           />
         </div>
       ) : null}
