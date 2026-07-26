@@ -1,7 +1,7 @@
-import type { IStrapiImage, IStrapiObject } from './strapi';
+import type { ICmsDocument, ICmsImage } from './cms';
 
-export interface IAlbum extends IStrapiObject {
+export interface IAlbum extends ICmsDocument {
   name: string;
   description: string;
-  photos: IStrapiImage[];
+  photos: ICmsImage[];
 }

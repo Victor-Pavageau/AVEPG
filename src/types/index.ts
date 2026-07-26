@@ -1,5 +1,7 @@
 export type {
   IAlbum,
+  ICmsDocument,
+  ICmsImage,
   IEvent,
   IGexRetromobileInfos,
   IGexRetromobilesNew,
