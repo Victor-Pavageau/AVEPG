@@ -48,8 +48,7 @@ export default function PracticalExhibitors({
             )}
 
             <div className='mb-3'>
-              <div className='font-semibold'>{t('gexRetromobilesPage.practical.petsAllowed')}</div>
-              <div className='text-gray-700'>
+              <div className='font-semibold'>
                 {infos.petsAllowed
                   ? t('gexRetromobilesPage.practical.petsAllowed')
                   : t('gexRetromobilesPage.practical.petsNotAllowed')}
