@@ -1,5 +1,5 @@
-import type { IStrapiImage, IStrapiObject } from './strapi';
+import type { ICmsDocument, ICmsImage } from './cms';
 
-export interface IHomePageCarousel extends IStrapiObject {
-  photos: IStrapiImage[];
+export interface IHomePageCarousel extends ICmsDocument {
+  photos: ICmsImage[];
 }

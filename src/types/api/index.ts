@@ -1,4 +1,5 @@
 export type { IAlbum } from './Album';
+export type { ICmsDocument, ICmsImage } from './cms';
 export type { IEvent } from './Event';
 export type { IGexRetromobileInfos } from './GexRetromobileInfos';
 export type { IGexRetromobilesNew } from './GexRetromobilesNew';

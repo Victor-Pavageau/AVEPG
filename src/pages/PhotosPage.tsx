@@ -9,7 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { LoadingCard, Seo } from '../components';
 import { goTo } from '../helpers';
 import { StrapiService } from '../services';
-import type { IAlbum, IStrapiImage } from '../types';
+import type { IAlbum, ICmsImage } from '../types';
 
 export default function PhotosPage(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
@@ -46,9 +46,7 @@ export default function PhotosPage(): JSX.Element {
       return;
     }
 
-    const found: IAlbum | undefined = albums.find(
-      (a: IAlbum) => a.documentId === albumId || a.id === albumId,
-    );
+    const found: IAlbum | undefined = albums.find((a: IAlbum) => a.id === albumId);
 
     if (found) {
       setSelectedAlbum(found);
@@ -57,7 +55,7 @@ export default function PhotosPage(): JSX.Element {
 
   function openAlbum(album: IAlbum): void {
     // update URL to include album id so the modal is addressable
-    navigate(goTo('/photos/:albumId', [album.documentId]));
+    navigate(goTo('/photos/:albumId', [album.id]));
     setSelectedAlbum(album);
   }
 
@@ -112,7 +110,7 @@ export default function PhotosPage(): JSX.Element {
               </p>
             </div>
             <div className='columns-1 md:columns-2 space-y-4'>
-              {selectedAlbum.photos.map((photo: IStrapiImage) => (
+              {selectedAlbum.photos.map((photo: ICmsImage) => (
                 <div
                   key={photo.id}
                   className='mb-4 break-inside-avoid rounded-lg overflow-hidden shadow-sm'>

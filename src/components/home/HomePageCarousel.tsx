@@ -3,7 +3,7 @@ import type { TFunction } from 'i18next';
 import { useEffect, useState, type Dispatch, type JSX, type SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StrapiService } from '../../services';
-import type { IHomePageCarousel, IStrapiImage } from '../../types';
+import type { ICmsImage, IHomePageCarousel } from '../../types';
 import { LoadingCard } from '../LoadingCard';
 
 export function HomePageCarousel(): JSX.Element {
@@ -49,8 +49,8 @@ export function HomePageCarousel(): JSX.Element {
               dots={true}
               dotPosition='right'
               autoplaySpeed={5000}>
-              {carousel.photos.map((photo: IStrapiImage) => (
-                <div key={photo.documentId}>
+              {carousel.photos.map((photo: ICmsImage) => (
+                <div key={photo.id}>
                   <img
                     className='h-full w-full object-cover object-[center_30%] md:object-center'
                     src={photo.url}
@@ -68,8 +68,8 @@ export function HomePageCarousel(): JSX.Element {
               dots={true}
               dotPosition='top'
               autoplaySpeed={5000}>
-              {carousel.photos.map((photo: IStrapiImage) => (
-                <div key={photo.documentId}>
+              {carousel.photos.map((photo: ICmsImage) => (
+                <div key={photo.id}>
                   <img
                     className='h-full w-full object-cover object-[center_30%] md:object-center'
                     src={photo.url}

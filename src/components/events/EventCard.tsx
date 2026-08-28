@@ -52,7 +52,7 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
         />
 
         {event.album && (
-          <a href={goTo('/photos/:albumId', [event.album.documentId])}>
+          <a href={goTo('/photos/:albumId', [event.album.id])}>
             <span className='absolute right-3 bottom-3 bg-gray-100/60 text-gray-900 text-xs px-2 py-1 rounded-md hover:bg-gray-100/80 transition cursor-pointer'>
               {t('events.eventCard.viewPhotos')}
             </span>

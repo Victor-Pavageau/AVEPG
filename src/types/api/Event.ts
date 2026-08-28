@@ -1,15 +1,15 @@
 import type { IAlbum } from './Album';
+import type { ICmsDocument, ICmsImage } from './cms';
 import type { IPartner } from './Partner';
-import type { IStrapiImage, IStrapiObject } from './strapi';
 
-export interface IEvent extends IStrapiObject {
+export interface IEvent extends ICmsDocument {
   title: string;
   description: string;
   startDate: Date;
   endDate?: Date;
-  cover: IStrapiImage;
+  cover: ICmsImage;
   location?: string;
   website?: string;
   partners: IPartner[];
-  album: IAlbum;
+  album?: IAlbum;
 }

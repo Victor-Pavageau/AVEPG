@@ -1,9 +1,9 @@
-import type { IStrapiImage, IStrapiObject } from './strapi';
+import type { ICmsDocument, ICmsImage } from './cms';
 
-export interface IGexRetromobilesNew extends IStrapiObject {
+export interface IGexRetromobilesNew extends ICmsDocument {
   title: string;
   post: string;
   year: number;
   isPinned: boolean;
-  photo: IStrapiImage | null;
+  photo: ICmsImage | null;
 }

@@ -1,4 +1,18 @@
 import { buildStrapiQueryUrl } from '../helpers';
+import {
+  mapStrapiAlbum,
+  mapStrapiEvent,
+  mapStrapiGexRetromobileInfos,
+  mapStrapiGexRetromobilesNew,
+  mapStrapiHomePageCarousel,
+  mapStrapiPartner,
+  type StrapiAlbumRaw,
+  type StrapiEventRaw,
+  type StrapiGexRetromobileInfosRaw,
+  type StrapiGexRetromobilesNewRaw,
+  type StrapiHomePageCarouselRaw,
+  type StrapiPartnerRaw,
+} from '../helpers/api/strapiMappers';
 import { languageToIso6391 } from '../i18n';
 import type {
   IAlbum,
@@ -85,55 +99,52 @@ export class StrapiService {
 
   public static async getPartners(language: string): Promise<IPartner[]> {
     const query: string = buildStrapiQueryUrl('partners', languageToIso6391(language));
-    const data: IStrapiResponse<IPartner> = await StrapiService.fetchWithFallback<IPartner>(
-      'partners',
-      query,
-      language,
-    );
+    const data: IStrapiResponse<StrapiPartnerRaw> =
+      await StrapiService.fetchWithFallback<StrapiPartnerRaw>('partners', query, language);
 
-    return data.data;
+    return data.data.map(mapStrapiPartner);
   }
 
   public static async getEvents(language: string): Promise<IEvent[]> {
     const query: string = buildStrapiQueryUrl('events', languageToIso6391(language));
-    const data: IStrapiResponse<IEvent> = await StrapiService.fetchWithFallback<IEvent>(
+    const data: IStrapiResponse<StrapiEventRaw> = await StrapiService.fetchWithFallback<StrapiEventRaw>(
       'events',
       query,
       language,
     );
 
-    return data.data;
+    return data.data.map(mapStrapiEvent);
   }
 
   public static async getAlbums(language: string): Promise<IAlbum[]> {
     const query: string = buildStrapiQueryUrl('albums', languageToIso6391(language));
-    const data: IStrapiResponse<IAlbum> = await StrapiService.fetchWithFallback<IAlbum>(
+    const data: IStrapiResponse<StrapiAlbumRaw> = await StrapiService.fetchWithFallback<StrapiAlbumRaw>(
       'albums',
       query,
       language,
     );
 
-    return data.data;
+    return data.data.map(mapStrapiAlbum);
   }
 
   public static async getHomePageCarousel(): Promise<IHomePageCarousel> {
     const query: string = buildStrapiQueryUrl('home-page-carousels');
-    const data: IStrapiResponse<IHomePageCarousel> =
-      await StrapiService.fetchWithFallback<IHomePageCarousel>('home-page-carousels', query);
+    const data: IStrapiResponse<StrapiHomePageCarouselRaw> =
+      await StrapiService.fetchWithFallback<StrapiHomePageCarouselRaw>('home-page-carousels', query);
 
-    return data.data[0];
+    return mapStrapiHomePageCarousel(data.data[0]);
   }
 
   public static async getGexRetromobilesNews(language: string): Promise<IGexRetromobilesNew[]> {
     const query: string = buildStrapiQueryUrl('gex-retromobiles-news', languageToIso6391(language));
-    const data: IStrapiResponse<IGexRetromobilesNew> =
-      await StrapiService.fetchWithFallback<IGexRetromobilesNew>(
+    const data: IStrapiResponse<StrapiGexRetromobilesNewRaw> =
+      await StrapiService.fetchWithFallback<StrapiGexRetromobilesNewRaw>(
         'gex-retromobiles-news',
         query,
         language,
       );
 
-    return data.data;
+    return data.data.map(mapStrapiGexRetromobilesNew);
   }
 
   public static async getGexRetromobileInfos(
@@ -143,13 +154,13 @@ export class StrapiService {
       'gex-retromobiles-infos',
       languageToIso6391(language),
     );
-    const data: IStrapiResponse<IGexRetromobileInfos> =
-      await StrapiService.fetchWithFallback<IGexRetromobileInfos>(
+    const data: IStrapiResponse<StrapiGexRetromobileInfosRaw> =
+      await StrapiService.fetchWithFallback<StrapiGexRetromobileInfosRaw>(
         'gex-retromobiles-infos',
         query,
         language,
       );
 
-    return data.data.length > 0 ? data.data[0] : null;
+    return data.data.length > 0 ? mapStrapiGexRetromobileInfos(data.data[0]) : null;
   }
 }
