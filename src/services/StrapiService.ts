@@ -56,10 +56,6 @@ export class StrapiService {
     } catch (err: unknown) {
       const e: Error = err as Error;
 
-      if (e.message !== 'STRAPI_TIMEOUT') {
-        throw err;
-      }
-
       const warmedAt: number | undefined = StrapiService.warmed.get(key);
 
       if (warmedAt && Date.now() - warmedAt < StrapiService.WARMED_TTL_MS) {
@@ -67,7 +63,7 @@ export class StrapiService {
         return await fetchPromise;
       }
 
-      // Try Vercel cache as fallback
+      // Try Vercel cache for any Strapi failure: timeout, network error, 404, 500, etc.
       const cached: IStrapiResponse<T> | null = await CacheService.readCached<IStrapiResponse<T>>(
         resource,
         locale,
@@ -78,8 +74,12 @@ export class StrapiService {
         return cached;
       }
 
-      // No remote cache, wait for Strapi response
-      return await fetchPromise;
+      // If no cache is available, rethrow the original Strapi error.
+      if (e.message === 'STRAPI_TIMEOUT') {
+        return await fetchPromise;
+      }
+
+      throw err;
     }
   }
 
