@@ -1,9 +1,9 @@
-import type { IStrapiImage, IStrapiObject } from './strapi';
+import type { ISanityLocaleString, ISanityObject } from './sanity';
 
-export interface IGexRetromobilesNew extends IStrapiObject {
-  title: string;
-  post: string;
-  year: number;
+export interface IGexRetromobilesNew extends ISanityObject {
   isPinned: boolean;
-  photo: IStrapiImage | null;
+  photo: string | null;
+  post: ISanityLocaleString;
+  title: ISanityLocaleString;
+  year: number;
 }

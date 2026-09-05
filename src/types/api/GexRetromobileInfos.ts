@@ -1,24 +1,19 @@
-import type { IStrapiImage, IStrapiObject } from './strapi';
+import type { ISanityLocaleImage, ISanityLocaleString, ISanityObject } from './sanity';
 
-export interface IGexRetromobileInfos extends IStrapiObject {
-  editionNumber: number;
-  year: number;
-  dateStart: Date;
+export interface IGexRetromobileInfos extends ISanityObject {
   dateEnd: Date;
-
-  posterImage: IStrapiImage | null;
-  programImage: IStrapiImage | null;
-
-  venueName: string | null;
-  venueCity: string | null;
-  venueMapsImage: IStrapiImage | null;
-
-  ticketPriceEur: number | null;
+  dateStart: Date;
+  editionNumber: number;
+  exhibitorImage: ISanityLocaleImage | null;
   petsAllowed: boolean;
-  practicalInfoExtra: string | null;
-
-  exhibitorImage: IStrapiImage | null;
-  exhibitorExtra: string | null;
-
-  sponsorsImage: IStrapiImage | null;
+  posterImage: ISanityLocaleImage | null;
+  programImage: ISanityLocaleImage | null;
+  sponsorsImage: ISanityLocaleImage | null;
+  ticketPriceEur: number | null;
+  venueCity: ISanityLocaleString | null;
+  venueMapsImage: ISanityLocaleImage | null;
+  venueName: ISanityLocaleString | null;
+  year: number;
+  practicalInfoExtra: ISanityLocaleString | null;
+  exhibitorExtra: ISanityLocaleString | null;
 }
