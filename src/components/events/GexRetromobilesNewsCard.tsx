@@ -4,6 +4,7 @@ import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaThumbtack } from 'react-icons/fa';
+import { retrieveLocalizedField } from '../../helpers/api/SanityHelper';
 import type { IGexRetromobilesNew } from '../../types';
 
 interface Props {
@@ -43,10 +44,10 @@ export function GexRetromobilesNewsCard({ eventNew, isPinned }: Readonly<Props>)
             type='button'
             onClick={openImage}
             className='w-full sm:w-40 shrink-0 p-0 border-0 bg-transparent text-left'
-            aria-label={eventNew.title}>
+            aria-label={retrieveLocalizedField(eventNew.title, i18n.language)}>
             <img
-              src={eventNew.photo.url}
-              alt={eventNew.title}
+              src={eventNew.photo}
+              alt={retrieveLocalizedField(eventNew.title, i18n.language)}
               className='w-full h-40 sm:h-full object-cover rounded-lg'
             />
           </button>
@@ -64,17 +65,19 @@ export function GexRetromobilesNewsCard({ eventNew, isPinned }: Readonly<Props>)
             )}
           </div>
 
-          <h4 className='text-sm sm:text-base font-semibold mb-2'>{eventNew.title}</h4>
+          <h4 className='text-sm sm:text-base font-semibold mb-2'>
+            {retrieveLocalizedField(eventNew.title, i18n.language)}
+          </h4>
 
           <div className='prose prose-sm prose-invert text-sm sm:text-base max-w-none'>
-            {eventNew.post}
+            {retrieveLocalizedField(eventNew.post, i18n.language)}
           </div>
         </div>
       </article>
 
       {eventNew.photo && (
         <Modal
-          title={eventNew.title}
+          title={retrieveLocalizedField(eventNew.title, i18n.language)}
           centered
           open={isOpen}
           onCancel={closeImage}
@@ -82,8 +85,8 @@ export function GexRetromobilesNewsCard({ eventNew, isPinned }: Readonly<Props>)
           width={'90%'}>
           <div className='w-full h-[80vh] flex items-center justify-center'>
             <img
-              src={eventNew.photo.url}
-              alt={eventNew.title}
+              src={eventNew.photo}
+              alt={retrieveLocalizedField(eventNew.title, i18n.language)}
               className='max-w-full max-h-full object-contain'
             />
           </div>

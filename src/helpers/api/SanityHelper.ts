@@ -1,4 +1,5 @@
-import type { SanityEntity } from '../../types/api/sanity';
+import { languageToIso6391 } from '../../i18n';
+import type { ISanityLocaleImage, ISanityLocaleString, SanityEntity } from '../../types/api/sanity';
 
 interface ISanityQueryBuilder {
   type: SanityEntity;
@@ -10,13 +11,25 @@ interface IFieldTranslation {
   translation: string;
 }
 
+const commonFields: IFieldTranslation[] = [
+  {
+    field: 'id',
+    translation: '_id',
+  },
+  {
+    field: 'createdAt',
+    translation: '_createdAt',
+  },
+  {
+    field: 'updatedAt',
+    translation: '_updatedAt',
+  },
+];
+
 const eventQueryBuilder: ISanityQueryBuilder = {
   type: 'event',
   fields: [
-    {
-      field: 'id',
-      translation: '_id',
-    },
+    ...commonFields,
     {
       field: 'title',
       translation: localeFieldTranslation('title'),
@@ -49,10 +62,7 @@ const eventQueryBuilder: ISanityQueryBuilder = {
 const albumQueryBuilder: ISanityQueryBuilder = {
   type: 'album',
   fields: [
-    {
-      field: 'id',
-      translation: '_id',
-    },
+    ...commonFields,
     'name',
     'description',
     {
@@ -65,10 +75,7 @@ const albumQueryBuilder: ISanityQueryBuilder = {
 const partnerQueryBuilder: ISanityQueryBuilder = {
   type: 'partner',
   fields: [
-    {
-      field: 'id',
-      translation: '_id',
-    },
+    ...commonFields,
     {
       field: 'name',
       translation: localeFieldTranslation('name'),
@@ -95,10 +102,7 @@ const partnerQueryBuilder: ISanityQueryBuilder = {
 const homePageCarouselQueryBuilder: ISanityQueryBuilder = {
   type: 'homePageCarousel',
   fields: [
-    {
-      field: 'id',
-      translation: '_id',
-    },
+    ...commonFields,
     {
       field: 'photos',
       translation: 'photos[].asset->url',
@@ -109,10 +113,7 @@ const homePageCarouselQueryBuilder: ISanityQueryBuilder = {
 const gexRetromobilesNewQueryBuilder: ISanityQueryBuilder = {
   type: 'gexRetromobilesNew',
   fields: [
-    {
-      field: 'id',
-      translation: '_id',
-    },
+    ...commonFields,
     {
       field: 'title',
       translation: localeFieldTranslation('title'),
@@ -133,10 +134,7 @@ const gexRetromobilesNewQueryBuilder: ISanityQueryBuilder = {
 const gexRetromobilesInfoQueryBuilder: ISanityQueryBuilder = {
   type: 'gexRetromobilesInfo',
   fields: [
-    {
-      field: 'id',
-      translation: '_id',
-    },
+    ...commonFields,
     'year',
     'editionNumber',
     'dateStart',
@@ -217,4 +215,17 @@ function localeFieldTranslation(field: string): string {
 
 function localeImageFieldTranslation(field: string): string {
   return `{"fr": ${field}.fr.asset->url, "en": ${field}.en.asset->url}`;
+}
+
+export function retrieveLocalizedField(
+  value: ISanityLocaleImage | ISanityLocaleString,
+  locale: string,
+): string {
+  const formattedLocale: string = languageToIso6391(locale);
+
+  if (formattedLocale === 'fr' || formattedLocale === 'en') {
+    return value[formattedLocale];
+  }
+
+  return '';
 }

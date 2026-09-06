@@ -1,5 +1,7 @@
+import type { UseQueryResult } from '@tanstack/react-query';
 import Modal from 'antd/es/modal/Modal';
 import type { i18n, TFunction } from 'i18next';
+import { nanoid } from 'nanoid';
 import type { Dispatch, JSX, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,47 +10,28 @@ import type { NavigateFunction } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LoadingCard, Seo } from '../components';
 import { goTo } from '../helpers';
-import { StrapiService } from '../services';
-import type { IAlbum, IStrapiImage } from '../types';
+import { retrieveLocalizedField } from '../helpers/api/SanityHelper';
+import { useSanityDoc } from '../services/SanityService';
+import type { IAlbum } from '../types';
 
 export default function PhotosPage(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
-
-  const [albums, setAlbums]: [IAlbum[], Dispatch<SetStateAction<IAlbum[]>>] = useState<IAlbum[]>(
-    [],
-  );
-  const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] =
-    useState<boolean>(true);
+  const { data: albums, isLoading }: UseQueryResult<IAlbum[], Error> =
+    useSanityDoc<IAlbum>('album');
   const [selectedAlbum, setSelectedAlbum]: [
     IAlbum | null,
     Dispatch<SetStateAction<IAlbum | null>>,
   ] = useState<IAlbum | null>(null);
 
-  useEffect(() => {
-    const fetchAlbums: () => Promise<void> = async (): Promise<void> => {
-      setLoading(true);
-      try {
-        await StrapiService.getAlbums(i18n.language).then(setAlbums);
-      } catch {
-        setAlbums([]);
-      }
-      setLoading(false);
-    };
-
-    void fetchAlbums();
-  }, [i18n.language]);
-
   const { albumId }: { albumId?: string } = useParams<{ albumId?: string }>();
   const navigate: NavigateFunction = useNavigate();
 
   useEffect(() => {
-    if (!albumId || albums.length === 0) {
+    if (!albumId || albums?.length === 0) {
       return;
     }
 
-    const found: IAlbum | undefined = albums.find(
-      (a: IAlbum) => a.documentId === albumId || a.id === albumId,
-    );
+    const found: IAlbum | undefined = albums?.find((a: IAlbum) => a.id === albumId);
 
     if (found) {
       setSelectedAlbum(found);
@@ -57,7 +40,7 @@ export default function PhotosPage(): JSX.Element {
 
   function openAlbum(album: IAlbum): void {
     // update URL to include album id so the modal is addressable
-    navigate(goTo('/photos/:albumId', [album.documentId]));
+    navigate(goTo('/photos/:albumId', [album.id]));
     setSelectedAlbum(album);
   }
 
@@ -74,9 +57,9 @@ export default function PhotosPage(): JSX.Element {
         description={t('home.navigation.photos.description')}
       />
       <h1 className='text-2xl font-bold mb-10 text-center'>{t('photos.pageTitle')}</h1>
-      {loading ? (
+      {isLoading ? (
         <LoadingCard />
-      ) : albums.length === 0 ? (
+      ) : !albums || albums.length === 0 ? (
         <div className='text-gray-600'>{t('shared.error.loadingFailed')}</div>
       ) : (
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6'>
@@ -85,12 +68,12 @@ export default function PhotosPage(): JSX.Element {
               key={album.id}
               onClick={() => openAlbum(album)}
               className='group flex flex-col items-center p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition'
-              title={album.name}>
+              title={retrieveLocalizedField(album.name, i18n.language)}>
               <div className='w-20 h-16 flex items-center justify-center'>
                 <FcFolder size={80} />
               </div>
               <span className='mt-3 text-sm text-gray-800 text-center wrap-break-word w-full'>
-                {album.name}
+                {retrieveLocalizedField(album.name, i18n.language)}
               </span>
             </button>
           ))}
@@ -99,7 +82,7 @@ export default function PhotosPage(): JSX.Element {
 
       {selectedAlbum && (
         <Modal
-          title={selectedAlbum.name}
+          title={retrieveLocalizedField(selectedAlbum.name, i18n.language)}
           centered
           open={true}
           onCancel={closeAlbum}
@@ -108,17 +91,19 @@ export default function PhotosPage(): JSX.Element {
           <div className='max-h-[60vh] md:max-h-[75vh] overflow-auto p-2'>
             <div className='bg-gray-100 p-4 rounded-lg mb-4'>
               <p className='text-sm text-gray-800 whitespace-pre-wrap'>
-                {selectedAlbum.description}
+                {retrieveLocalizedField(selectedAlbum.description, i18n.language)}
               </p>
             </div>
             <div className='columns-1 md:columns-2 space-y-4'>
-              {selectedAlbum.photos.map((photo: IStrapiImage) => (
+              {selectedAlbum.photos.map((photo: string) => (
                 <div
-                  key={photo.id}
+                  key={nanoid()}
                   className='mb-4 break-inside-avoid rounded-lg overflow-hidden shadow-sm'>
                   <img
-                    src={photo.url}
-                    alt={t('photos.photoAlt', { album: selectedAlbum.name })}
+                    src={photo}
+                    alt={t('photos.photoAlt', {
+                      album: retrieveLocalizedField(selectedAlbum.name, i18n.language),
+                    })}
                     className='w-full h-auto object-cover transition-transform duration-200'
                   />
                 </div>

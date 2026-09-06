@@ -16,5 +16,5 @@ export { NavigationCard } from './NavigationCard';
 export { OrganizationJsonLd } from './OrganizationJsonLd';
 export { SectionHeader } from './SectionHeader';
 export { Seo } from './Seo';
-export { PartnersSection } from './shared/PartnersSection';
+export { PartnersSection } from './PartnersSection';
 export { VisitWebsite } from './VisitWebsite';

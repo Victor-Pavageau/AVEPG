@@ -1,6 +1,8 @@
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
+import { retrieveLocalizedField } from '../../helpers/api/SanityHelper';
 import type { IGexRetromobileInfos } from '../../types';
+import type { ISanityLocaleImage } from '../../types/api/sanity';
 
 interface Props {
   readonly infos: IGexRetromobileInfos;
@@ -10,7 +12,7 @@ interface Props {
 }
 
 export default function Hero({ infos, t, language, locationBadge }: Readonly<Props>): JSX.Element {
-  const posterUrl: string | undefined = infos.posterImage?.url ?? undefined;
+  const posterUrl: ISanityLocaleImage | undefined = infos.posterImage ?? undefined;
 
   const start: Date | null = infos.dateStart ? new Date(infos.dateStart) : null;
   const end: Date | null = infos.dateEnd ? new Date(infos.dateEnd) : null;
@@ -50,7 +52,7 @@ export default function Hero({ infos, t, language, locationBadge }: Readonly<Pro
       {posterUrl ? (
         <div className='w-full flex justify-center'>
           <img
-            src={posterUrl}
+            src={retrieveLocalizedField(posterUrl, language)}
             alt={t('gexRetromobilesPage.hero.title')}
             className='max-h-96 md:max-h-140 w-auto max-w-full object-contain rounded-lg'
           />

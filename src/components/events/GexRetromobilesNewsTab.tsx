@@ -1,52 +1,31 @@
+import type { UseQueryResult } from '@tanstack/react-query';
 import Segmented from 'antd/es/segmented';
 import type { TFunction, i18n } from 'i18next';
 import { useEffect, useState, type Dispatch, type JSX, type SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
-import { StrapiService } from '../../services';
+import { useSanityDoc } from '../../services';
 import type { IGexRetromobilesNew } from '../../types';
 import { LoadingCard } from '../LoadingCard';
 import { GexRetromobilesNewsCard } from './GexRetromobilesNewsCard';
 
 export function GexRetromobilesNewsTab(): JSX.Element {
-  const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
-  const [news, setNews]: [IGexRetromobilesNew[], Dispatch<SetStateAction<IGexRetromobilesNew[]>>] =
-    useState<IGexRetromobilesNew[]>([]);
-  const [newsYears, setNewsYears]: [number[], Dispatch<SetStateAction<number[]>>] = useState<
-    number[]
-  >([]);
-  const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
+  const { t }: { t: TFunction; i18n: i18n } = useTranslation();
+
+  const { data, isLoading }: UseQueryResult<IGexRetromobilesNew[] | null, Error> =
+    useSanityDoc<IGexRetromobilesNew>('gexRetromobilesInfo');
+  const news: IGexRetromobilesNew[] =
+    data?.sort(
+      (a: IGexRetromobilesNew, b: IGexRetromobilesNew) =>
+        new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+    ) ?? [];
+  const newsYears: number[] = Array.from(
+    new Set(news.map((n: IGexRetromobilesNew) => n.year)),
+  ).sort((a: number, b: number) => a - b);
   const [selectedYear, setSelectedYear]: [
     number | undefined,
     Dispatch<SetStateAction<number | undefined>>,
   ] = useState<number | undefined>();
-
-  useEffect(() => {
-    const fetchNews: () => Promise<void> = async (): Promise<void> => {
-      setLoading(true);
-      try {
-        const data: IGexRetromobilesNew[] = await StrapiService.getGexRetromobilesNews(
-          i18n.language,
-        );
-        data.sort(
-          (a: IGexRetromobilesNew, b: IGexRetromobilesNew) =>
-            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
-        );
-        setNews(data);
-        setNewsYears(
-          Array.from(new Set(data.map((n: IGexRetromobilesNew) => n.year))).sort(
-            (a: number, b: number) => a - b,
-          ),
-        );
-      } catch {
-        setNews([]);
-        setNewsYears([]);
-      }
-      setLoading(false);
-    };
-
-    fetchNews();
-  }, [i18n.language]);
 
   useEffect(() => {
     if (newsYears.length > 0) {
@@ -103,7 +82,7 @@ export function GexRetromobilesNewsTab(): JSX.Element {
       </div>
 
       <div className='space-y-3'>
-        {loading ? (
+        {isLoading ? (
           <LoadingCard />
         ) : news.length === 0 || newsYears.length === 0 ? (
           <div className='text-sm'>{t('events.gexRetromobilesCard.noNews')}</div>

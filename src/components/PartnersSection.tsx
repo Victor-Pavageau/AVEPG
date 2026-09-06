@@ -1,32 +1,20 @@
+import type { UseQueryResult } from '@tanstack/react-query';
 import type { i18n, TFunction } from 'i18next';
-import type { Dispatch, JSX, SetStateAction } from 'react';
-import { useEffect, useState } from 'react';
+import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaHandshake } from 'react-icons/fa';
-import { StrapiService } from '../../services';
-import type { IPartner } from '../../types';
-import { Card, LoadingCard, SectionHeader, VisitWebsite } from '../index';
+import { retrieveLocalizedField } from '../helpers/api/SanityHelper';
+import { useSanityDoc } from '../services';
+import type { IPartner } from '../types';
+import { Card } from './Card';
+import { LoadingCard } from './LoadingCard';
+import { SectionHeader } from './SectionHeader';
+import { VisitWebsite } from './VisitWebsite';
 
 export function PartnersSection(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
-  const [partners, setPartners]: [IPartner[], Dispatch<SetStateAction<IPartner[]>>] = useState<
-    IPartner[]
-  >([]);
-  const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
-
-  useEffect(() => {
-    const fetchPartners: () => Promise<void> = async (): Promise<void> => {
-      setLoading(true);
-      try {
-        await StrapiService.getPartners(i18n.language).then(setPartners);
-      } catch {
-        setPartners([]);
-      }
-      setLoading(false);
-    };
-
-    fetchPartners();
-  }, [i18n.language]);
+  const { data: partners, isLoading }: UseQueryResult<IPartner[], Error> =
+    useSanityDoc<IPartner>('partner');
 
   return (
     <div className='mb-8'>
@@ -39,7 +27,7 @@ export function PartnersSection(): JSX.Element {
 
       <div className='mb-6'>
         <Card className='md:p-8'>
-          {loading ? (
+          {isLoading ? (
             <LoadingCard />
           ) : (
             <>
@@ -47,7 +35,7 @@ export function PartnersSection(): JSX.Element {
                 {t('about.partners.description')}
               </p>
 
-              {partners.length === 0 ? (
+              {!partners || partners.length === 0 ? (
                 <p className='text-center text-gray-600'>{t('shared.error.loadingFailed')}</p>
               ) : (
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
@@ -59,17 +47,23 @@ export function PartnersSection(): JSX.Element {
                       <div className='flex flex-col items-center text-center h-full'>
                         <div className='w-32 h-32 mb-4 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden'>
                           <img
-                            src={partner.logo.url}
+                            src={partner.logo}
                             alt={`Logo ${partner.shortName}`}
                             className='max-w-full max-h-full object-contain'
                           />
                         </div>
 
-                        <h3 className='text-xl font-bold text-gray-900 mb-2'>{partner.name}</h3>
+                        <h3 className='text-xl font-bold text-gray-900 mb-2'>
+                          {retrieveLocalizedField(partner.name, i18n.language)}
+                        </h3>
 
-                        <p className='text-base text-gray-700 mb-4 grow'>{partner.description}</p>
+                        <p className='text-base text-gray-700 mb-4 grow'>
+                          {retrieveLocalizedField(partner.description, i18n.language)}
+                        </p>
 
-                        <VisitWebsite url={partner.website} />
+                        <VisitWebsite
+                          url={retrieveLocalizedField(partner.website, i18n.language)}
+                        />
                       </div>
                     </Card>
                   ))}
