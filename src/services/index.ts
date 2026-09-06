@@ -1,2 +1,1 @@
-export { CacheService } from './CacheService';
-export { StrapiService } from './StrapiService';
+export { useSanityDoc } from './SanityService';
