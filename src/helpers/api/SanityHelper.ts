@@ -191,15 +191,7 @@ const documentsQueryBuilder: ISanityQueryBuilder[] = [
   gexRetromobilesInfoQueryBuilder,
 ];
 
-export function buildSanityQuery(entity: SanityEntity): string {
-  const projectId: string = import.meta.env.VITE_SANITY_PROJECT_ID ?? '';
-  const apiVersion: string = import.meta.env.VITE_SANITY_API_VERSION ?? '';
-  const dataset: string = import.meta.env.VITE_SANITY_DATASET ?? '';
-
-  return `https://${projectId}.api.sanity.io/${apiVersion}/data/query/${dataset}?query=${getGroqQuery(entity)}`;
-}
-
-function getGroqQuery(entity: SanityEntity): string {
+export function getGroqQuery(entity: SanityEntity): string {
   const documentQueryBuilder: ISanityQueryBuilder | undefined = documentsQueryBuilder.find(
     (queryBuilder: ISanityQueryBuilder) => queryBuilder.type === entity,
   );
