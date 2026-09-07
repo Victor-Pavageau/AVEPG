@@ -1,5 +1,6 @@
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
+import { retrieveNullableLocalizedField } from '../../helpers/api/SanityHelper';
 import type { IGexRetromobileInfos } from '../../types';
 
 interface Props {
@@ -10,8 +11,7 @@ interface Props {
 }
 
 export default function Hero({ infos, t, language, locationBadge }: Readonly<Props>): JSX.Element {
-  const posterUrl: string | undefined = infos.posterImage?.url ?? undefined;
-
+  const posterUrl: string | null = retrieveNullableLocalizedField(infos.posterImage, language);
   const start: Date | null = infos.dateStart ? new Date(infos.dateStart) : null;
   const end: Date | null = infos.dateEnd ? new Date(infos.dateEnd) : null;
 

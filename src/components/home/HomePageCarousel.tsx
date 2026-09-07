@@ -1,40 +1,29 @@
+import type { UseQueryResult } from '@tanstack/react-query';
 import Carousel from 'antd/es/carousel';
 import type { TFunction } from 'i18next';
-import { useEffect, useState, type Dispatch, type JSX, type SetStateAction } from 'react';
+import { nanoid } from 'nanoid';
+import { type JSX } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StrapiService } from '../../services';
-import type { IHomePageCarousel, IStrapiImage } from '../../types';
+import { useSanityDoc } from '../../services';
+import type { IHomePageCarousel } from '../../types';
 import { LoadingCard } from '../LoadingCard';
 
 export function HomePageCarousel(): JSX.Element {
   const { t }: { t: TFunction } = useTranslation();
-  const [carousel, setCarousel]: [
-    IHomePageCarousel | null,
-    Dispatch<SetStateAction<IHomePageCarousel | null>>,
-  ] = useState<IHomePageCarousel | null>(null);
-  const [loading, setLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(true);
+
+  const { data: carousel, isLoading }: UseQueryResult<IHomePageCarousel[], Error> =
+    useSanityDoc<IHomePageCarousel>('homePageCarousel');
 
   const imageAltText: string = 'Home page carousel image';
 
-  useEffect(() => {
-    const fetchCarousel: () => Promise<void> = async (): Promise<void> => {
-      setLoading(true);
-      try {
-        await StrapiService.getHomePageCarousel().then(setCarousel);
-      } catch {
-        setCarousel(null);
-      }
-      setLoading(false);
-    };
-
-    fetchCarousel();
-  }, []);
-
-  return loading ? (
+  return isLoading ? (
     <LoadingCard />
   ) : (
     <div className='mb-8 overflow-hidden h-80 sm:h-120 lg:h-160 relative'>
-      {carousel === null || carousel.photos.length === 0 ? (
+      {carousel === null ||
+      carousel === undefined ||
+      carousel.length === 0 ||
+      carousel[0]?.photos?.length === 0 ? (
         <img
           className='h-full w-full object-cover object-[center_30%] md:object-center'
           src='/assets/pictures/home_page.png'
@@ -49,11 +38,11 @@ export function HomePageCarousel(): JSX.Element {
               dots={true}
               dotPosition='right'
               autoplaySpeed={5000}>
-              {carousel.photos.map((photo: IStrapiImage) => (
-                <div key={photo.documentId}>
+              {carousel[0].photos?.map((photo: string) => (
+                <div key={nanoid()}>
                   <img
                     className='h-full w-full object-cover object-[center_30%] md:object-center'
-                    src={photo.url}
+                    src={photo}
                     alt={imageAltText}
                   />
                 </div>
@@ -68,11 +57,11 @@ export function HomePageCarousel(): JSX.Element {
               dots={true}
               dotPosition='top'
               autoplaySpeed={5000}>
-              {carousel.photos.map((photo: IStrapiImage) => (
-                <div key={photo.documentId}>
+              {carousel[0].photos?.map((photo: string) => (
+                <div key={nanoid()}>
                   <img
                     className='h-full w-full object-cover object-[center_30%] md:object-center'
-                    src={photo.url}
+                    src={photo}
                     alt={imageAltText}
                   />
                 </div>

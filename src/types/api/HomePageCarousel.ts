@@ -1,5 +1,5 @@
-import type { IStrapiImage, IStrapiObject } from './strapi';
+import type { ISanityObject } from './sanity';
 
-export interface IHomePageCarousel extends IStrapiObject {
-  photos: IStrapiImage[];
+export interface IHomePageCarousel extends ISanityObject {
+  photos: string[] | null;
 }

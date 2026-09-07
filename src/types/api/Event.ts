@@ -1,15 +1,13 @@
-import type { IAlbum } from './Album';
-import type { IPartner } from './Partner';
-import type { IStrapiImage, IStrapiObject } from './strapi';
+import type { ISanityLocaleString, ISanityNullableLocaleString, ISanityObject } from './sanity';
 
-export interface IEvent extends IStrapiObject {
-  title: string;
-  description: string;
+export interface IEvent extends ISanityObject {
+  album: ISanityObject;
+  cover: string;
+  description: ISanityLocaleString;
+  endDate: Date | null;
+  location: ISanityNullableLocaleString;
   startDate: Date;
-  endDate?: Date;
-  cover: IStrapiImage;
-  location?: string;
-  website?: string;
-  partners: IPartner[];
-  album: IAlbum;
+  title: ISanityLocaleString;
+  website: ISanityNullableLocaleString;
+  partners: { id: string; name: ISanityLocaleString; logo: string }[] | null;
 }

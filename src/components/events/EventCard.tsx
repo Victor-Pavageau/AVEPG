@@ -6,7 +6,18 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { IoCalendar } from 'react-icons/io5';
 import { VisitWebsite } from '../';
 import { goTo } from '../../helpers';
-import type { IEvent, IPartner } from '../../types';
+import {
+  retrieveLocalizedField,
+  retrieveNullableLocalizedField,
+} from '../../helpers/api/SanityHelper';
+import type { IEvent } from '../../types';
+import type { ISanityLocaleString } from '../../types/api/sanity';
+
+interface PartialPartner {
+  id: string;
+  name: ISanityLocaleString;
+  logo: string;
+}
 
 interface Props {
   readonly event: IEvent;
@@ -18,6 +29,11 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
     boolean,
     Dispatch<SetStateAction<boolean>>,
   ] = useState<boolean>(false);
+
+  const location: string | null = retrieveNullableLocalizedField(event.location, i18n.language);
+  const description: string | null = retrieveLocalizedField(event.description, i18n.language);
+  const title: string | null = retrieveLocalizedField(event.title, i18n.language);
+  const website: string | null = retrieveNullableLocalizedField(event.website, i18n.language);
 
   const formatDate = (date: Date): string => {
     return new Intl.DateTimeFormat(i18n.language, {
@@ -45,14 +61,14 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
     <div className='max-w-sm bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100'>
       <div className='relative h-60 bg-gray-100 overflow-hidden select-none'>
         <img
-          src={event.cover.url}
-          alt={event.title}
+          src={event.cover}
+          alt={title}
           className='w-full h-full object-cover'
           loading='lazy'
         />
 
         {event.album && (
-          <a href={goTo('/photos/:albumId', [event.album.documentId])}>
+          <a href={goTo('/photos/:albumId', [event.album.id])}>
             <span className='absolute right-3 bottom-3 bg-gray-100/60 text-gray-900 text-xs px-2 py-1 rounded-md hover:bg-gray-100/80 transition cursor-pointer'>
               {t('events.eventCard.viewPhotos')}
             </span>
@@ -66,15 +82,13 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
             <IoCalendar className='w-3 h-3 mr-2 text-gray-400' />
             <span>{formatDateRange()}</span>
           </div>
-          <h3 className='text-lg font-bold text-gray-900 line-clamp-2 leading-tight'>
-            {event.title}
-          </h3>
+          <h3 className='text-lg font-bold text-gray-900 line-clamp-2 leading-tight'>{title}</h3>
         </div>
 
-        {event.location && (
+        {location && (
           <div className='flex items-center text-sm text-gray-600'>
             <FaMapMarkerAlt className='w-4 h-4 mr-2 text-gray-400' />
-            <span className='truncate'>{event.location}</span>
+            <span className='truncate'>{location}</span>
           </div>
         )}
 
@@ -83,9 +97,9 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
             className={`overflow-hidden transition-all duration-500 ease-in-out ${
               isDescriptionExpanded ? 'max-h-screen' : 'max-h-12'
             }`}>
-            <p className='text-sm text-gray-700 leading-relaxed'>{event.description}</p>
+            <p className='text-sm text-gray-700 leading-relaxed'>{description}</p>
           </div>
-          {event.description.length > 100 && (
+          {description && description.length > 100 && (
             <div className='flex justify-end'>
               <button
                 onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
@@ -100,16 +114,16 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
 
         <div className='flex items-center justify-between pt-3 border-t border-gray-100'>
           <div className='flex items-center space-x-2'>
-            {event.partners.length > 0 && (
+            {event.partners && event.partners.length > 0 && (
               <div className='flex items-center space-x-1'>
-                {event.partners.map((partner: IPartner) => (
+                {event.partners.map((partner: PartialPartner) => (
                   <div
                     key={partner.id}
                     className='w-6 h-6 bg-gray-50 rounded-full flex items-center justify-center overflow-hidden border border-gray-200'
-                    title={partner.name}>
+                    title={retrieveLocalizedField(partner.name, i18n.language)}>
                     <img
-                      src={partner.logo.url}
-                      alt={partner.name}
+                      src={partner.logo}
+                      alt={retrieveLocalizedField(partner.name, i18n.language)}
                       className='w-full h-full object-cover'
                     />
                   </div>
@@ -118,9 +132,9 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
             )}
           </div>
 
-          {event.website && (
+          {website && (
             <div className='shrink-0'>
-              <VisitWebsite url={event.website} />
+              <VisitWebsite url={website} />
             </div>
           )}
         </div>

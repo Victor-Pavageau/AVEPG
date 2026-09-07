@@ -1,14 +1,16 @@
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
+import { retrieveNullableLocalizedField } from '../../helpers/api/SanityHelper';
 import type { IGexRetromobileInfos } from '../../types';
 
 interface Props {
   readonly infos: IGexRetromobileInfos;
   readonly t: TFunction;
+  readonly language: string;
 }
 
-export default function Program({ infos, t }: Readonly<Props>): JSX.Element | null {
-  const programmeUrl: string | undefined = infos.programImage?.url ?? undefined;
+export default function Program({ infos, t, language }: Readonly<Props>): JSX.Element | null {
+  const programmeUrl: string | null = retrieveNullableLocalizedField(infos.programImage, language);
 
   if (!programmeUrl) {
     return null;
