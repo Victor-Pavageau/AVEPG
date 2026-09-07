@@ -1,5 +1,5 @@
 import type { ISanityObject } from './sanity';
 
 export interface IHomePageCarousel extends ISanityObject {
-  photos: string[];
+  photos: string[] | null;
 }

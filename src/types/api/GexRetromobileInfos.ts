@@ -1,19 +1,23 @@
-import type { ISanityLocaleImage, ISanityLocaleString, ISanityObject } from './sanity';
+import type {
+  ISanityNullableLocaleImage,
+  ISanityNullableLocaleString,
+  ISanityObject,
+} from './sanity';
 
 export interface IGexRetromobileInfos extends ISanityObject {
   dateEnd: Date;
   dateStart: Date;
   editionNumber: number;
-  exhibitorImage: ISanityLocaleImage | null;
+  exhibitorImage: ISanityNullableLocaleImage;
   petsAllowed: boolean;
-  posterImage: ISanityLocaleImage | null;
-  programImage: ISanityLocaleImage | null;
-  sponsorsImage: ISanityLocaleImage | null;
+  posterImage: ISanityNullableLocaleImage;
+  programImage: ISanityNullableLocaleImage;
+  sponsorsImage: ISanityNullableLocaleImage;
   ticketPriceEur: number | null;
-  venueCity: ISanityLocaleString | null;
-  venueMapsImage: ISanityLocaleImage | null;
-  venueName: ISanityLocaleString | null;
+  venueCity: ISanityNullableLocaleString;
+  venueMapsImage: ISanityNullableLocaleImage;
+  venueName: ISanityNullableLocaleString;
   year: number;
-  practicalInfoExtra: ISanityLocaleString | null;
-  exhibitorExtra: ISanityLocaleString | null;
+  practicalInfoExtra: ISanityNullableLocaleString;
+  exhibitorExtra: ISanityNullableLocaleString;
 }

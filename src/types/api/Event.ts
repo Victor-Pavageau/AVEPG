@@ -1,13 +1,13 @@
-import type { ISanityLocaleString, ISanityObject } from './sanity';
+import type { ISanityLocaleString, ISanityNullableLocaleString, ISanityObject } from './sanity';
 
 export interface IEvent extends ISanityObject {
   album: ISanityObject;
   cover: string;
   description: ISanityLocaleString;
-  endDate?: Date;
-  location?: ISanityLocaleString;
+  endDate: Date | null;
+  location: ISanityNullableLocaleString;
   startDate: Date;
   title: ISanityLocaleString;
-  website?: ISanityLocaleString;
-  partners: { id: string; name: ISanityLocaleString; logo: string }[];
+  website: ISanityNullableLocaleString;
+  partners: { id: string; name: ISanityLocaleString; logo: string }[] | null;
 }

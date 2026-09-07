@@ -1,5 +1,11 @@
 import { languageToIso6391 } from '../../i18n';
-import type { ISanityLocaleImage, ISanityLocaleString, SanityEntity } from '../../types/api/sanity';
+import type {
+  ISanityLocaleImage,
+  ISanityLocaleString,
+  ISanityNullableLocaleImage,
+  ISanityNullableLocaleString,
+  SanityEntity,
+} from '../../types/api/sanity';
 
 interface ISanityQueryBuilder {
   type: SanityEntity;
@@ -50,7 +56,11 @@ const eventQueryBuilder: ISanityQueryBuilder = {
     },
     {
       field: 'album',
-      translation: 'album->{"id":_id}',
+      translation: 'album->{"id":_id, "createdAt":_createdAt, "updatedAt":_updatedAt}',
+    },
+    {
+      field: 'website',
+      translation: localeFieldTranslation('website'),
     },
     {
       field: 'partners',
@@ -228,4 +238,17 @@ export function retrieveLocalizedField(
   }
 
   return '';
+}
+
+export function retrieveNullableLocalizedField(
+  value: ISanityNullableLocaleImage | ISanityNullableLocaleString,
+  locale: string,
+): string | null {
+  const formattedLocale: string = languageToIso6391(locale);
+
+  if ((formattedLocale === 'fr' || formattedLocale === 'en') && value[formattedLocale]) {
+    return value[formattedLocale];
+  }
+
+  return null;
 }

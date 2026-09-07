@@ -1,8 +1,7 @@
 import type { TFunction } from 'i18next';
 import type { JSX } from 'react';
-import { retrieveLocalizedField } from '../../helpers/api/SanityHelper';
+import { retrieveNullableLocalizedField } from '../../helpers/api/SanityHelper';
 import type { IGexRetromobileInfos } from '../../types';
-import type { ISanityLocaleImage } from '../../types/api/sanity';
 
 interface Props {
   readonly infos: IGexRetromobileInfos;
@@ -11,7 +10,7 @@ interface Props {
 }
 
 export default function Program({ infos, t, language }: Readonly<Props>): JSX.Element | null {
-  const programmeUrl: ISanityLocaleImage | undefined = infos.programImage ?? undefined;
+  const programmeUrl: string | null = retrieveNullableLocalizedField(infos.programImage, language);
 
   if (!programmeUrl) {
     return null;
@@ -21,7 +20,7 @@ export default function Program({ infos, t, language }: Readonly<Props>): JSX.El
     <section>
       <div className='w-full flex justify-center'>
         <img
-          src={retrieveLocalizedField(programmeUrl, language)}
+          src={programmeUrl}
           alt={t('gexRetromobilesPage.welcome.heading')}
           className='max-h-96 md:max-h-140 w-auto max-w-full object-contain rounded-lg'
         />

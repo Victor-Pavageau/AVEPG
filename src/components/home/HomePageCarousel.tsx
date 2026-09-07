@@ -20,7 +20,10 @@ export function HomePageCarousel(): JSX.Element {
     <LoadingCard />
   ) : (
     <div className='mb-8 overflow-hidden h-80 sm:h-120 lg:h-160 relative'>
-      {!carousel || carousel[0].photos.length === 0 ? (
+      {carousel === null ||
+      carousel === undefined ||
+      carousel.length === 0 ||
+      carousel[0]?.photos?.length === 0 ? (
         <img
           className='h-full w-full object-cover object-[center_30%] md:object-center'
           src='/assets/pictures/home_page.png'
@@ -35,7 +38,7 @@ export function HomePageCarousel(): JSX.Element {
               dots={true}
               dotPosition='right'
               autoplaySpeed={5000}>
-              {carousel[0].photos.map((photo: string) => (
+              {carousel[0].photos?.map((photo: string) => (
                 <div key={nanoid()}>
                   <img
                     className='h-full w-full object-cover object-[center_30%] md:object-center'
@@ -54,7 +57,7 @@ export function HomePageCarousel(): JSX.Element {
               dots={true}
               dotPosition='top'
               autoplaySpeed={5000}>
-              {carousel[0].photos.map((photo: string) => (
+              {carousel[0].photos?.map((photo: string) => (
                 <div key={nanoid()}>
                   <img
                     className='h-full w-full object-cover object-[center_30%] md:object-center'

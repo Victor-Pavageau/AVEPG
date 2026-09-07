@@ -1,7 +1,7 @@
 import type { UseQueryResult } from '@tanstack/react-query';
 import Segmented from 'antd/es/segmented';
 import type { TFunction, i18n } from 'i18next';
-import { useEffect, useState, type Dispatch, type JSX, type SetStateAction } from 'react';
+import { useEffect, useMemo, useState, type Dispatch, type JSX, type SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { useSanityDoc } from '../../services';
@@ -13,15 +13,27 @@ export function GexRetromobilesNewsTab(): JSX.Element {
   const { t }: { t: TFunction; i18n: i18n } = useTranslation();
 
   const { data, isLoading }: UseQueryResult<IGexRetromobilesNew[] | null, Error> =
-    useSanityDoc<IGexRetromobilesNew>('gexRetromobilesInfo');
-  const news: IGexRetromobilesNew[] =
-    data?.sort(
-      (a: IGexRetromobilesNew, b: IGexRetromobilesNew) =>
-        new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
-    ) ?? [];
-  const newsYears: number[] = Array.from(
-    new Set(news.map((n: IGexRetromobilesNew) => n.year)),
-  ).sort((a: number, b: number) => a - b);
+    useSanityDoc<IGexRetromobilesNew>('gexRetromobilesNew');
+
+  const news: IGexRetromobilesNew[] = useMemo(
+    () =>
+      data
+        ?.slice()
+        .sort(
+          (a: IGexRetromobilesNew, b: IGexRetromobilesNew) =>
+            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+        ) ?? [],
+    [data],
+  );
+
+  const newsYears: number[] = useMemo(
+    () =>
+      Array.from(new Set(news.map((n: IGexRetromobilesNew) => n.year))).sort(
+        (a: number, b: number) => a - b,
+      ),
+    [news],
+  );
+
   const [selectedYear, setSelectedYear]: [
     number | undefined,
     Dispatch<SetStateAction<number | undefined>>,

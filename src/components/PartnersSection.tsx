@@ -48,7 +48,7 @@ export function PartnersSection(): JSX.Element {
                         <div className='w-32 h-32 mb-4 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden'>
                           <img
                             src={partner.logo}
-                            alt={`Logo ${partner.shortName}`}
+                            alt={`Logo ${retrieveLocalizedField(partner.shortName, i18n.language)}`}
                             className='max-w-full max-h-full object-contain'
                           />
                         </div>

@@ -7,10 +7,10 @@ import Hero from '../components/gex-retromobiles/Hero';
 import PracticalExhibitors from '../components/gex-retromobiles/PracticalExhibitors';
 import Program from '../components/gex-retromobiles/Program';
 import WelcomeExperience from '../components/gex-retromobiles/WelcomeExperience';
-import { retrieveLocalizedField } from '../helpers/api/SanityHelper';
+import { retrieveNullableLocalizedField } from '../helpers/api/SanityHelper';
 import { useSanityDoc } from '../services/SanityService';
 import type { IGexRetromobileInfos } from '../types';
-import type { ISanityLocaleImage } from '../types/api/sanity';
+import type { ISanityNullableLocaleImage } from '../types/api/sanity';
 
 export default function GexRetromobilesPage(): JSX.Element {
   const { t, i18n }: { t: TFunction; i18n: i18n } = useTranslation();
@@ -28,11 +28,19 @@ export default function GexRetromobilesPage(): JSX.Element {
       return null;
     }
 
-    return [infos.venueName, infos.venueCity].filter(Boolean).join(', ') || null;
+    const venueName: string | null = retrieveNullableLocalizedField(infos.venueName, i18n.language);
+    const venueCity: string | null = retrieveNullableLocalizedField(infos.venueCity, i18n.language);
+
+    return [venueName, venueCity].filter(Boolean).join(', ') || null;
   };
 
   const seoYear: number = infos?.year ?? new Date().getFullYear();
-  const sponsorsImageUrl: ISanityLocaleImage | null | undefined = infos?.sponsorsImage;
+  const sponsorsImageUrl: string | null = infos?.sponsorsImage
+    ? retrieveNullableLocalizedField(
+        infos.sponsorsImage as ISanityNullableLocaleImage,
+        i18n.language,
+      )
+    : null;
 
   return (
     <div className='w-full px-6 md:px-12 max-w-5xl mx-auto py-8'>
@@ -77,7 +85,7 @@ export default function GexRetromobilesPage(): JSX.Element {
           {sponsorsImageUrl && (
             <div className='mt-6 flex justify-center'>
               <img
-                src={retrieveLocalizedField(sponsorsImageUrl, i18n.language)}
+                src={sponsorsImageUrl}
                 alt={t('gexRetromobilesPage.sponsors.alt')}
                 className='max-h-40 md:max-h-64 w-auto max-w-full object-contain rounded-lg'
               />

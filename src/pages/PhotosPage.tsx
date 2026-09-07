@@ -95,7 +95,7 @@ export default function PhotosPage(): JSX.Element {
               </p>
             </div>
             <div className='columns-1 md:columns-2 space-y-4'>
-              {selectedAlbum.photos.map((photo: string) => (
+              {selectedAlbum.photos?.map((photo: string) => (
                 <div
                   key={nanoid()}
                   className='mb-4 break-inside-avoid rounded-lg overflow-hidden shadow-sm'>

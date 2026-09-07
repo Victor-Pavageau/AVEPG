@@ -6,7 +6,10 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { IoCalendar } from 'react-icons/io5';
 import { VisitWebsite } from '../';
 import { goTo } from '../../helpers';
-import { retrieveLocalizedField } from '../../helpers/api/SanityHelper';
+import {
+  retrieveLocalizedField,
+  retrieveNullableLocalizedField,
+} from '../../helpers/api/SanityHelper';
 import type { IEvent } from '../../types';
 import type { ISanityLocaleString } from '../../types/api/sanity';
 
@@ -26,6 +29,11 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
     boolean,
     Dispatch<SetStateAction<boolean>>,
   ] = useState<boolean>(false);
+
+  const location: string | null = retrieveNullableLocalizedField(event.location, i18n.language);
+  const description: string | null = retrieveLocalizedField(event.description, i18n.language);
+  const title: string | null = retrieveLocalizedField(event.title, i18n.language);
+  const website: string | null = retrieveNullableLocalizedField(event.website, i18n.language);
 
   const formatDate = (date: Date): string => {
     return new Intl.DateTimeFormat(i18n.language, {
@@ -54,7 +62,7 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
       <div className='relative h-60 bg-gray-100 overflow-hidden select-none'>
         <img
           src={event.cover}
-          alt={retrieveLocalizedField(event.title, i18n.language)}
+          alt={title}
           className='w-full h-full object-cover'
           loading='lazy'
         />
@@ -74,17 +82,13 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
             <IoCalendar className='w-3 h-3 mr-2 text-gray-400' />
             <span>{formatDateRange()}</span>
           </div>
-          <h3 className='text-lg font-bold text-gray-900 line-clamp-2 leading-tight'>
-            {retrieveLocalizedField(event.title, i18n.language)}
-          </h3>
+          <h3 className='text-lg font-bold text-gray-900 line-clamp-2 leading-tight'>{title}</h3>
         </div>
 
-        {event.location && (
+        {location && (
           <div className='flex items-center text-sm text-gray-600'>
             <FaMapMarkerAlt className='w-4 h-4 mr-2 text-gray-400' />
-            <span className='truncate'>
-              {retrieveLocalizedField(event.location, i18n.language)}
-            </span>
+            <span className='truncate'>{location}</span>
           </div>
         )}
 
@@ -93,11 +97,9 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
             className={`overflow-hidden transition-all duration-500 ease-in-out ${
               isDescriptionExpanded ? 'max-h-screen' : 'max-h-12'
             }`}>
-            <p className='text-sm text-gray-700 leading-relaxed'>
-              {retrieveLocalizedField(event.description, i18n.language)}
-            </p>
+            <p className='text-sm text-gray-700 leading-relaxed'>{description}</p>
           </div>
-          {retrieveLocalizedField(event.description, i18n.language).length > 100 && (
+          {description && description.length > 100 && (
             <div className='flex justify-end'>
               <button
                 onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
@@ -112,7 +114,7 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
 
         <div className='flex items-center justify-between pt-3 border-t border-gray-100'>
           <div className='flex items-center space-x-2'>
-            {event.partners.length > 0 && (
+            {event.partners && event.partners.length > 0 && (
               <div className='flex items-center space-x-1'>
                 {event.partners.map((partner: PartialPartner) => (
                   <div
@@ -130,9 +132,9 @@ export function EventCard({ event }: Readonly<Props>): JSX.Element {
             )}
           </div>
 
-          {event.website && (
+          {website && (
             <div className='shrink-0'>
-              <VisitWebsite url={retrieveLocalizedField(event.website, i18n.language)} />
+              <VisitWebsite url={website} />
             </div>
           )}
         </div>
